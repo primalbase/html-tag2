@@ -12,28 +12,33 @@ require_once 'Tag.php';
  */
 class TagTest extends PHPUnit_Framework_TestCase
 {
-    /**
-     * @var Tag
-     */
-    protected $object;
-
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
     protected function setUp()
     {
-        $this->object = new Tag;
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
     protected function tearDown()
     {
     }
 
+    public function testConstruct()
+    {
+      $this->assertEquals(get_class(Tag::a()), 'Pbw_Tag');
+      $this->assertEquals((string)Tag::a(), '<a></a>');
+      $this->assertEquals((string)Tag::div(array('class' => 'span12')), '<div class="span12"></div>');
+      $this->assertEquals((string)Tag::div(array('class' => 'span12'), 'test', Tag::span("inner")), '<div class="span12">test<span>inner</span></div>');
+    }
+    
+    public function testMember()
+    {
+      $this->assertEquals(Tag::table()->tagName(), 'table');
+      $this->assertEquals(Tag::table()->attributes(), array());
+    }
+    
+    public function testAppend()
+    {
+      $this->assertEquals((string)Tag::div()->append(Tag::span('content')), '<div><span>content</span></div>');
+    }
+    
     public function testHtml4()
     {
       Tag::$DocType = 'html4';
@@ -43,10 +48,6 @@ class TagTest extends PHPUnit_Framework_TestCase
     public function testXhtml()
     {
       Tag::$DocType = 'xhtml';
-      $this->assertEquals(get_class(Tag::a()), 'Tag');
-      $this->assertEquals(Tag::a()->tagName(), 'a');
-      $this->assertEquals(Tag::a()->attributes(), array());
-      $this->assertEquals((string)Tag::a(), '<a></a>');
       $this->assertEquals((string)Tag::br(), '<br />');
     }
     
@@ -55,5 +56,6 @@ class TagTest extends PHPUnit_Framework_TestCase
       Tag::$DocType = 'html5';
       $this->assertEquals((string)Tag::br(), '<br>');
     }
+
 }
 ?>

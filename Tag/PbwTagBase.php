@@ -1,5 +1,5 @@
 <?php
-if (!defined('PBW_TAG_CLASS')) throw new Exception('PBW_TAG_CLASS not defined.');
+require_once dirname(__FILE__).'/PbwTagNodes.php';
 
 class Pbw_TagBase {
   
@@ -10,7 +10,7 @@ class Pbw_TagBase {
   protected static function __create($tagName, $args)
   {
     array_unshift($args, $tagName);
-    $_ = new ReflectionClass(PBW_TAG_CLASS);
+    $_ = new ReflectionClass('Pbw_Tag');
     return $_->newInstanceArgs($args);
   }
   

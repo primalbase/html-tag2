@@ -4,7 +4,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
   get_include_path(),
 )));
 
-require_once 'Tag/PbwTagNodes.php';
+require_once 'TagNodes.php';
 require_once 'Tag.php';
 
 class NodesTest extends PHPUnit_Framework_TestCase
@@ -13,7 +13,7 @@ class NodesTest extends PHPUnit_Framework_TestCase
   
     protected function setUp()
     {
-      $this->nodes = new Pbw_TagNodes;
+      $this->nodes = new TagNodes;
     }
 
     protected function tearDown()
@@ -29,6 +29,13 @@ class NodesTest extends PHPUnit_Framework_TestCase
     {
       $this->nodes->append(Tag::strong());
       $this->assertEquals((string)$this->nodes, '<strong></strong>');
+      $this->assertEquals((string)$this->nodes, '<strong></strong>');
+    }
+    
+    public function testException()
+    {
+      $this->setExpectedException('Exception');
+      $this->nodes->append(null);
     }
     
     public function testAppendTagWithContent()

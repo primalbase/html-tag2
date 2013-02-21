@@ -25,7 +25,7 @@ abstract class Pbw_DocType {
     
     $parts = array($this->openBracket, implode(' ', $token));
     
-    if ($this->isEmpty($tagName) && $this->useEmptyCloseSeparator)
+    if ($this->isEmptyTag($tagName) && $this->useEmptyCloseSeparator)
       array_push($parts, ' ', $this->closeSeparator);
     array_push($parts, $this->closeBracket);
     
@@ -44,7 +44,7 @@ abstract class Pbw_DocType {
     return implode('', $parts);
   }
   
-  public function isEmpty($tagName)
+  public function isEmptyTag($tagName)
   {
     return ($this->elements[$tagName][2] == 'E');
   }

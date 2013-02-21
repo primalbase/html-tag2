@@ -1,4 +1,13 @@
 <?php
+/**
+ * HTML Tag nodes class.
+ *
+ * PHP 5 >= 5.1.0
+ *
+ * @author Hiroshi Kawai <hkawai@gmail.com>
+ * @version 0.0.0.1
+ *
+ */
 class Pbw_TagNodes implements Iterator {
   
   protected $nodes = array();
@@ -46,26 +55,44 @@ class Pbw_TagNodes implements Iterator {
     return $this->nodes[$idx];
   }
   
-  public function append($content, $escape=true)
+  public function append($content)
   {
+    if (!self::appendable($content))
+      throw new Exception($type.' is not append.');
+    
     array_push($this->nodes, $content);
+    
     return $this;
   }
   
   public function __toString()
   {
-    $nodes = "";
-    foreach ($this->nodes as $i => $node)
+    $escaped = array();
+    foreach ($this->nodes as $node)
     {
       if (is_string($node))
-      {
-        $string = htmlspecialchars($node);
-        $nodes .= $string;
-      }
+        array_push($escaped, htmlspecialchars($node));
       else
-        $nodes .= (string)$node;
+        array_push($escaped, (string)$node);
     }
-    return $nodes;
+    return implode('', $escaped);
+  }
+  
+  protected static function appendable($content)
+  {
+    if (gettype($content) == 'string')
+      return true;
+    
+    if (!is_object($content))
+      return false;
+    
+    if (get_class($content) == 'Pbw_Tag')
+      return true;
+    
+    if (is_subclass($content, 'Pbw_Tag'))
+      return true;
+    
+    return false;
   }
 }
 

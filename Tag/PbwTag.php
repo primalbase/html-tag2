@@ -1,18 +1,16 @@
 <?php
 /**
- * HTML Tag generated class.
+ * HTML Tag generate class.
  *
  * PHP 5 >= 5.1.0
  *
  * Support doctype: html5, xhtml(xhtml1.0 Transitional), html4
  *
  * @author Hiroshi Kawai <hkawai@gmail.com>
+ * @version 0.0.0.1
  *
  */
-
-!defined('PBW_TAG_CLASS') && define('PBW_TAG_CLASS', 'Pbw_Tag');
-
-require_once 'Tag/PbwTagBase.php';
+require_once dirname(__FILE__).'/PbwTagBase.php';
  
 class Pbw_Tag extends Pbw_TagBase {
   
@@ -82,13 +80,32 @@ class Pbw_Tag extends Pbw_TagBase {
    */
   protected $nodes;
   
+  /**
+   * Pbw_Tag($tagName, (variadic_options)...)
+   *
+   * If variadic_options is an array to update attributes.
+   *
+   * Else if it is a string or a Pbw_Tag to append nodes.
+   *
+   * @param string $tagNam
+   * @param variadic_options
+   */
   public function __construct()
   {
-    $args = func_get_args();
-    $this->tagName      = strtolower(array_shift($args));
+    $args          = func_get_args();
+    $this->tagName = strtolower(array_shift($args));
+    
+    foreach ($args as $arg)
+    {
+      if (is_array($arg))
+        $this->updateAttributes($arg);
+      else
+        $this->append($arg);
+    }
+    
     $doc_type_class     = 'Pbw_'.ucfirst(self::$DocType);
     $doc_type_file_name = 'Pbw'.ucfirst(self::$DocType).'.php';
-    require_once dirname(__FILE__).'/Tag/'.$doc_type_file_name;
+    require_once dirname(__FILE__).'/'.$doc_type_file_name;
     if (!isset(self::$DocTypeInstance[self::$DocType]))
       self::$DocTypeInstance[self::$DocType] = new $doc_type_class;
     $this->doc      = self::$DocTypeInstance[self::$DocType];
@@ -100,7 +117,7 @@ class Pbw_Tag extends Pbw_TagBase {
     $parts = array();
     
     array_push($parts, $this->doc->openTag($this->tagName, $this->attributes));
-    if (!$this->doc->isEmpty($this->tagName))
+    if (!$this->doc->isEmptyTag($this->tagName))
     {
       array_push($parts, $this->nodes);
       array_push($parts, $this->doc->closeTag($this->tagName));
@@ -114,9 +131,25 @@ class Pbw_Tag extends Pbw_TagBase {
     return $this->tagName;
   }
   
+  public function append($content)
+  {
+    if (!$this->nodes)
+      $this->nodes = new Pbw_TagNodes();
+    $this->nodes->append($content);
+    return $this;
+  }
+  
   public function attributes()
   {
     return $this->attributes;
+  }
+  
+  public function updateAttributes(array $attributes=array())
+  {
+    $this->attributes = array_merge(
+      $this->attributes,
+      $attributes);
+    return $this;
   }
 }
 
