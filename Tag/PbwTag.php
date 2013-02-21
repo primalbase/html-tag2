@@ -126,6 +126,26 @@ class Pbw_Tag extends Pbw_TagBase {
     return implode('', $parts);
   }
   
+  /**
+   * Set attribute.
+   *
+   * If empty $args to return attributes[$name].
+   *
+   * $attributes[$name] = $args[0]
+   *
+   * @param $name string
+   * @param $args array
+   */
+  public function __call($name, $args)
+  {
+    if (empty($args))
+      return $this->attributes[$name];
+    
+    $this->attributes[$name] = $args[0];
+    
+    return $this;
+  }
+  
   public function tagName()
   {
     return $this->tagName;

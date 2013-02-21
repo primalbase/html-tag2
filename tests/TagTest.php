@@ -34,6 +34,11 @@ class TagTest extends PHPUnit_Framework_TestCase
       $this->assertEquals(Tag::table()->attributes(), array());
     }
     
+    public function testAttributes()
+    {
+      $this->assertEquals((string)Tag::div()->class('control-group'), '<div class="control-group"></div>');
+    }
+    
     public function testAppend()
     {
       $this->assertEquals((string)Tag::div()->append(Tag::span('content')), '<div><span>content</span></div>');
