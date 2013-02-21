@@ -1,5 +1,11 @@
-Tag - Tag generate class.
--------------------------
+Tag - HTML Tag generate class.
+------------------------------
+
+PHP 5 >= 5.1.0
+
+Support doctype: html5, xhtml(xhtml1.0 Transitional), html4
+
+@version 0.0.0.1
 
 ### echo Tag::body() ###
 
@@ -17,8 +23,12 @@ Tag - Tag generate class.
 
 `<div><span class="label">labbeled text</span></div>`
 
-TagNodes - Tag list.
---------------------
+TagNodes - HTML Tag list.
+-------------------------
+
+PHP 5 >= 5.1.0
+
+@version 0.0.0.1
 
 ### $nodes = new TagNodes; echo $nodes->append(Tag::hr())->append(Tag::br())
 
