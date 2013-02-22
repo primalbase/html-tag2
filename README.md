@@ -19,11 +19,11 @@ Support doctype: html5(default), xhtml(xhtml1.0 Transitional), html4
 
 `<table><tr><td>content</td></tr></table>`
 
-### echo Tag::div()->append(Tag::span(array('class' => 'label'), 'labbeled text')) ###
+### echo Tag::div()->append(Tag::span(array('class' => 'label'), 'labeled text')) ###
 
-`<div><span class="label">labbeled text</span></div>`
+`<div><span class="label">labeled text</span></div>`
 
-### echo Tag::create('hoge', array('class' = 'fuga') ###
+### echo Tag::create('hoge', array('class' => 'fuga')) ###
 
 `<hoge class="fuga"></hoge>`
 
