@@ -12,6 +12,7 @@
  */
 require_once 'Tag/TagNodes.php';
 
+class Tag_Exception extends Exception {}
 class Tag_Base {
   
   protected static $OpenBracket  = '<';

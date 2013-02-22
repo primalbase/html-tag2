@@ -8,6 +8,7 @@
  * @version 0.0.0.1
  *
  */
+class Tag_NodesException extends Exception {}
 class Tag_Nodes implements Iterator {
   
   protected $nodes = array();
@@ -59,7 +60,7 @@ class Tag_Nodes implements Iterator {
       foreach ($content as $node)
         $this->append($node);
     elseif (!self::appendable($content))
-      throw new Exception($type.' is not append.');
+      throw new Tag_NodesException($type.' is not append.');
     else
       array_push($this->nodes, $content);
     

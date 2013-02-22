@@ -23,6 +23,7 @@ class NodesTest extends PHPUnit_Framework_TestCase
     public function testConstruct()
     {
       $this->assertEquals((string)TagNodes::create(), '');
+      $this->assertEquals((string)TagNodes::create('hoge fuga'), 'hoge fuga');
       $this->assertEquals((string)TagNodes::create(Tag::b()), '<b></b>');
       $this->assertEquals((string)TagNodes::create()->append(Tag::hr()), '<hr>');
     }
@@ -41,7 +42,7 @@ class NodesTest extends PHPUnit_Framework_TestCase
     
     public function testException()
     {
-      $this->setExpectedException('Exception');
+      $this->setExpectedException('Tag_NodesException');
       $this->nodes->append(null);
     }
     

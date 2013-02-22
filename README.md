@@ -30,10 +30,10 @@ PHP 5 >= 5.1.0
 
 @version 0.0.0.1
 
-### $nodes = new TagNodes; echo $nodes->append(Tag::hr())->append(Tag::br())
+### echo TagNodes::create()->append(Tag::hr())->append(Tag::br())
 
 `<hr><br>`
 
-### $nodes = new TagNodes; echo $nodes->append('hoge fuga')
+### echo TagNodes::create('hoge fuga')
 
 `hoge fuga`
