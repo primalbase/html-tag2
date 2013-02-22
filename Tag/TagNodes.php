@@ -2,7 +2,7 @@
 /**
  * HTML Tag nodes class.
  *
- * PHP 5 >= 5.1.0
+ * PHP 5 >= 5.2.0
  *
  * @author Hiroshi Kawai <hkawai@gmail.com>
  * @version 0.0.0.1
@@ -62,7 +62,7 @@ class Tag_Nodes implements Iterator {
         foreach ($node as $in_node)
           $this->append($in_node);
       elseif (!self::appendable($node))
-        throw new Tag_NodesException($type.' is not append.');
+        throw new Tag_NodesException(gettype($node).' is not append.');
       else
         array_push($this->nodes, $node);
     }

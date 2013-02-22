@@ -1,7 +1,7 @@
 Tag - HTML Tag generate class.
 ------------------------------
 
-PHP 5 >= 5.1.0
+PHP 5 >= 5.2.0
 
 Support doctype: html5(default), xhtml(xhtml1.0 Transitional), html4
 
@@ -49,7 +49,7 @@ echo Tag::br() //=> <br>
 TagNodes - HTML Tag list.
 -------------------------
 
-PHP 5 >= 5.1.0
+PHP 5 >= 5.2.0
 
 @version 0.0.0.1
 

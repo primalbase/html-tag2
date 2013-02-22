@@ -26,7 +26,7 @@ foreach (glob('tags/*') as $tags)
  */
 $php_code = array();
 foreach ($tag_list as $tag)
-  array_push($php_code, '  public static function '.$tag.'() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }'."\r\n");
+  array_push($php_code, '  public static function '.$tag.'() { $_=func_get_args(); return self::__forward_create(__FUNCTION__, $_); }'."\r\n");
 /**
  * second. remove generated code.
  */

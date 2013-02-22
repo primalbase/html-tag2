@@ -7,6 +7,8 @@ set_include_path(implode(PATH_SEPARATOR, array(
 
 require_once 'Tag.php';
 
+echo Tag::i('PHP ', PHP_VERSION);
+
 echo Tag::h1('Example 1');
 echo Tag::h2('1. Construct');
 
