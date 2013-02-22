@@ -1,7 +1,7 @@
 <?php
 /**
- * Pbw_Tag and Tag use each anyone.
+ * Tag_Base and Tag use each anyone.
  */
-require_once dirname(__FILE__).'/Tag/PbwTag.php';
+require_once 'Tag/TagBase.php';
 
-class Tag extends Pbw_Tag {}
+class Tag extends Tag_Base {}

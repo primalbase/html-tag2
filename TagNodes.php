@@ -1,7 +1,7 @@
 <?php
 /**
- * Pbw_TagNodes and TagNodes use each anyone.
+ * Tag_Nodes and TagNodes use each anyone.
  */
-require_once dirname(__FILE__).'/Tag/PbwTagNodes.php';
+require_once 'Tag/TagNodes.php';
 
-class TagNodes extends Pbw_TagNodes { }
+class TagNodes extends Tag_Nodes { }

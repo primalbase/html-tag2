@@ -1,5 +1,5 @@
 <?php
-abstract class Pbw_DocType {
+abstract class Tag_DocType {
   
   protected $openBracket = '<';
   

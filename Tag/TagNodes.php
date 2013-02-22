@@ -8,7 +8,7 @@
  * @version 0.0.0.1
  *
  */
-class Pbw_TagNodes implements Iterator {
+class Tag_Nodes implements Iterator {
   
   protected $nodes = array();
   

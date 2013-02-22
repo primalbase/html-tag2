@@ -1,7 +1,7 @@
 <?php
-require_once dirname(__FILE__).'/PbwDocType.php';
+require_once 'Tag/TagDocType.php';
 
-class Pbw_Html4 extends Pbw_DocType {
+class Tag_Html4 extends Tag_DocType {
 
   protected $elements = array(
     'a' => array(' ', ' ', ' ', ' '),
