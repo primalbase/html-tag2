@@ -54,15 +54,18 @@ class Tag_Nodes implements Iterator {
     return $this->nodes[$idx];
   }
   
-  public function append($content)
+  public function append()
   {
-    if (is_array($content))
-      foreach ($content as $node)
-        $this->append($node);
-    elseif (!self::appendable($content))
-      throw new Tag_NodesException($type.' is not append.');
-    else
-      array_push($this->nodes, $content);
+    foreach (func_get_args() as $node)
+    {
+      if (is_array($node))
+        foreach ($node as $in_node)
+          $this->append($in_node);
+      elseif (!self::appendable($node))
+        throw new Tag_NodesException($type.' is not append.');
+      else
+        array_push($this->nodes, $node);
+    }
     
     return $this;
   }

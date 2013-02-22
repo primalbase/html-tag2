@@ -3,7 +3,7 @@ Tag - HTML Tag generate class.
 
 PHP 5 >= 5.1.0
 
-Support doctype: html5, xhtml(xhtml1.0 Transitional), html4
+Support doctype: html5(default), xhtml(xhtml1.0 Transitional), html4
 
 @version 0.0.0.1
 
@@ -22,6 +22,29 @@ Support doctype: html5, xhtml(xhtml1.0 Transitional), html4
 ### echo Tag::div()->append(Tag::span(array('class' => 'label'), 'labbeled text')) ###
 
 `<div><span class="label">labbeled text</span></div>`
+
+### echo Tag::create('hoge', array('class' = 'fuga') ###
+
+`<hoge class="fuga"></hoge>`
+
+### echo Tag::a('here')->href('http://www.google.com')
+
+`<a href="http://www.google.com">here</a>`
+
+### Change doctype.
+
+```PHP
+Tag::$DocType = 'xhtml5';
+echo Tag::br() //=> <br>
+```
+```PHP
+Tag::$DocType = 'xhtml';
+echo Tag::br() //=> <br />
+```
+```PHP
+Tag::$DocType = 'html4';
+echo Tag::br() //=> <br>
+```
 
 TagNodes - HTML Tag list.
 -------------------------

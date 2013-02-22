@@ -24,6 +24,7 @@ class TagTest extends PHPUnit_Framework_TestCase
     {
       $this->assertEquals(get_class(Tag::a()), 'Tag_Base');
       $this->assertEquals((string)Tag::a(), '<a></a>');
+      $this->assertEquals((string)Tag::create('hoge', array('class' => 'fuga'), 'munya'), '<hoge class="fuga">munya</hoge>');
       $this->assertEquals((string)Tag::div(array('class' => 'span12')), '<div class="span12"></div>');
       $this->assertEquals((string)Tag::div(array('class' => 'span12'), 'test', Tag::span("inner")), '<div class="span12">test<span>inner</span></div>');
     }
@@ -31,12 +32,13 @@ class TagTest extends PHPUnit_Framework_TestCase
     public function testMember()
     {
       $this->assertEquals(Tag::table()->tagName(), 'table');
-      $this->assertEquals(Tag::table()->attributes(), array());
+      $this->assertEquals(Tag::table(array('class' => 'horizontal'))->attributes(), array('class' => 'horizontal'));
     }
     
     public function testAttributes()
     {
       $this->assertEquals((string)Tag::div()->class('control-group'), '<div class="control-group"></div>');
+      $this->assertEquals((string)Tag::a('here')->href('http://www.google.com'), '<a href="http://www.google.com">here</a>');
     }
     
     public function testAppend()

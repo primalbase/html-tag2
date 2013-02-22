@@ -1,19 +1,18 @@
 <?php
+define('APP_ROOT', realpath(dirname(__FILE__).'/..'));
 set_include_path(implode(PATH_SEPARATOR, array(
-    dirname(__FILE__).'/..',
+    APP_ROOT,
     get_include_path(),
 )));
-
-$tag_base_class_path = 'Tag/Tag_Base.php';
 
 $php_keywords = array('__halt_compiler', 'abstract', 'and', 'array', 'as', 'break', 'callable', 'case', 'catch', 'class', 'clone', 'const', 'continue', 'declare', 'default', 'die', 'do', 'echo', 'else', 'elseif', 'empty', 'enddeclare', 'endfor', 'endforeach', 'endif', 'endswitch', 'endwhile', 'eval', 'exit', 'extends', 'final', 'for', 'foreach', 'function', 'global', 'goto', 'if', 'implements', 'include', 'include_once', 'instanceof', 'insteadof', 'interface', 'isset', 'list', 'namespace', 'new', 'or', 'print', 'private', 'protected', 'public', 'require', 'require_once', 'return', 'static', 'switch', 'throw', 'trait', 'try', 'unset', 'use', 'var', 'while', 'xor');
 
 $tag_list = array();
 foreach (glob('tags/*') as $tags)
 {
-  foreach (unserialize(file_get_contents($tags)) as $values)
+  foreach (unserialize(file_get_contents($tags)) as $tag_name => $values)
   {
-    $tag_name = strtolower(trim($values[0]));
+    $tag_name = strtolower(trim($tag_name));
     if (in_array($tag_name, $php_keywords))
       continue;
     if (in_array($tag_name, $tag_list))
@@ -27,16 +26,14 @@ foreach (glob('tags/*') as $tags)
  */
 $php_code = array();
 foreach ($tag_list as $tag)
-  array_push($php_code, '  public static function '.$tag.'() { return self::__create(__FUNCTION__, func_get_args()); }'."\r\n");
-
-var_dump($php_code);
+  array_push($php_code, '  public static function '.$tag.'() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }'."\r\n");
 /**
  * second. remove generated code.
  */
 $generate_flg = false;
 $contents = array();
 $insert_index = 0;
-foreach (file($tag_base_class_path) as $index => $line)
+foreach (file(APP_ROOT.'/Tag/TagBase.php') as $index => $line)
 {
   if ($generate_flg && (strpos($line, '-generate_here') !== false))
     $generate_flg = false;
@@ -51,4 +48,4 @@ foreach (file($tag_base_class_path) as $index => $line)
   }
 }
 array_splice($contents, $insert_index+1, 0, $php_code);
-file_put_contents($tag_base_class_path, implode('', $contents));
+file_put_contents(APP_ROOT.'/Tag/TagBase.php', implode('', $contents));

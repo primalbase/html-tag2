@@ -93,8 +93,8 @@ class Tag_Base {
    *
    * Else if it is a string or a Tag_Base to append nodes.
    *
-   * @param string $tagNam
-   * @param variadic_options
+   * @param string $tagName
+   * @param variadic_options $content1, $content2, ...
    */
   public function __construct()
   {
@@ -116,6 +116,12 @@ class Tag_Base {
       self::$DocTypeInstance[self::$DocType] = new $doc_type_class;
     $this->doc      = self::$DocTypeInstance[self::$DocType];
     $this->property = $this->doc->property($this->tagName);
+  }
+  
+  public static function create($tagName)
+  {
+    $_ = new ReflectionClass('Tag_Base');
+    return $_->newInstanceArgs(func_get_args());
   }
   
   public function __toString()
@@ -157,11 +163,13 @@ class Tag_Base {
     return $this->tagName;
   }
   
-  public function append($content)
+  public function append()
   {
     if (!$this->nodes)
       $this->nodes = new Tag_Nodes();
-    $this->nodes->append($content);
+    
+    call_user_func_array(array($this->nodes, 'append'), func_get_args());
+    
     return $this;
   }
   
@@ -178,136 +186,129 @@ class Tag_Base {
     return $this;
   }
 
-  protected static function __create($tagName, $args)
-  {
-    array_unshift($args, $tagName);
-    $_ = new ReflectionClass('Tag_Base');
-    return $_->newInstanceArgs($args);
-  }
-  
   //+generate_here
-  public static function a() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function abbr() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function acronym() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function address() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function applet() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function area() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function b() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function base() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function basefont() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function bdo() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function big() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function blockquote() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function body() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function br() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function button() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function caption() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function center() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function cite() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function code() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function col() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function colgroup() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function dd() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function del() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function dfn() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function dir() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function div() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function dl() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function dt() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function em() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function fieldset() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function font() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function form() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function frame() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function frameset() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function h1() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function h2() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function h3() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function h4() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function h5() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function h6() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function head() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function hr() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function html() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function i() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function iframe() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function img() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function input() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function ins() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function isindex() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function kbd() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function label() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function legend() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function li() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function link() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function map() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function menu() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function meta() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function noframes() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function noscript() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function object() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function ol() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function optgroup() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function option() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function p() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function param() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function pre() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function q() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function s() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function samp() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function script() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function select() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function small() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function span() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function strike() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function strong() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function style() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function sub() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function sup() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function table() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function tbody() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function td() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function textarea() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function tfoot() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function th() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function thead() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function title() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function tr() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function tt() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function u() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function ul() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function article() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function aside() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function audio() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function bdi() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function canvas() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function command() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function data() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function datagrid() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function datalist() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function details() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function embed() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function eventsource() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function figcaption() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function figure() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function footer() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function header() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function hgroup() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function keygen() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function mark() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function meter() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function nav() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function output() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function progress() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function ruby() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function rp() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function rt() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function section() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function source() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function summary() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function time() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function track() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function video() { return self::__create(__FUNCTION__, func_get_args()); }
-  public static function wbr() { return self::__create(__FUNCTION__, func_get_args()); }
+  public static function a() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function abbr() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function acronym() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function address() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function applet() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function area() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function b() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function base() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function basefont() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function bdo() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function big() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function blockquote() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function body() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function br() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function button() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function caption() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function center() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function cite() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function code() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function col() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function colgroup() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function dd() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function del() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function dfn() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function dir() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function div() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function dl() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function dt() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function em() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function fieldset() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function font() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function form() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function frame() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function frameset() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function h1() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function h2() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function h3() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function h4() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function h5() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function h6() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function head() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function hr() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function html() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function i() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function iframe() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function img() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function input() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function ins() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function isindex() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function kbd() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function label() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function legend() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function li() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function link() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function map() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function menu() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function meta() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function noframes() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function noscript() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function object() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function ol() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function optgroup() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function option() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function p() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function param() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function pre() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function q() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function s() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function samp() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function script() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function select() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function small() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function span() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function strike() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function strong() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function style() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function sub() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function sup() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function table() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function tbody() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function td() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function textarea() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function tfoot() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function th() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function thead() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function title() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function tr() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function tt() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function u() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function ul() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function article() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function aside() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function audio() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function bdi() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function canvas() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function command() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function data() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function datagrid() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function datalist() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function details() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function embed() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function eventsource() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function figcaption() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function figure() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function footer() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function header() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function hgroup() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function keygen() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function mark() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function meter() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function nav() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function output() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function progress() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function ruby() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function rp() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function rt() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function section() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function source() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function summary() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function time() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function track() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function video() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
+  public static function wbr() { $args = func_get_args(); array_unshift($args, __FUNCTION__); return call_user_func_array("self::create", $args); }
   //-generate_here
 }
