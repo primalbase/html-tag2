@@ -19,9 +19,7 @@ class Tag_Nodes implements Iterator {
   
   public function __construct($nodes=array())
   {
-    if (is_array($nodes))
-      foreach ($nodes as $node)
-      $this->append($node);
+    $this->append($nodes);
   }
   
   public function rewind()
@@ -57,10 +55,13 @@ class Tag_Nodes implements Iterator {
   
   public function append($content)
   {
-    if (!self::appendable($content))
+    if (is_array($content))
+      foreach ($content as $node)
+        $this->append($node);
+    elseif (!self::appendable($content))
       throw new Exception($type.' is not append.');
-    
-    array_push($this->nodes, $content);
+    else
+      array_push($this->nodes, $content);
     
     return $this;
   }

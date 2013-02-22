@@ -20,6 +20,13 @@ class NodesTest extends PHPUnit_Framework_TestCase
     {
     }
 
+    public function testConstruct()
+    {
+      $this->assertEquals((string)TagNodes::create(), '');
+      $this->assertEquals((string)TagNodes::create(Tag::b()), '<b></b>');
+      $this->assertEquals((string)TagNodes::create()->append(Tag::hr()), '<hr>');
+    }
+    
     public function testEmpty()
     {
       $this->assertEquals((string)$this->nodes, '');
@@ -42,6 +49,7 @@ class NodesTest extends PHPUnit_Framework_TestCase
     {
       $this->nodes->append(Tag::strong('content'));
       $this->assertEquals((string)$this->nodes, '<strong>content</strong>');
+      $this->assertEquals((string)$this->nodes->append(array(Tag::br(), 'append text')), '<strong>content</strong><br>append text');
     }
     
 }
