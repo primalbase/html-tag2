@@ -1,4 +1,11 @@
 <?php
+set_include_path(implode(PATH_SEPARATOR, array(
+    dirname(__FILE__).'/..',
+    get_include_path(),
+)));
+
+define('APP_ROOT', dirname(__FILE__).'/..');
+
 require_once dirname(__FILE__).'/lib/Generator.php';
 
 $elements_list_url   = 'http://undine.sakura.ne.jp/uglabo/htmlref/xhtml1-transitional/index.html';
@@ -49,10 +56,10 @@ foreach ($all_li as $li)
 }
 
 $generator = new Generator(array(
-  'class_name'          => 'Pbw_Xhtml',
+  'class_name'          => 'Tag_Xhtml',
   'use_empty_close_separator' => 'true',
   'tags'                => $tags,
-  'doc_type_class_path' => dirname(__FILE__).'/../Tag/PbwXhtml.php',
+  'doc_type_class_path' => APP_ROOT.'/Tag/TagXhtml.php',
   'tag_list_path'       => dirname(__FILE__).'/tags/xhtmltags',
 ));
 

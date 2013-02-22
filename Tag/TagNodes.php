@@ -86,10 +86,10 @@ class Tag_Nodes implements Iterator {
     if (!is_object($content))
       return false;
     
-    if (get_class($content) == 'Pbw_Tag')
+    if (get_class($content) == 'Tag_Base')
       return true;
     
-    if (is_subclass($content, 'Pbw_Tag'))
+    if (is_subclass($content, 'Tag_Base'))
       return true;
     
     return false;

@@ -15,9 +15,9 @@ class Generator {
   {
     $php_code =<<< __PHP_CODE__
 <?php
-require_once dirname(__FILE__).'/PbwDocType.php';
+require_once 'Tag/TagDocType.php';
 
-class {$this->class_name} extends Pbw_DocType {
+class {$this->class_name} extends Tag_DocType {
 
 
 __PHP_CODE__;

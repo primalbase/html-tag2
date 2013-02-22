@@ -1,4 +1,11 @@
 <?php
+set_include_path(implode(PATH_SEPARATOR, array(
+    dirname(__FILE__).'/..',
+    get_include_path(),
+)));
+
+define('APP_ROOT', dirname(__FILE__).'/..');
+
 require_once dirname(__FILE__).'/lib/Generator.php';
 
 $elements_url = 'http://www.w3.org/TR/html401/index/elements.html';
@@ -29,12 +36,11 @@ foreach ($all_tr as $tr)
     trim($all_td->item(4)->nodeValue),
   );
 }
-var_dump($tags);
 
 $generator = new Generator(array(
-  'class_name'          => 'Pbw_Html4',
+  'class_name'          => 'Tag_Html4',
   'tags'                => $tags,
-  'doc_type_class_path' => dirname(__FILE__).'/../Tag/PbwHtml4.php',
+  'doc_type_class_path' => APP_ROOT.'/Tag/TagHtml4.php',
   'tag_list_path'       => dirname(__FILE__).'/tags/html4tags',
 ));
 

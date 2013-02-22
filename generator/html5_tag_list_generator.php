@@ -1,4 +1,11 @@
 <?php
+set_include_path(implode(PATH_SEPARATOR, array(
+    dirname(__FILE__).'/..',
+    get_include_path(),
+)));
+
+define('APP_ROOT', dirname(__FILE__).'/..');
+
 require_once dirname(__FILE__).'/lib/Generator.php';
 
 $elements_list_url   = 'http://www.quackit.com/html_5/tags/';
@@ -35,9 +42,9 @@ foreach ($all_tr as $tr)
 }
 
 $generator = new Generator(array(
-  'class_name'          => 'Pbw_Html5',
+  'class_name'          => 'Tag_Html5',
   'tags'                => $tags,
-  'doc_type_class_path' => dirname(__FILE__).'/../Tag/PbwHtml5.php',
+  'doc_type_class_path' => APP_ROOT.'/Tag/TagHtml5.php',
   'tag_list_path'       => dirname(__FILE__).'/tags/html5tags',
 ));
 

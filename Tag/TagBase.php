@@ -42,7 +42,7 @@ class Tag_Base {
   /**
    * Current DocType instance.
    *
-   * @var Pbw_DocType
+   * @var Tag_DocType
    */
   protected $doc;
   
@@ -78,19 +78,19 @@ class Tag_Base {
   /**
    * <$tagName>$nodes</$tagName>
    *
-   * $nodes is Pbw_TagNodes object or a string.
-   * Pbw_TagNodes supported __toString().
+   * $nodes is Tag_Nodes object or a string.
+   * Tag_Nodes supported __toString().
    *
-   * @var mixed Pbw_TagNodes or string
+   * @var mixed Tag_Nodes or string
    */
   protected $nodes;
   
   /**
-   * Pbw_Tag($tagName, (variadic_options)...)
+   * Tag_Base($tagName, (variadic_options)...)
    *
    * If variadic_options is an array to update attributes.
    *
-   * Else if it is a string or a Pbw_Tag to append nodes.
+   * Else if it is a string or a Tag_Base to append nodes.
    *
    * @param string $tagNam
    * @param variadic_options
@@ -108,8 +108,8 @@ class Tag_Base {
         $this->append($arg);
     }
     
-    $doc_type_class     = 'Pbw_'.ucfirst(self::$DocType);
-    $doc_type_file_name = 'Pbw'.ucfirst(self::$DocType).'.php';
+    $doc_type_class     = 'Tag_'.ucfirst(self::$DocType);
+    $doc_type_file_name = 'Tag'.ucfirst(self::$DocType).'.php';
     require_once dirname(__FILE__).'/'.$doc_type_file_name;
     if (!isset(self::$DocTypeInstance[self::$DocType]))
       self::$DocTypeInstance[self::$DocType] = new $doc_type_class;
@@ -159,7 +159,7 @@ class Tag_Base {
   public function append($content)
   {
     if (!$this->nodes)
-      $this->nodes = new Pbw_TagNodes();
+      $this->nodes = new Tag_Nodes();
     $this->nodes->append($content);
     return $this;
   }

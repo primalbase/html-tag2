@@ -22,7 +22,7 @@ class TagTest extends PHPUnit_Framework_TestCase
 
     public function testConstruct()
     {
-      $this->assertEquals(get_class(Tag::a()), 'Pbw_Tag');
+      $this->assertEquals(get_class(Tag::a()), 'Tag_Base');
       $this->assertEquals((string)Tag::a(), '<a></a>');
       $this->assertEquals((string)Tag::div(array('class' => 'span12')), '<div class="span12"></div>');
       $this->assertEquals((string)Tag::div(array('class' => 'span12'), 'test', Tag::span("inner")), '<div class="span12">test<span>inner</span></div>');
