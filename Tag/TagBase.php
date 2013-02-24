@@ -96,7 +96,7 @@ class Tag_Base {
    * @param string $tagName
    * @param variadic_options $content1, $content2, ...
    */
-  public function __construct()
+  public function __construct($tagName)
   {
     $args          = func_get_args();
     $this->tagName = strtolower(array_shift($args));
@@ -118,13 +118,30 @@ class Tag_Base {
     $this->property = $this->doc->property($this->tagName);
   }
   
+  /**
+   * Create caller class instance.
+   *
+   * But, not get class name with static in PHP 5.2
+   * Should be defined 'Tag' to TAG_REFLECTION_CLASS.
+   * Not defined case, Create a Tag_Base instance.
+   *
+   * @param string $tagName
+   * @param array $args
+   */
   protected static function __create_instance($tagName, array $args)
   {
     array_unshift($args, $tagName);
-    $_ = new ReflectionClass('Tag_Base');
+    $class_name = defined(TAG_REFLECTION_CLASS) ? TAG_REFLECTION_CLASS : __CLASS__;
+    $_ = new ReflectionClass($class_name);
     return $_->newInstanceArgs($args);
   }
   
+  /**
+   * Create a Tag instance with any tag name.
+   *
+   * @param string $tagName
+   * @param variadic_options $content1, $content2, ...
+   */
   public static function create($tagName)
   {
     $args = func_get_args();

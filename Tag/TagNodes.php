@@ -94,7 +94,7 @@ class Tag_Nodes implements Iterator {
     if (get_class($content) == 'Tag_Base')
       return true;
     
-    if (is_subclass($content, 'Tag_Base'))
+    if (is_subclass_of($content, 'Tag_Base'))
       return true;
     
     return false;
