@@ -1,6 +1,8 @@
 <?php
 abstract class Tag_DocType {
   
+  protected $docTypeTag = '<!DOCTYPE html>';
+  
   protected $openBracket = '<';
   
   protected $closeBracket = '>';
@@ -47,5 +49,10 @@ abstract class Tag_DocType {
   public function isEmptyTag($tagName)
   {
     return ($this->elements[$tagName][2] == 'E');
+  }
+  
+  public function __toString()
+  {
+    return $this->docTypeTag;
   }
 }

@@ -63,6 +63,7 @@ $generator = new Generator(array(
   'class_name'          => 'Tag_Xhtml',
   'use_empty_close_separator' => 'true',
   'tags'                => $tags,
+  'doc_type'            => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">',
   'doc_type_class_path' => APP_ROOT.'/Tag/TagXhtml.php',
   'tag_list_path'       => dirname(__FILE__).'/tags/xhtmltags',
 ));

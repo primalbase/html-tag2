@@ -48,6 +48,7 @@ foreach ($all_tr as $tr)
 $generator = new Generator(array(
   'class_name'          => 'Tag_Html5',
   'tags'                => $tags,
+  'doc_type'            => '<!DOCTYPE html>',
   'doc_type_class_path' => APP_ROOT.'/Tag/TagHtml5.php',
   'tag_list_path'       => dirname(__FILE__).'/tags/html5tags',
 ));

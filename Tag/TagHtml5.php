@@ -3,6 +3,8 @@ require_once 'Tag/TagDocType.php';
 
 class Tag_Html5 extends Tag_DocType {
 
+  protected $docTypeTag = '<!DOCTYPE html>';
+
   protected $elements = array(
     'a' => array('', '', '', ''),
     'abbr' => array('', '', '', ''),

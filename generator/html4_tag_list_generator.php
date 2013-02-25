@@ -44,6 +44,7 @@ foreach ($all_tr as $tr)
 $generator = new Generator(array(
   'class_name'          => 'Tag_Html4',
   'tags'                => $tags,
+  'doc_type'            => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">',
   'doc_type_class_path' => APP_ROOT.'/Tag/TagHtml4.php',
   'tag_list_path'       => dirname(__FILE__).'/tags/html4tags',
 ));

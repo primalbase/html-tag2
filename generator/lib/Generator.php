@@ -19,6 +19,8 @@ require_once 'Tag/TagDocType.php';
 
 class {$this->class_name} extends Tag_DocType {
 
+  protected \$docTypeTag = '{$this->doc_type}';
+
 
 __PHP_CODE__;
     if ($this->open_bracket)

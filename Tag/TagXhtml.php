@@ -3,6 +3,8 @@ require_once 'Tag/TagDocType.php';
 
 class Tag_Xhtml extends Tag_DocType {
 
+  protected $docTypeTag = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
+
   protected $useEmptyCloseSeparator = true;
 
   protected $elements = array(

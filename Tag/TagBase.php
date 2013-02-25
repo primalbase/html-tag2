@@ -4,7 +4,7 @@
  *
  * PHP 5 >= 5.2.0
  *
- * Support doctype: html5, xhtml(xhtml1.0 Transitional), html4
+ * Support doctype: html5, xhtml(xhtml1.0 Transitional), html4(html4.01 Transitional)
  *
  * @author Hiroshi Kawai <hkawai@gmail.com>
  * @version 0.0.0.1
@@ -15,11 +15,6 @@ require_once 'Tag/TagNodes.php';
 class Tag_Exception extends Exception {}
 class Tag_Base {
   
-  protected static $OpenBracket  = '<';
-  protected static $CloseBracket = '>';
-  protected static $EmptyCloseBracket = '>';
-  
-  
   /**
    * HTML Document type
    *
@@ -27,7 +22,14 @@ class Tag_Base {
    *
    * @var string $DocType
    */
-  public static $DocType='html5';
+  public static $DocType = 'html5';
+
+  /**
+   * Current DocType instance.
+   *
+   * @var Tag_DocType
+   */
+  public $doc;
   
   /**
    * Cache array.
@@ -38,14 +40,7 @@ class Tag_Base {
    *
    * @var array $DocTypeInstance
    */
-  protected static $DocTypeInstance=array();
-
-  /**
-   * Current DocType instance.
-   *
-   * @var Tag_DocType
-   */
-  protected $doc;
+  protected static $DocTypeInstance = array();
   
   /**
    * The tag property.
@@ -211,7 +206,7 @@ class Tag_Base {
       $attributes);
     return $this;
   }
-
+  
   //+generate_here
   public static function a() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
   public static function abbr() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
