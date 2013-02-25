@@ -18,6 +18,7 @@ $html->append(
   Tag::head()
     ->append(Tag::meta(array('charset' => 'UTF-8')))
     ->append(Tag::link(array('type' => 'text/css', 'rel' => 'stylesheet', 'href' => 'asset/bootstrap/css/bootstrap.min.css')))
+    ->append(Tag::script(array('type' => 'text/javascript', 'src' => 'asset/jquery/jquery-1.9.1.min.js')))
     ->append(Tag::script(array('type' => 'text/javascript', 'src' => 'asset/bootstrap/js/bootstrap.min.js')))
 );
 
