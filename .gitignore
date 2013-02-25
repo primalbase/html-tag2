@@ -217,4 +217,9 @@ pip-log.txt
 #############
 # Generator cache
 #############
-generator/cache/*.*
+generator/cache/
+
+#############
+# Generator tags
+#############
+generator/tags/

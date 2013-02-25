@@ -1,4 +1,8 @@
 <?php
+/**
+ * Generate a tag list to "tags/xhtmltags" from a websites.
+ */
+
 set_include_path(implode(PATH_SEPARATOR, array(
     dirname(__FILE__).'/..',
     get_include_path(),

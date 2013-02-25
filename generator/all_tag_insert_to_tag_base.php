@@ -1,4 +1,8 @@
 <?php
+/**
+ * Make a method from "tags" directory and insert to the TagBase.
+ */
+
 define('APP_ROOT', realpath(dirname(__FILE__).'/..'));
 set_include_path(implode(PATH_SEPARATOR, array(
     APP_ROOT,
