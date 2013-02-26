@@ -68,4 +68,4 @@ PHP 5 >= 5.2.0
 Other Examples.
 ---------------
 
-http://primalbase.github.com/html-tag
+http://primalbase.github.com/html-tag/examples
