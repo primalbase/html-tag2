@@ -63,3 +63,9 @@ PHP 5 >= 5.2.0
 ### echo TagNodes::create('hoge fuga')
 
 `hoge fuga`
+
+
+Other Examples.
+---------------
+
+http://primalbase.github.com/html-tag

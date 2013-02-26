@@ -2,7 +2,7 @@
 /**
  * Make the static html from php examples.
  */
-foreach (glob('*.php') as $file)
+foreach (glob('example*.php') as $file)
 {
   ob_start();
   require $file;
