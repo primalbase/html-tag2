@@ -151,7 +151,10 @@ class Tag_Base {
     array_push($parts, $this->doc->openTag($this->tagName, $this->attributes));
     if (!$this->doc->isEmptyTag($this->tagName))
     {
-      array_push($parts, (string)$this->nodes);
+      if (in_array($this->tagName, array('script', 'style')) && !is_null($this->nodes))
+        array_push($parts, $this->nodes->rawString());
+      else
+        array_push($parts, (string)$this->nodes);
       array_push($parts, $this->doc->closeTag($this->tagName));
     }
     
