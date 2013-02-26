@@ -39,6 +39,7 @@ class TagTest extends PHPUnit_Framework_TestCase
     {
       $this->assertEquals((string)Tag::div()->class('control-group'), '<div class="control-group"></div>');
       $this->assertEquals((string)Tag::a('here')->href('http://www.google.com'), '<a href="http://www.google.com">here</a>');
+      $this->assertEquals((string)Tag::a('another')->attr('href', 'http://www.yahoo.com'), '<a href="http://www.yahoo.com">another</a>');
     }
     
     public function testAppend()

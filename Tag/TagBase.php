@@ -162,9 +162,9 @@ class Tag_Base {
   }
   
   /**
-   * Set attribute.
+   * Undefined method call is set attribute.
    *
-   * If empty $args to return attributes[$name].
+   * If get empty $args return attributes[$name].
    *
    * $attributes[$name] = $args[0]
    *
@@ -176,9 +176,7 @@ class Tag_Base {
     if (empty($args))
       return $this->attributes[$name];
     
-    $this->attributes[$name] = $args[0];
-    
-    return $this;
+    return $this->attr($name, $args[0]);
   }
   
   public function tagName()
@@ -193,6 +191,20 @@ class Tag_Base {
     
     $args = func_get_args();
     call_user_func_array(array($this->nodes, 'append'), $args);
+    
+    return $this;
+  }
+  
+  /**
+   * Set attribute.
+   *
+   * @param string $name
+   * @param string $value
+   * @return Tag_Base
+   */
+  public function attr($name, $value)
+  {
+    $this->attributes[$name] = $value;
     
     return $this;
   }

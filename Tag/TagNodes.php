@@ -62,7 +62,7 @@ class Tag_Nodes implements Iterator {
         foreach ($node as $in_node)
           $this->append($in_node);
       elseif (!self::appendable($node))
-        throw new Tag_NodesException(gettype($node).' is not append.');
+        throw new Tag_NodesException('Don\'t append type [' . gettype($node).']');
       else
         array_push($this->nodes, $node);
     }

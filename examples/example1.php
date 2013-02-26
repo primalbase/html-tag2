@@ -40,6 +40,9 @@ echo Tag::create('xmp')->append(Tag::div()->class('control-group'));
 echo Tag::h3("Tag::a('here')->href('http://www.google.com')");
 echo Tag::create('xmp')->append(Tag::a('here')->href('http://www.google.com'));
 
+echo Tag::h3("Tag::a('another')->attr('href', 'http://www.yahoo.com')");
+echo Tag::create('xmp')->append(Tag::a('another')->href('http://www.yahoo.com'));
+
 echo Tag::h2('4. Append');
 
 echo Tag::h3("Tag::div()->append(Tag::span('content'))");
