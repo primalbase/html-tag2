@@ -229,7 +229,7 @@ eval($php_code);
 
 $body->append(
   Tag::section(
-    Tag::h2('4. Hero unit'),
+    Tag::h2('5. Headings.'),
     $view,
     Tag::div(
       Tag::pre($php_code, array('class' => 'brush: php'))
