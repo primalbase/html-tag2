@@ -83,6 +83,19 @@ class Tag_Nodes implements Iterator {
     return implode('', $escaped);
   }
   
+  public function rawString()
+  {
+    $raw = array();
+    foreach ($this->nodes as $node)
+    {
+      if (is_string($node))
+        array_push($raw, $node);
+      else
+        array_push($raw, (string)$node);
+    }
+    return implode('', $raw);
+  }
+  
   protected static function appendable($content)
   {
     if (gettype($content) == 'string')
