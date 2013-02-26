@@ -26,6 +26,7 @@ class NodesTest extends PHPUnit_Framework_TestCase
       $this->assertEquals((string)TagNodes::create('hoge fuga'), 'hoge fuga');
       $this->assertEquals((string)TagNodes::create(Tag::b()), '<b></b>');
       $this->assertEquals((string)TagNodes::create()->append(Tag::hr()), '<hr>');
+      $this->assertEquals((string)TagNodes::create(Tag::li('item1'), Tag::li('item2')), '<li>item1</li><li>item2</li>');
     }
     
     public function testEmpty()

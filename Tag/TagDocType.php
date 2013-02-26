@@ -15,7 +15,10 @@ abstract class Tag_DocType {
   
   public function property($tagName)
   {
-    return $this->elements[$tagName];
+    if (isset($this->elements[$tagName]))
+      return $this->elements[$tagName];
+    else
+      return array(' ', ' ', ' ', ' ');
   }
   
   public function openTag($tagName, $attributes)

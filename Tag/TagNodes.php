@@ -13,14 +13,15 @@ class Tag_Nodes implements Iterator {
   
   protected $nodes = array();
   
-  public static function create($nodes=array())
+  public static function create()
   {
-    return new self($nodes);
+    $_ = new ReflectionClass(__CLASS__);
+    return $_->newInstanceArgs(func_get_args());
   }
   
-  public function __construct($nodes=array())
+  public function __construct()
   {
-    $this->append($nodes);
+    call_user_func_array(array($this, 'append'), func_get_args());
   }
   
   public function rewind()
@@ -108,6 +109,12 @@ class Tag_Nodes implements Iterator {
       return true;
     
     if (is_subclass_of($content, 'Tag_Base'))
+      return true;
+
+    if (get_class($content) == 'Tag_Nodes')
+      return true;
+    
+    if (is_subclass_of($content, 'Tag_Nodes'))
       return true;
     
     return false;
