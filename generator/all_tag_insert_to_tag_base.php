@@ -30,7 +30,7 @@ foreach (glob('tags/*') as $tags)
  */
 $php_code = array();
 foreach ($tag_list as $tag)
-  array_push($php_code, '  public static function '.$tag.'() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }'."\r\n");
+  array_push($php_code, '  public static function '.$tag.'() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }'."\r\n");
 /**
  * second. remove generated code.
  */

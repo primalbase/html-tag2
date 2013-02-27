@@ -114,23 +114,23 @@ class Tag_Base {
   }
   
   /**
-   * Create caller class instance.
+   * Create caller class instance with array.
    *
    * But, not get class name with static in PHP 5.2
-   * Should be defined 'Tag' to TAG_REFLECTION_CLASS.
+   * Should be defined like 'Tag' of TAG_REFLECTION_CLASS to subclass.
    * Not defined case, Create a Tag_Base instance.
    *
    * @param string $tagName
    * @param array $args
    */
-  protected static function __create_instance($tagName, array $args)
+  public static function createInstanceArray($tagName, array $args)
   {
     array_unshift($args, $tagName);
     $class_name = defined(TAG_REFLECTION_CLASS) ? TAG_REFLECTION_CLASS : __CLASS__;
     $_ = new ReflectionClass($class_name);
     return $_->newInstanceArgs($args);
   }
-  
+    
   /**
    * Create a Tag instance with any tag name.
    *
@@ -141,7 +141,7 @@ class Tag_Base {
   {
     $args = func_get_args();
     array_shift($args);
-    return self::__create_instance($tagName, $args);
+    return self::createInstanceArray($tagName, $args);
   }
   
   public function __toString()
@@ -223,128 +223,128 @@ class Tag_Base {
   }
   
   //+generate_here
-  public static function a() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function abbr() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function acronym() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function address() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function applet() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function area() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function b() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function base() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function basefont() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function bdo() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function big() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function blockquote() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function body() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function br() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function button() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function caption() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function center() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function cite() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function code() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function col() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function colgroup() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function dd() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function del() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function dfn() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function dir() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function div() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function dl() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function dt() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function em() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function fieldset() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function font() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function form() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function frame() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function frameset() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function h1() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function h2() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function h3() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function h4() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function h5() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function h6() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function head() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function hr() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function html() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function i() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function iframe() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function img() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function input() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function ins() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function isindex() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function kbd() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function label() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function legend() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function li() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function link() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function map() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function menu() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function meta() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function noframes() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function noscript() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function object() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function ol() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function optgroup() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function option() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function p() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function param() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function pre() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function q() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function s() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function samp() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function script() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function select() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function small() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function span() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function strike() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function strong() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function style() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function sub() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function sup() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function table() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function tbody() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function td() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function textarea() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function tfoot() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function th() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function thead() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function title() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function tr() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function tt() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function u() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function ul() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function article() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function aside() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function audio() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function bdi() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function canvas() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function command() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function data() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function datagrid() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function datalist() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function details() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function embed() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function eventsource() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function figcaption() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function figure() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function footer() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function header() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function hgroup() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function keygen() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function mark() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function meter() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function nav() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function output() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function progress() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function ruby() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function rp() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function rt() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function section() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function source() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function summary() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function time() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function track() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function video() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
-  public static function wbr() { $_=func_get_args(); return self::__create_instance(__FUNCTION__, $_); }
+  public static function a() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function abbr() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function acronym() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function address() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function applet() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function area() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function b() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function base() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function basefont() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function bdo() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function big() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function blockquote() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function body() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function br() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function button() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function caption() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function center() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function cite() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function code() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function col() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function colgroup() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function dd() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function del() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function dfn() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function dir() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function div() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function dl() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function dt() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function em() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function fieldset() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function font() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function form() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function frame() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function frameset() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function h1() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function h2() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function h3() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function h4() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function h5() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function h6() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function head() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function hr() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function html() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function i() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function iframe() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function img() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function input() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function ins() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function isindex() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function kbd() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function label() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function legend() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function li() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function link() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function map() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function menu() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function meta() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function noframes() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function noscript() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function object() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function ol() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function optgroup() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function option() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function p() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function param() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function pre() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function q() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function s() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function samp() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function script() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function select() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function small() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function span() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function strike() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function strong() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function style() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function sub() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function sup() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function table() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function tbody() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function td() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function textarea() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function tfoot() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function th() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function thead() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function title() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function tr() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function tt() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function u() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function ul() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function article() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function aside() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function audio() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function bdi() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function canvas() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function command() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function data() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function datagrid() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function datalist() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function details() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function embed() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function eventsource() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function figcaption() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function figure() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function footer() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function header() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function hgroup() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function keygen() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function mark() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function meter() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function nav() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function output() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function progress() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function ruby() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function rp() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function rt() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function section() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function source() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function summary() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function time() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function track() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function video() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
+  public static function wbr() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
   //-generate_here
 }

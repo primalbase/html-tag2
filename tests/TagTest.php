@@ -27,6 +27,7 @@ class TagTest extends PHPUnit_Framework_TestCase
       $this->assertEquals((string)Tag::create('hoge', array('class' => 'fuga'), 'munya'), '<hoge class="fuga">munya</hoge>');
       $this->assertEquals((string)Tag::div(array('class' => 'span12')), '<div class="span12"></div>');
       $this->assertEquals((string)Tag::div(array('class' => 'span12'), 'test', Tag::span("inner")), '<div class="span12">test<span>inner</span></div>');
+      $this->assertEquals((string)Tag::createInstanceArray('div', array(array('class' => 'span9'), 'array contents.')), '<div class="span9">array contents.</div>');
     }
     
     public function testMember()
