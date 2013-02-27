@@ -222,6 +222,76 @@ class Tag_Base {
     return $this;
   }
   
+  /**
+   * Add class.
+   *
+   * Not append if class exists.
+   *
+   * @param valiadic_options
+   *
+   * @return self
+   */
+  public function addClass()
+  {
+    foreach (func_get_args() as $arg)
+    {
+      if (is_array($arg))
+      {
+        $this->addClass($arg);
+        continue;
+      }
+      
+      if (!$defined_class = $this->attributes['class'])
+      {
+        $this->attributes['class'] = $arg;
+        continue;
+      }
+      
+      $class_array = preg_split('/\s+/', $defined_class);
+      if (!in_array($arg, $class_array))
+      {
+        array_push($class_array, $arg);
+        $this->attributes['class'] = implode(' ', $class_array);
+      }
+    }
+    
+    return $this;
+  }
+  
+  /**
+   * remove class.
+   *
+   * @param valiadic_options
+   *
+   * @return self
+   */
+  public function removeClass()
+  {
+    foreach (func_get_args() as $arg)
+    {
+      if (!$this->attributes['class'])
+        break;
+      
+      if (is_array($arg))
+      {
+        foreach ($arg as $_)
+          $this->removeClass($_);
+        continue;
+      }
+      
+      $class_array = preg_split('/\s+/', $this->attributes['class']);
+      $index = array_search($arg, $class_array);
+      if ($index !== false)
+        array_splice($class_array, $index, 1);
+      if (empty($class_array))
+        unset($this->attributes['class']);
+      else
+        $this->attributes['class'] = implode(' ', $class_array);
+    }
+          
+    return $this;
+  }
+  
   //+generate_here
   public static function a() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
   public static function abbr() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }

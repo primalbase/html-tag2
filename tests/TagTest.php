@@ -67,5 +67,12 @@ class TagTest extends PHPUnit_Framework_TestCase
       $this->assertEquals((string)Tag::br(), '<br>');
     }
 
+    public function testClassManipulation()
+    {
+      $this->assertEquals((string)Tag::div()->addClass('span1'), '<div class="span1"></div>');
+      $this->assertEquals((string)Tag::div(array('class' => 'span1 label'))->removeClass('span1'), '<div class="label"></div>');
+      $this->assertEquals((string)Tag::div()->addClass('span1', 'label'), '<div class="span1 label"></div>');
+      $this->assertEquals((string)Tag::div(array('class' => 'span1 label'))->removeClass(array('label')), '<div class="span1"></div>');
+    }
 }
 ?>
