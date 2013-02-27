@@ -76,10 +76,10 @@ class Tag_Nodes implements Iterator {
     $escaped = array();
     foreach ($this->nodes as $node)
     {
-      if (is_string($node))
-        array_push($escaped, htmlspecialchars($node));
-      else
+      if (is_object($node))
         array_push($escaped, (string)$node);
+      else
+        array_push($escaped, htmlspecialchars((string)$node));
     }
     return implode('', $escaped);
   }
@@ -97,27 +97,30 @@ class Tag_Nodes implements Iterator {
     return implode('', $raw);
   }
   
+  /**
+   * Return posibility content append.
+   *
+   * Content type is object then allow Tag_Base or Tag_Nodes.
+   * Other types always true.
+   *
+   * @param mixed $content
+   * @return boolean
+   */
   protected static function appendable($content)
   {
-    if (gettype($content) == 'string')
-      return true;
+    if (is_object($content))
+    {
+      if (
+        get_class($content) == 'Tag_Base' ||
+        is_subclass_of($content, 'Tag_Base') ||
+        get_class($content) == 'Tag_Nodes' ||
+        is_subclass_of($content, 'Tag_Nodes'))
+        return true;
+      else
+        return false;
+    }
     
-    if (!is_object($content))
-      return false;
-    
-    if (get_class($content) == 'Tag_Base')
-      return true;
-    
-    if (is_subclass_of($content, 'Tag_Base'))
-      return true;
-
-    if (get_class($content) == 'Tag_Nodes')
-      return true;
-    
-    if (is_subclass_of($content, 'Tag_Nodes'))
-      return true;
-    
-    return false;
+    return true;
   }
 }
 
