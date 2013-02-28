@@ -115,6 +115,7 @@ class Tag_Base {
   {
     $args          = func_get_args();
     $this->tagName = strtolower(array_shift($args));
+    $this->nodes   = new Tag_Nodes();
     
     foreach ($args as $arg)
     {
@@ -170,40 +171,43 @@ class Tag_Base {
   
   public function __toString()
   {
-    $parts = array();
+    $is_block_tag = !$this->doc->isInlineTag($this->tagName);
+    $is_empty_tag = $this->doc->isEmptyTag($this->tagName);
+    $open_tag     = $this->doc->openTag($this->tagName, $this->attributes);
+    $close_tag    = $this->doc->closeTag($this->tagName);
     
-    array_push($parts, $this->doc->openTag($this->tagName, $this->attributes));
+    if ($is_empty_tag)
+      return $open_tag;
+      
+    $parts = array($open_tag);
     
-    if (!$this->doc->isEmptyTag($this->tagName))
+    if (!$this->nodes->isEmpty())
     {
-      if (!is_null($this->nodes))
+      if (self::$codeFormat && $is_block_tag)
       {
-        if (self::$codeFormat && !$this->doc->isInlineTag($this->tagName))
-        {
-          array_push($parts, PHP_EOL);
-          self::$codeFormatIndent++;
-          array_push($parts, str_repeat(self::$codeFormatSpacing, self::$codeFormatIndent));
-        }
-        
-        if (in_array($this->tagName, array('script', 'style')))
-          array_push($parts, $this->nodes->rawString());
-        else
-          array_push($parts, (string)$this->nodes);
-        
-        if (self::$codeFormat && !$this->doc->isInlineTag($this->tagName))
-          array_push($parts, PHP_EOL);
-        
-        if (self::$codeFormat && !$this->doc->isInlineTag($this->tagName))
-          self::$codeFormatIndent--;
-      }
-      
-      if (self::$codeFormat && !$this->doc->isInlineTag($this->tagName))
+        array_push($parts, PHP_EOL);
+        self::$codeFormatIndent++;
         array_push($parts, str_repeat(self::$codeFormatSpacing, self::$codeFormatIndent));
+      }
+    
+      if (in_array($this->tagName, array('script', 'style')))
+        array_push($parts, $this->nodes->rawString());
+      else
+        array_push($parts, (string)$this->nodes);
       
-      array_push($parts, $this->doc->closeTag($this->tagName));
+      if (self::$codeFormat && $is_block_tag)
+        array_push($parts, PHP_EOL);
+      
+      if (self::$codeFormat && $is_block_tag)
+        self::$codeFormatIndent--;
     }
     
-    if (self::$codeFormat && !$this->doc->isInlineTag($this->tagName) && self::$codeFormatIndent == 0)
+    if (self::$codeFormat && $is_block_tag)
+      array_push($parts, str_repeat(self::$codeFormatSpacing, self::$codeFormatIndent));
+    
+    array_push($parts, $close_tag);
+    
+    if (self::$codeFormat && self::$codeFormatIndent == 0)
       array_push($parts, PHP_EOL);
     
     return implode('', $parts);
@@ -234,9 +238,6 @@ class Tag_Base {
   
   public function append()
   {
-    if (!$this->nodes)
-      $this->nodes = new Tag_Nodes();
-    
     $args = func_get_args();
     call_user_func_array(array($this->nodes, 'append'), $args);
     
@@ -289,11 +290,13 @@ class Tag_Base {
         continue;
       }
       
-      if (!$defined_class = $this->attributes['class'])
+      if (!isset($this->attributes['class']))
       {
         $this->attributes['class'] = $arg;
         continue;
       }
+      
+      $defined_class = $this->attributes['class'];
       
       $class_array = preg_split('/\s+/', $defined_class);
       if (!in_array($arg, $class_array))

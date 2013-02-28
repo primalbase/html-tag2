@@ -71,6 +71,11 @@ class Tag_Nodes implements Iterator {
     return $this;
   }
   
+  public function isEmpty()
+  {
+    return empty($this->nodes);
+  }
+  
   public function __toString()
   {
     $escaped = array();
