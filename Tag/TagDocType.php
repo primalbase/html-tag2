@@ -1,4 +1,14 @@
 <?php
+/**
+ *
+ * $elements = (tagName => BitFlg)
+ *
+ * BitFlg & 1 is empty tag.
+ * BitFlg & 2 is phrasing or inline contents.
+ *
+ * @author Hiroshi Kawai <hkawai@gmail.com>
+ */
+
 abstract class Tag_DocType {
   
   protected $docTypeTag = '<!DOCTYPE html>';
@@ -51,7 +61,7 @@ abstract class Tag_DocType {
   
   public function isEmptyTag($tagName)
   {
-    return ($this->elements[$tagName][2] == 'E');
+    return ($this->elements[$tagName] & 1 == 1);
   }
   
   public function __toString()

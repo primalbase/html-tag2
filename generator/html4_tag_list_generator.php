@@ -15,6 +15,11 @@ require_once dirname(__FILE__).'/lib/Generator.php';
 $elements_url = 'http://www.w3.org/TR/html401/index/elements.html';
 $cache_path   = dirname(__FILE__).'/cache/html4_elements.html';
 
+/**
+ * @see http://www.xml.vc/html/block-inline.html
+ */
+$inline_contents = array('a', 'abbr', 'acronym', 'applet', 'b', 'basefont', 'bdo', 'big', 'br', 'button', 'cite', 'code', 'dfn', 'em', 'font', 'i', 'iframe', 'img', 'input', 'kbd', 'label', 'map', 'object', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var', 'img', 'input', 'object', 'select', 'textarea');
+
 $tags = array();
 
 $doc = new DOMDocument();
@@ -33,12 +38,12 @@ foreach ($all_tr as $tr)
   $tag_name = strtolower(trim($all_td->item(0)->nodeValue));
   if (empty($tag_name))
     continue;
-  $tags[$tag_name] = array(
-    trim($all_td->item(1)->nodeValue),
-    trim($all_td->item(2)->nodeValue),
-    trim($all_td->item(3)->nodeValue),
-    trim($all_td->item(4)->nodeValue),
-  );
+  $tags[$tag_name] = 0;
+  
+  if (trim($all_td->item(3)->nodeValue) == 'E')
+    $tags[$tag_name] |= 1;
+  if (in_array($tag_name, $inline_contents))
+    $tags[$tag_name] |= 2;
 }
 
 $generator = new Generator(array(

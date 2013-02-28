@@ -14,7 +14,12 @@ require_once dirname(__FILE__).'/lib/Generator.php';
 
 $elements_list_url   = 'http://undine.sakura.ne.jp/uglabo/htmlref/xhtml1-transitional/index.html';
 $cache_path          = dirname(__FILE__).'/cache/xhtml_elements.html';
+
 $empty_tags = array('base', 'meta', 'link', 'hr', 'br', 'basefont', 'param', 'img', 'area', 'input', 'isindex', 'col');
+/**
+ * @see http://www.xml.vc/html/block-inline.html
+ */
+$inline_contents = array('a', 'abbr', 'acronym', 'applet', 'b', 'basefont', 'bdo', 'big', 'br', 'button', 'cite', 'code', 'dfn', 'em', 'font', 'i', 'iframe', 'img', 'input', 'kbd', 'label', 'map', 'object', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var', 'img', 'input', 'object', 'select', 'textarea');
 
 $tags = array();
 
@@ -39,24 +44,12 @@ foreach ($all_li as $li)
   if (!$tag_name)
     continue;
   
-  $values = array(' ');
-  if (in_array($tag_name, $empty_tags))
-  {
-    array_push($values, 'F');
-    array_push($values, 'E');
-  }
-  else
-  {
-    array_push($values, ' ');
-    array_push($values, ' ');
-  }
+  $tags[$tag_name] = 0;
   
-  if (strpos($li->nodeValue, '(*)') !== false)
-    array_push($values, 'D');
-  else
-    array_push($values, ' ');
-
-  $tags[$tag_name] = $values;
+  if (in_array($tag_name, $empty_tags))
+    $tags[$tag_name] |= 1;
+  if (in_array($tag_name, $inline_contents))
+    $tags[$tag_name] |= 2;
 }
 
 $generator = new Generator(array(

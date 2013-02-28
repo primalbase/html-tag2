@@ -35,15 +35,10 @@ __PHP_CODE__;
   protected \$elements = array(
 
 __PHP_CODE__;
-  foreach ($this->tags as $tag_name => $values)
+  foreach ($this->tags as $tag_name => $value)
   {
-    $tag_name   = "'".trim($tag_name)."'";
-    $start_tag  = "'".trim($values[0])."'";
-    $end_tag    = "'".trim($values[1])."'";
-    $empty      = "'".trim($values[2])."'";
-    $deprecated = "'".trim($values[3])."'";
-    $php_code  .= sprintf("    %s => array(%s, %s, %s, %s),\n",
-      $tag_name, $start_tag, $end_tag, $empty, $deprecated);
+    $tag_name = "'".trim($tag_name)."'";
+    $php_code .= sprintf("    %s => %d,\n", $tag_name, $value);
   }
   $php_code .=<<< __PHP_CODE__
     );

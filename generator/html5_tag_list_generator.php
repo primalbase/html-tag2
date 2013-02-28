@@ -18,6 +18,10 @@ $cache_path          = dirname(__FILE__).'/cache/html5_elements.html';
  * @see http://www.w3.org/TR/html5/syntax.html#void-elements
  */
 $empty_tags = array('area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr');
+/**
+ * @see http://www.marguerite.jp/Nihongo/WWW/RefHTML5/Appendix/Content-Phrasing.html
+ */
+$phrasing_contents = array('a', 'abbr', 'area', 'map', 'audio', 'b', 'bdi', 'bdo', 'br', 'button', 'canvas', 'cite', 'code', 'command', 'del', 'dfn', 'em', 'embed', 'i', 'iframe', 'img', 'input', 'ins', 'kbd', 'keygen', 'label', 'map', 'mark', 'math', 'meter', 'noscript', 'object', 'output', 'p', 'pre', 'progress', 'q', 'ruby', 's', 'samp', 'script', 'section', 'select', 'small', 'span', 'strong', 'sub', 'sup', 'svg', 'textarea', 'time', 'u', 'var', 'video', 'wbr');
 
 $tags = array();
 
@@ -39,10 +43,11 @@ foreach ($all_tr as $tr)
     continue;
   if (!$tag_name)
     continue;
+  $tags[$tag_name] = 0;
   if (in_array($tag_name, $empty_tags))
-    $tags[$tag_name] = array(' ', 'F', 'E', ' ');
-  else
-    $tags[$tag_name] = array(' ', ' ', ' ', ' ');
+    $tags[$tag_name] |= 1;
+  if (in_array($tag_name, $phrasing_contents))
+    $tags[$tag_name] |= 2;
 }
 
 $generator = new Generator(array(
