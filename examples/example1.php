@@ -62,3 +62,6 @@ echo Tag::h3("Tag::\$DocType = 'html5'; Tag::br()");
 Tag::$DocType = 'html5';
 echo Tag::create('xmp')->append(Tag::br());
 
+
+
+echo Tag::div(Tag::div(Tag::span('content')));

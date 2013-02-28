@@ -8,9 +8,9 @@ set_include_path(implode(PATH_SEPARATOR, array(
   get_include_path(),
 )));
 
-require_once 'Tag.php';
+$html_code =<<< '__PHP_CODE__'
 
-$php_code =<<< '__PHP_CODE__'
+require_once 'Tag.php';
 
 Tag::$DocType = 'html5';
 
@@ -49,24 +49,16 @@ $(function(){
     )
   )
 );
+
 __PHP_CODE__;
 
-eval($php_code);
-
-$body = Tag::body();
-
-$body->append(
-  Tag::section(
-    Tag::h2('1. Html header'),
-    Tag::pre($php_code, array('class' => 'brush: php'))
-  )
-);
+eval($html_code);
 
 /**
  * navbar
  */
-$php_code = <<< '__PHP_CODE__'
-$view = Tag::div(
+$navbar_code = <<< '__PHP_CODE__'
+$navbar = Tag::div(
   Tag::div(array('class' => 'navbar navbar-inverse'),
     Tag::div(array('class' => 'navbar-inner'),
       Tag::div(array('class' => 'container-fluid'),
@@ -88,25 +80,17 @@ $view = Tag::div(
     )
   )
 );
+
 __PHP_CODE__;
 
-eval($php_code);
+eval($nabvar_code);
 
-$body->append(
-  Tag::section(
-    Tag::h2('2. Navbar'),
-    $view,
-    Tag::div(
-      Tag::pre($php_code, array('class' => 'brush: php'))
-    )
-  )
-);
 
 /**
  * sidebar
  */
-$php_code = <<< '__PHP_CODE__'
-$view = Tag::div(
+$sidebar_code = <<< '__PHP_CODE__'
+$sidebar = Tag::div(
   Tag::div(array('class' => 'container-fluid'),
     Tag::div(array('class' => 'row-fluid'),
       Tag::div(array('class' => 'span3'),
@@ -134,23 +118,13 @@ $view = Tag::div(
 );
 __PHP_CODE__;
 
-eval($php_code);
-
-$body->append(
-  Tag::section(
-    Tag::h2('3. Sidebar'),
-    $view,
-    Tag::div(
-      Tag::pre($php_code, array('class' => 'brush: php'))
-    )
-  )
-);
+eval($sidebar_code);
 
 /**
  * hero unit
  */
-$php_code = <<< '__PHP_CODE__'
-$view = Tag::div(
+$hero_unit_code = <<< '__PHP_CODE__'
+$hero_unit = Tag::div(
   Tag::div(array('class' => 'container-fluid'),
     Tag::div(array('class' => 'row-fluid'),
       Tag::div(array('class' => 'span9'),
@@ -165,23 +139,13 @@ $view = Tag::div(
 );
 __PHP_CODE__;
 
-eval($php_code);
-
-$body->append(
-  Tag::section(
-    Tag::h2('4. Hero unit'),
-    $view,
-    Tag::div(
-      Tag::pre($php_code, array('class' => 'brush: php'))
-    )
-  )
-);
+eval($hero_unit_code);
 
 /**
  * Headings
  */
-$php_code = <<< '__PHP_CODE__'
-$view = Tag::div(
+$headings_code = <<< '__PHP_CODE__'
+$headings = Tag::div(
   Tag::div(array('class' => 'container-fluid'),
     Tag::div(array('class' => 'row-fluid'),
       Tag::div(array('class' => 'span9'),
@@ -225,20 +189,44 @@ $view = Tag::div(
 );
 __PHP_CODE__;
 
-eval($php_code);
+eval($headings_code);
 
-$body->append(
+$html->append(Tag::body(
+  Tag::section(
+    Tag::h2('1. Html header'),
+    Tag::pre($html_code, array('class' => 'brush: php'))
+  ),
+  Tag::section(
+    Tag::h2('2. Navbar'),
+    $navbar,
+    Tag::div(
+      Tag::pre($nabvar_code, array('class' => 'brush: php'))
+    )
+  ),
+  Tag::section(
+    Tag::h2('3. Sidebar'),
+    $sidevar,
+    Tag::div(
+      Tag::pre($sidebar_code, array('class' => 'brush: php'))
+    )
+  ),
+  Tag::section(
+    Tag::h2('4. Hero unit'),
+    $hero_unit,
+    Tag::div(
+      Tag::pre($hero_unit_code, array('class' => 'brush: php'))
+    )
+  ),
   Tag::section(
     Tag::h2('5. Headings.'),
-    $view,
+    $headings,
     Tag::div(
-      Tag::pre($php_code, array('class' => 'brush: php'))
+      Tag::pre($headings_code, array('class' => 'brush: php'))
     )
   )
-);
-
-$html->append($body);
+));
 echo $html->doc;
 echo $html;
+
 
 
