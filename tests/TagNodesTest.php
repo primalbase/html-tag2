@@ -13,6 +13,7 @@ class NodesTest extends PHPUnit_Framework_TestCase
   
     protected function setUp()
     {
+      Tag::$codeFormat = false;
       $this->nodes = new TagNodes;
     }
 

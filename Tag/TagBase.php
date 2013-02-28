@@ -82,6 +82,26 @@ class Tag_Base {
   protected $nodes;
   
   /**
+   * Code format settings.
+   *
+   * $codeFormat = false
+   *
+   * <div><span>codes</span></div>
+   *
+   * $codeFormat = true
+   *
+   * <div>
+   *   <span>codes</span>
+   * </div>
+   *
+   */
+  public static $codeFormat = true;
+  
+  public static $codeFormatIndent = 0;
+  
+  public static $codeFormatSpacing = '  ';
+  
+  /**
    * Tag_Base($tagName, (variadic_options)...)
    *
    * If variadic_options is an array to update attributes.
@@ -126,11 +146,15 @@ class Tag_Base {
   public static function createInstanceArray($tagName, array $args)
   {
     array_unshift($args, $tagName);
-    $class_name = defined(TAG_REFLECTION_CLASS) ? TAG_REFLECTION_CLASS : __CLASS__;
-    $_ = new ReflectionClass($class_name);
+    $_ = new ReflectionClass(self::getClass());
     return $_->newInstanceArgs($args);
   }
-    
+
+  private static function getClass()
+  {
+    return defined(TAG_REFLECTION_CLASS) ? TAG_REFLECTION_CLASS : __CLASS__;
+  }
+  
   /**
    * Create a Tag instance with any tag name.
    *
@@ -149,14 +173,38 @@ class Tag_Base {
     $parts = array();
     
     array_push($parts, $this->doc->openTag($this->tagName, $this->attributes));
+    
     if (!$this->doc->isEmptyTag($this->tagName))
     {
-      if (in_array($this->tagName, array('script', 'style')) && !is_null($this->nodes))
-        array_push($parts, $this->nodes->rawString());
-      else
-        array_push($parts, (string)$this->nodes);
+      if (!is_null($this->nodes))
+      {
+        if (self::$codeFormat && !$this->doc->isInlineTag($this->tagName))
+        {
+          array_push($parts, PHP_EOL);
+          self::$codeFormatIndent++;
+          array_push($parts, str_repeat(self::$codeFormatSpacing, self::$codeFormatIndent));
+        }
+        
+        if (in_array($this->tagName, array('script', 'style')))
+          array_push($parts, $this->nodes->rawString());
+        else
+          array_push($parts, (string)$this->nodes);
+        
+        if (self::$codeFormat && !$this->doc->isInlineTag($this->tagName))
+          array_push($parts, PHP_EOL);
+        
+        if (self::$codeFormat && !$this->doc->isInlineTag($this->tagName))
+          self::$codeFormatIndent--;
+      }
+      
+      if (self::$codeFormat && !$this->doc->isInlineTag($this->tagName))
+        array_push($parts, str_repeat(self::$codeFormatSpacing, self::$codeFormatIndent));
+      
       array_push($parts, $this->doc->closeTag($this->tagName));
     }
+    
+    if (self::$codeFormat && !$this->doc->isInlineTag($this->tagName) && self::$codeFormatIndent == 0)
+      array_push($parts, PHP_EOL);
     
     return implode('', $parts);
   }

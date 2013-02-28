@@ -22,13 +22,13 @@ abstract class Tag_DocType {
   protected $useEmptyCloseSeparator = false;
   
   protected $elements = array();
-  
+
   public function property($tagName)
   {
     if (isset($this->elements[$tagName]))
       return $this->elements[$tagName];
     else
-      return array(' ', ' ', ' ', ' ');
+      return 0;
   }
   
   public function openTag($tagName, $attributes)
@@ -61,7 +61,12 @@ abstract class Tag_DocType {
   
   public function isEmptyTag($tagName)
   {
-    return ($this->elements[$tagName] & 1 == 1);
+    return ($this->elements[$tagName] & 1);
+  }
+  
+  public function isInlineTag($tagName)
+  {
+    return ($this->elements[$tagName] & 2);
   }
   
   public function __toString()
