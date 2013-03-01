@@ -83,7 +83,7 @@ $navbar = Tag::div(
 
 __PHP_CODE__;
 
-eval($nabvar_code);
+eval($navbar_code);
 
 
 /**
@@ -200,12 +200,12 @@ $html->append(Tag::body(
     Tag::h2('2. Navbar'),
     $navbar,
     Tag::div(
-      Tag::pre($nabvar_code, array('class' => 'brush: php'))
+      Tag::pre($navbar_code, array('class' => 'brush: php'))
     )
   ),
   Tag::section(
     Tag::h2('3. Sidebar'),
-    $sidevar,
+    $sidebar,
     Tag::div(
       Tag::pre($sidebar_code, array('class' => 'brush: php'))
     )

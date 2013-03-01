@@ -35,6 +35,8 @@ foreach ($all_tr as $tr)
 {
   $all_td = $tr->getElementsByTagName('td');
   
+  if (is_null($all_td->item(0)))
+    continue;
   $tag_name = strtolower(trim($all_td->item(0)->nodeValue));
   if (empty($tag_name))
     continue;

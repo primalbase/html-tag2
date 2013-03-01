@@ -79,11 +79,12 @@ class TagTest extends PHPUnit_Framework_TestCase
     public function testCodeFormat()
     {
       Tag::$codeFormat = true;
-      $this->assertEquals((string)Tag::div()->addClass('span1'), '<div class="span1"></div>'.PHP_EOL);
+      $this->assertEquals((string)Tag::div()->addClass('span1'), '<div class="span1">'.PHP_EOL.'</div>'.PHP_EOL);
       $this->assertEquals((string)Tag::div('contents')->addClass('span1'), '<div class="span1">'.PHP_EOL.'  contents'.PHP_EOL.'</div>'.PHP_EOL);
-      $this->assertEquals((string)Tag::br(), '<br>');
+      $this->assertEquals((string)Tag::br(), '<br>'.PHP_EOL);
       $this->assertEquals((string)Tag::div('contents'), '<div>'.PHP_EOL.'  contents'.PHP_EOL.'</div>'.PHP_EOL);
       $this->assertEquals((string)Tag::div(Tag::div(Tag::span('content'))), '<div>'.PHP_EOL.'  <div>'.PHP_EOL.'    <span>content</span>'.PHP_EOL.'  </div>'.PHP_EOL.'</div>'.PHP_EOL);
+      $this->assertEquals((string)Tag::span(Tag::span(), Tag::span()), '<span><span></span><span></span></span>'.PHP_EOL);
     }
     
 }

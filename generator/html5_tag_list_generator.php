@@ -38,6 +38,8 @@ foreach ($all_tr as $tr)
 {
   $td = $tr->getElementsByTagName('td');
   $td = $td->item(0);
+  if (is_null($td))
+    continue;
   $tag_name = trim($td->nodeValue, ' <>');
   if (strpos($tag_name, '!') !== false)
     continue;

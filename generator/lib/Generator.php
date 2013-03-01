@@ -8,7 +8,10 @@ class Generator {
   
   public function __get($name)
   {
-    return $this->attributes[$name];
+    if (isset($this->attributes[$name]))
+      return $this->attributes[$name];
+    else
+      false;
   }
   
   public function output()

@@ -19,13 +19,37 @@ $plain = TagNodes::create();
 foreach ($html4_tags as $tag_name => $flg)
   $plain->append(Tag::create($tag_name, 'contents'));
 
-echo Tag::pre(Tag::code((string)$plain));
-
+echo Tag::pre(Tag::code(htmlspecialchars($plain)));
 
 $plain = Tag::table(Tag::tr(Tag::td(),Tag::td()), Tag::tr(Tag::td(),Tag::td()));
 
-echo Tag::pre(Tag::code((string)$plain));
+echo Tag::pre(Tag::code(htmlspecialchars($plain)));
 
 $plain = Tag::ul(Tag::li(), Tag::li());
 
-echo Tag::pre(Tag::code((string)$plain));
+echo Tag::pre(Tag::code(htmlspecialchars($plain)));
+
+$plain = Tag::ul(Tag::li('aaa'), Tag::li('bbb'));
+
+echo Tag::pre(Tag::code(htmlspecialchars($plain)));
+
+$plain = Tag::div(Tag::div(), Tag::div());
+
+echo Tag::pre(Tag::code(htmlspecialchars($plain)));
+
+$plain = Tag::div(Tag::span(), Tag::span());
+
+echo Tag::pre(Tag::code(htmlspecialchars($plain)));
+
+$plain = Tag::span(Tag::span(), Tag::span());
+
+echo Tag::pre(Tag::code(htmlspecialchars($plain)));
+
+
+$plain = Tag::span(Tag::span(), Tag::br());
+
+echo Tag::pre(Tag::code(htmlspecialchars($plain)));
+
+$plain = Tag::body(Tag::style('a { color: red; }'));
+
+echo Tag::pre(Tag::code(htmlspecialchars($plain)));

@@ -40,6 +40,8 @@ foreach ($all_li as $li)
 {
   $a = $li->getElementsByTagName('a');
   $a = $a->item(0);
+  if (is_null($a))
+    continue;
   $tag_name = $a->nodeValue;
   if (!$tag_name)
     continue;

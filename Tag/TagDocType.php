@@ -61,12 +61,18 @@ abstract class Tag_DocType {
   
   public function isEmptyTag($tagName)
   {
-    return ($this->elements[$tagName] & 1);
+    if (!isset($this->elements[$tagName]))
+      return 0;
+    else
+      return ($this->elements[$tagName] & 1);
   }
   
   public function isInlineTag($tagName)
   {
-    return ($this->elements[$tagName] & 2);
+    if (!isset($this->elements[$tagName]))
+      return 0;
+    else
+      return ($this->elements[$tagName] & 2);
   }
   
   public function __toString()

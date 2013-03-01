@@ -169,6 +169,11 @@ class Tag_Base {
     return self::createInstanceArray($tagName, $args);
   }
   
+  static private function indent()
+  {
+    return str_repeat(self::$codeFormatSpacing, self::$codeFormatIndent);
+  }
+  
   public function __toString()
   {
     $is_block_tag = !$this->doc->isInlineTag($this->tagName);
@@ -176,7 +181,9 @@ class Tag_Base {
     $open_tag     = $this->doc->openTag($this->tagName, $this->attributes);
     $close_tag    = $this->doc->closeTag($this->tagName);
     
-    $parts = array($open_tag);
+    $parts = array();
+    
+    array_push($parts, $open_tag);
     
     if ($is_empty_tag)
     {
@@ -185,29 +192,50 @@ class Tag_Base {
       return implode('', $parts);
     }
       
-    if (!$this->nodes->isEmpty())
+    if (in_array($this->tagName, array('script', 'style')))
     {
-      if (self::$codeFormat && $is_block_tag)
-      {
+      if (self::$codeFormat)
         array_push($parts, PHP_EOL);
-        self::$codeFormatIndent++;
-        array_push($parts, str_repeat(self::$codeFormatSpacing, self::$codeFormatIndent));
-      }
-    
-      if (in_array($this->tagName, array('script', 'style')))
-        array_push($parts, $this->nodes->rawString());
-      else
-        array_push($parts, (string)$this->nodes);
-      
-      if (self::$codeFormat && $is_block_tag)
+      array_push($parts, $this->nodes->rawString());
+      if (self::$codeFormat)
         array_push($parts, PHP_EOL);
-      
-      if (self::$codeFormat && $is_block_tag)
-        self::$codeFormatIndent--;
+      if (self::$codeFormat)
+        array_push($parts, self::indent());
+      array_push($parts, $close_tag);
+      if (self::$codeFormatIndent == 0)
+        array_push($parts, PHP_EOL);
+      return implode('', $parts);
     }
     
+    if (!$this->nodes->isEmpty())
+    {
+      foreach ($this->nodes as $node)
+      {
+        self::$codeFormatIndent++;
+        if (self::$codeFormat && $is_block_tag)
+          array_push($parts, PHP_EOL);
+        if (is_object($node))
+        {
+          if (self::$codeFormat && $is_block_tag)
+            array_push($parts, self::indent());
+          array_push($parts, (string)$node);
+        }
+        else
+        {
+          if (self::$codeFormat && $is_block_tag)
+          {
+            array_push($parts, self::indent());
+          }
+          array_push($parts, (string)$node);
+        }
+        self::$codeFormatIndent--;
+      }
+    }
     if (self::$codeFormat && $is_block_tag)
-      array_push($parts, str_repeat(self::$codeFormatSpacing, self::$codeFormatIndent));
+    {
+      array_push($parts, PHP_EOL);
+        array_push($parts, self::indent());
+    }
     
     array_push($parts, $close_tag);
     
