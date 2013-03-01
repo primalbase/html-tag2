@@ -176,11 +176,15 @@ class Tag_Base {
     $open_tag     = $this->doc->openTag($this->tagName, $this->attributes);
     $close_tag    = $this->doc->closeTag($this->tagName);
     
-    if ($is_empty_tag)
-      return $open_tag;
-      
     $parts = array($open_tag);
     
+    if ($is_empty_tag)
+    {
+      if (self::$codeFormat && self::$codeFormatIndent == 0)
+        array_push($parts, PHP_EOL);
+      return implode('', $parts);
+    }
+      
     if (!$this->nodes->isEmpty())
     {
       if (self::$codeFormat && $is_block_tag)
