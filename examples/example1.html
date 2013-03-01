@@ -1,5 +1,112 @@
-<i>PHP 5.3.1</i><h1>Example 1</h1><h2>1. Construct</h2><h3>Tag::a()</h3><xmp><a></a></xmp><h3>Tag::create('hoge', array('class' =&gt; 'fuga'), 'munya')</h3><xmp><hoge class="fuga">munya</hoge></xmp><h3>Tag::div(array('class' =&gt; 'span12'))</h3><xmp><div class="span12"></div></xmp><h3>Tag::div(array('class' =&gt; 'span12'), 'test', Tag::span('inner'))</h3><xmp><div class="span12">test<span>inner</span></div></xmp><h2>2. Member</h2><h3>Tag::table()-&gt;tagName()</h3><xmp>table</xmp><h3>Tag::table(array('class' =&gt; 'horizontal'))-&gt;attributes()</h3>array(1) {
+<i>PHP 5.4.7</i>
+<h1>
+  Example 1
+</h1>
+<h2>
+  1. Construct
+</h2>
+<h3>
+  Tag::a()
+</h3>
+<xmp>
+  <a></a>
+</xmp>
+<h3>
+  Tag::create('hoge', array('class' => 'fuga'), 'munya')
+</h3>
+<xmp>
+  <hoge class="fuga">
+    munya
+  </hoge>
+</xmp>
+<h3>
+  Tag::div(array('class' => 'span12'))
+</h3>
+<xmp>
+  <div class="span12">
+  </div>
+</xmp>
+<h3>
+  Tag::div(array('class' => 'span12'), 'test', Tag::span('inner'))
+</h3>
+<xmp>
+  <div class="span12">
+    test
+    <span>inner</span>
+  </div>
+</xmp>
+<h2>
+  2. Member
+</h2>
+<h3>
+  Tag::table()->tagName()
+</h3>
+<xmp>
+  table
+</xmp>
+<h3>
+  Tag::table(array('class' => 'horizontal'))->attributes()
+</h3>
+array(1) {
   ["class"]=>
   string(10) "horizontal"
 }
-<h2>3. Attributes</h2><h3>Tag::div()-&gt;class('control-group')</h3><xmp><div class="control-group"></div></xmp><h3>Tag::a('here')-&gt;href('http://www.google.com')</h3><xmp><a href="http://www.google.com">here</a></xmp><h3>Tag::a('another')-&gt;attr('href', 'http://www.yahoo.com')</h3><xmp><a href="http://www.yahoo.com">another</a></xmp><h2>4. Append</h2><h3>Tag::div()-&gt;append(Tag::span('content'))</h3><xmp><div><span>content</span></div></xmp><h2>5. Doctype</h2><h3>Tag::$DocType = 'html4'; Tag::br()</h3><xmp><br></xmp><h3>Tag::$DocType = 'xhtml'; Tag::br()</h3><xmp><br /></xmp><h3>Tag::$DocType = 'html5'; Tag::br()</h3><xmp><br></xmp>
+<h2>
+  3. Attributes
+</h2>
+<h3>
+  Tag::div()->class('control-group')
+</h3>
+<xmp>
+  <div class="control-group">
+  </div>
+</xmp>
+<h3>
+  Tag::a('here')->href('http://www.google.com')
+</h3>
+<xmp>
+  <a href="http://www.google.com">here</a>
+</xmp>
+<h3>
+  Tag::a('another')->attr('href', 'http://www.yahoo.com')
+</h3>
+<xmp>
+  <a href="http://www.yahoo.com">another</a>
+</xmp>
+<h2>
+  4. Append
+</h2>
+<h3>
+  Tag::div()->append(Tag::span('content'))
+</h3>
+<xmp>
+  <div>
+    <span>content</span>
+  </div>
+</xmp>
+<h2>
+  5. Doctype
+</h2>
+<h3>
+  Tag::$DocType = 'html4'; Tag::br()
+</h3>
+<xmp>
+  <br>
+</xmp>
+<h3>
+  Tag::$DocType = 'xhtml'; Tag::br()
+</h3>
+<xmp>
+  <br />
+</xmp>
+<h3>
+  Tag::$DocType = 'html5'; Tag::br()
+</h3>
+<xmp>
+  <br>
+</xmp>
+<div>
+  <div>
+    <span>content</span>
+  </div>
+</div>

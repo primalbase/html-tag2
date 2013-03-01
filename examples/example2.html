@@ -1,4 +1,16 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Example 2</title><meta name="viewport" content="width=device-width, initial-scale=1.0"><link type="text/css" rel="stylesheet" href="asset/bootstrap/css/bootstrap.min.css"><link type="text/css" rel="stylesheet" href="asset/bootstrap/css/bootstrap-responsive.min.css"><link type="text/css" rel="stylesheet" href="asset/syntaxhighlighter/styles/shCore.css"><link type="text/css" rel="stylesheet" href="asset/syntaxhighlighter/styles/shThemeDefault.css"><style>
+<!DOCTYPE html><html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>
+      Example 2
+    </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link type="text/css" rel="stylesheet" href="asset/bootstrap/css/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="asset/bootstrap/css/bootstrap-responsive.min.css">
+    <link type="text/css" rel="stylesheet" href="asset/syntaxhighlighter/styles/shCore.css">
+    <link type="text/css" rel="stylesheet" href="asset/syntaxhighlighter/styles/shThemeDefault.css">
+    <style>
+
 .syntaxhighlighter {
   overflow: auto !important;
   overflow-y: hidden !important;
@@ -6,26 +18,49 @@
 .syntaxhighlighter table {
   margin-bottom: 1em !important;
 }
-</style><script type="text/javascript" src="asset/jquery/jquery-1.9.1.min.js"></script><script type="text/javascript" src="asset/bootstrap/js/bootstrap.min.js"></script><script type="text/javascript" src="asset/syntaxhighlighter/scripts/shCore.js"></script><script type="text/javascript" src="asset/syntaxhighlighter/scripts/shBrushPhp.js"></script><script type="text/javascript">
+
+    </style>
+    <script type="text/javascript" src="asset/jquery/jquery-1.9.1.min.js">
+
+    </script>
+    <script type="text/javascript" src="asset/bootstrap/js/bootstrap.min.js">
+
+    </script>
+    <script type="text/javascript" src="asset/syntaxhighlighter/scripts/shCore.js">
+
+    </script>
+    <script type="text/javascript" src="asset/syntaxhighlighter/scripts/shBrushPhp.js">
+
+    </script>
+    <script type="text/javascript">
+
 $(function(){
   SyntaxHighlighter.all();
 })
-</script></head><body><section><h2>1. Html header</h2><pre class="brush: php">
+
+    </script>
+  </head>
+  <body>
+    <section><h2>
+        1. Html header
+      </h2><pre class="brush: php">
+require_once 'Tag.php';
+
 Tag::$DocType = 'html5';
 
 /**
  * header
  */
 $html = Tag::html(
-  array('lang' =&gt; 'en'),
+  array('lang' => 'en'),
   Tag::head(
-    Tag::meta(array('charset' =&gt; 'UTF-8')),
+    Tag::meta(array('charset' => 'UTF-8')),
     Tag::title('Example 2'),
-    Tag::meta(array('name' =&gt; 'viewport', 'content' =&gt; 'width=device-width, initial-scale=1.0')),
-    Tag::link(array('type' =&gt; 'text/css', 'rel' =&gt; 'stylesheet', 'href' =&gt; 'asset/bootstrap/css/bootstrap.min.css')),
-    Tag::link(array('type' =&gt; 'text/css', 'rel' =&gt; 'stylesheet', 'href' =&gt; 'asset/bootstrap/css/bootstrap-responsive.min.css')),
-    Tag::link(array('type' =&gt; 'text/css', 'rel' =&gt; 'stylesheet', 'href' =&gt; 'asset/syntaxhighlighter/styles/shCore.css')),
-    Tag::link(array('type' =&gt; 'text/css', 'rel' =&gt; 'stylesheet', 'href' =&gt; 'asset/syntaxhighlighter/styles/shThemeDefault.css')),
+    Tag::meta(array('name' => 'viewport', 'content' => 'width=device-width, initial-scale=1.0')),
+    Tag::link(array('type' => 'text/css', 'rel' => 'stylesheet', 'href' => 'asset/bootstrap/css/bootstrap.min.css')),
+    Tag::link(array('type' => 'text/css', 'rel' => 'stylesheet', 'href' => 'asset/bootstrap/css/bootstrap-responsive.min.css')),
+    Tag::link(array('type' => 'text/css', 'rel' => 'stylesheet', 'href' => 'asset/syntaxhighlighter/styles/shCore.css')),
+    Tag::link(array('type' => 'text/css', 'rel' => 'stylesheet', 'href' => 'asset/syntaxhighlighter/styles/shThemeDefault.css')),
     Tag::style('
 .syntaxhighlighter {
   overflow: auto !important;
@@ -36,114 +71,281 @@ $html = Tag::html(
 }
 '
     ),
-    Tag::script(array('type' =&gt; 'text/javascript', 'src' =&gt; 'asset/jquery/jquery-1.9.1.min.js')),
-    Tag::script(array('type' =&gt; 'text/javascript', 'src' =&gt; 'asset/bootstrap/js/bootstrap.min.js')),
-    Tag::script(array('type' =&gt; 'text/javascript', 'src' =&gt; 'asset/syntaxhighlighter/scripts/shCore.js')),
-    Tag::script(array('type' =&gt; 'text/javascript', 'src' =&gt; 'asset/syntaxhighlighter/scripts/shBrushPhp.js')),
-    Tag::script(array('type' =&gt; 'text/javascript'), '
+    Tag::script(array('type' => 'text/javascript', 'src' => 'asset/jquery/jquery-1.9.1.min.js')),
+    Tag::script(array('type' => 'text/javascript', 'src' => 'asset/bootstrap/js/bootstrap.min.js')),
+    Tag::script(array('type' => 'text/javascript', 'src' => 'asset/syntaxhighlighter/scripts/shCore.js')),
+    Tag::script(array('type' => 'text/javascript', 'src' => 'asset/syntaxhighlighter/scripts/shBrushPhp.js')),
+    Tag::script(array('type' => 'text/javascript'), '
 $(function(){
   SyntaxHighlighter.all();
 })
 '
     )
   )
-);</pre></section><section><h2>2. Navbar</h2><div><div class="navbar navbar-inverse"><div class="navbar-inner"><div class="container-fluid"><button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button><a class="brand" href="#">Project name</a><div class="nav-collapse collapse"><p class="navbar-text pull-right">Logged in as <a href="#" class="navbar-link"></a>Username</p><ul class="nav"><li class="active"><a href="#">Home</a></li><li><a href="#about">About</a></li><li><a href="#content">Content</a></li></ul></div></div></div></div></div><div><pre class="brush: php">$view = Tag::div(
-  Tag::div(array('class' =&gt; 'navbar navbar-inverse'),
-    Tag::div(array('class' =&gt; 'navbar-inner'),
-      Tag::div(array('class' =&gt; 'container-fluid'),
-        Tag::button(array('type' =&gt; 'button', 'class' =&gt; 'btn btn-navbar', 'data-toggle' =&gt; 'collapse', 'data-target' =&gt; '.nav-collapse'),
-          Tag::span(array('class' =&gt; 'icon-bar')),
-          Tag::span(array('class' =&gt; 'icon-bar')),
-          Tag::span(array('class' =&gt; 'icon-bar'))
+);
+</pre></section>
+    <section><h2>
+        2. Navbar
+      </h2><div>
+        <div class="navbar navbar-inverse">
+          <div class="navbar-inner">
+            <div class="container-fluid">
+              <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+              <a class="brand" href="#">Project name</a>
+              <div class="nav-collapse collapse">
+                <p class="navbar-text pull-right">Logged in as <a href="#" class="navbar-link"></a>Username</p>
+                <ul class="nav">
+                  <li class="active">
+                    <a href="#">Home</a>
+                  </li>
+                  <li>
+                    <a href="#about">About</a>
+                  </li>
+                  <li>
+                    <a href="#content">Content</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><div>
+        <pre class="brush: php">$navbar = Tag::div(
+  Tag::div(array('class' => 'navbar navbar-inverse'),
+    Tag::div(array('class' => 'navbar-inner'),
+      Tag::div(array('class' => 'container-fluid'),
+        Tag::button(array('type' => 'button', 'class' => 'btn btn-navbar', 'data-toggle' => 'collapse', 'data-target' => '.nav-collapse'),
+          Tag::span(array('class' => 'icon-bar')),
+          Tag::span(array('class' => 'icon-bar')),
+          Tag::span(array('class' => 'icon-bar'))
         ),
-        Tag::a(array('class' =&gt; 'brand', 'href' =&gt; '#'), 'Project name'),
-        Tag::div(array('class' =&gt; 'nav-collapse collapse'),
-          Tag::p(array('class' =&gt; 'navbar-text pull-right'), 'Logged in as ', Tag::a(array('href' =&gt; '#', 'class' =&gt; 'navbar-link')), 'Username'),
-          Tag::ul(array('class' =&gt; 'nav'),
-            Tag::li(array('class' =&gt; 'active'), Tag::a(array('href' =&gt; '#'), 'Home')),
-            Tag::li(Tag::a(array('href' =&gt; '#about'), 'About')),
-            Tag::li(Tag::a(array('href' =&gt; '#content'), 'Content'))
+        Tag::a(array('class' => 'brand', 'href' => '#'), 'Project name'),
+        Tag::div(array('class' => 'nav-collapse collapse'),
+          Tag::p(array('class' => 'navbar-text pull-right'), 'Logged in as ', Tag::a(array('href' => '#', 'class' => 'navbar-link')), 'Username'),
+          Tag::ul(array('class' => 'nav'),
+            Tag::li(array('class' => 'active'), Tag::a(array('href' => '#'), 'Home')),
+            Tag::li(Tag::a(array('href' => '#about'), 'About')),
+            Tag::li(Tag::a(array('href' => '#content'), 'Content'))
           )
         )
       )
     )
   )
-);</pre></div></section><section><h2>3. Sidebar</h2><div><div class="container-fluid"><div class="row-fluid"><div class="span3"><div class="well sidebar-nav"><ul class="nav nav-list"><li><a href="#">Link</a></li><li><a href="#">Link</a></li><li><a href="#">Link</a></li><li class="nav-header">Sidebar</li><li><a href="#">Link</a></li><li><a href="#">Link</a></li><li><a href="#">Link</a></li><li><a href="#">Link</a></li><li><a href="#">Link</a></li><li><a href="#">Link</a></li><li class="nav-header">Sidebar</li><li><a href="#">Link</a></li><li><a href="#">Link</a></li><li><a href="#">Link</a></li></ul></div></div></div></div></div><div><pre class="brush: php">$view = Tag::div(
-  Tag::div(array('class' =&gt; 'container-fluid'),
-    Tag::div(array('class' =&gt; 'row-fluid'),
-      Tag::div(array('class' =&gt; 'span3'),
-        Tag::div(array('class' =&gt; 'well sidebar-nav'),
-          Tag::ul(array('class' =&gt; 'nav nav-list'),
-            Tag::li(Tag::a(array('href' =&gt; '#'), 'Link')),
-            Tag::li(Tag::a(array('href' =&gt; '#'), 'Link')),
-            Tag::li(Tag::a(array('href' =&gt; '#'), 'Link')),
-            Tag::li(array('class' =&gt; 'nav-header'), 'Sidebar'),
-            Tag::li(Tag::a(array('href' =&gt; '#'), 'Link')),
-            Tag::li(Tag::a(array('href' =&gt; '#'), 'Link')),
-            Tag::li(Tag::a(array('href' =&gt; '#'), 'Link')),
-            Tag::li(Tag::a(array('href' =&gt; '#'), 'Link')),
-            Tag::li(Tag::a(array('href' =&gt; '#'), 'Link')),
-            Tag::li(Tag::a(array('href' =&gt; '#'), 'Link')),
-            Tag::li(array('class' =&gt; 'nav-header'), 'Sidebar'),
-            Tag::li(Tag::a(array('href' =&gt; '#'), 'Link')),
-            Tag::li(Tag::a(array('href' =&gt; '#'), 'Link')),
-            Tag::li(Tag::a(array('href' =&gt; '#'), 'Link'))
+);
+</pre>
+      </div></section>
+    <section><h2>
+        3. Sidebar
+      </h2><div>
+        <div class="container-fluid">
+          <div class="row-fluid">
+            <div class="span3">
+              <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                  <li>
+                    <a href="#">Link</a>
+                  </li>
+                  <li>
+                    <a href="#">Link</a>
+                  </li>
+                  <li>
+                    <a href="#">Link</a>
+                  </li>
+                  <li class="nav-header">
+                    Sidebar
+                  </li>
+                  <li>
+                    <a href="#">Link</a>
+                  </li>
+                  <li>
+                    <a href="#">Link</a>
+                  </li>
+                  <li>
+                    <a href="#">Link</a>
+                  </li>
+                  <li>
+                    <a href="#">Link</a>
+                  </li>
+                  <li>
+                    <a href="#">Link</a>
+                  </li>
+                  <li>
+                    <a href="#">Link</a>
+                  </li>
+                  <li class="nav-header">
+                    Sidebar
+                  </li>
+                  <li>
+                    <a href="#">Link</a>
+                  </li>
+                  <li>
+                    <a href="#">Link</a>
+                  </li>
+                  <li>
+                    <a href="#">Link</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><div>
+        <pre class="brush: php">$sidebar = Tag::div(
+  Tag::div(array('class' => 'container-fluid'),
+    Tag::div(array('class' => 'row-fluid'),
+      Tag::div(array('class' => 'span3'),
+        Tag::div(array('class' => 'well sidebar-nav'),
+          Tag::ul(array('class' => 'nav nav-list'),
+            Tag::li(Tag::a(array('href' => '#'), 'Link')),
+            Tag::li(Tag::a(array('href' => '#'), 'Link')),
+            Tag::li(Tag::a(array('href' => '#'), 'Link')),
+            Tag::li(array('class' => 'nav-header'), 'Sidebar'),
+            Tag::li(Tag::a(array('href' => '#'), 'Link')),
+            Tag::li(Tag::a(array('href' => '#'), 'Link')),
+            Tag::li(Tag::a(array('href' => '#'), 'Link')),
+            Tag::li(Tag::a(array('href' => '#'), 'Link')),
+            Tag::li(Tag::a(array('href' => '#'), 'Link')),
+            Tag::li(Tag::a(array('href' => '#'), 'Link')),
+            Tag::li(array('class' => 'nav-header'), 'Sidebar'),
+            Tag::li(Tag::a(array('href' => '#'), 'Link')),
+            Tag::li(Tag::a(array('href' => '#'), 'Link')),
+            Tag::li(Tag::a(array('href' => '#'), 'Link'))
           )
         )
       )
     )
   )
-);</pre></div></section><section><h2>4. Hero unit</h2><div><div class="container-fluid"><div class="row-fluid"><div class="span9"><div class="hero-unit"><h1>Hello, world!</h1><p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p><p><a href="#" class="btn btn-primary btn-large">Learn more »</a></p></div></div></div></div></div><div><pre class="brush: php">$view = Tag::div(
-  Tag::div(array('class' =&gt; 'container-fluid'),
-    Tag::div(array('class' =&gt; 'row-fluid'),
-      Tag::div(array('class' =&gt; 'span9'),
-        Tag::div(array('class' =&gt; 'hero-unit'),
+);</pre>
+      </div></section>
+    <section><h2>
+        4. Hero unit
+      </h2><div>
+        <div class="container-fluid">
+          <div class="row-fluid">
+            <div class="span9">
+              <div class="hero-unit">
+                <h1>
+                  Hello, world!
+                </h1>
+                <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+                <p><a href="#" class="btn btn-primary btn-large">Learn more »</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><div>
+        <pre class="brush: php">$hero_unit = Tag::div(
+  Tag::div(array('class' => 'container-fluid'),
+    Tag::div(array('class' => 'row-fluid'),
+      Tag::div(array('class' => 'span9'),
+        Tag::div(array('class' => 'hero-unit'),
           Tag::h1('Hello, world!'),
           Tag::p('This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.'),
-          Tag::p(Tag::a(array('href' =&gt; '#', 'class' =&gt; 'btn btn-primary btn-large'), 'Learn more »'))
+          Tag::p(Tag::a(array('href' => '#', 'class' => 'btn btn-primary btn-large'), 'Learn more »'))
         )
       )
     )
   )
-);</pre></div></section><section><h2>5. Headings.</h2><div><div class="container-fluid"><div class="row-fluid"><div class="span9"><div class="row-fluid"><div class="span4"><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p><p><a href="#" class="btn">View details »</a></p></div><div class="span4"><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p><p><a href="#" class="btn">View details »</a></p></div><div class="span4"><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p><p><a href="#" class="btn">View details »</a></p></div></div><div class="row-fluid"><div class="span4"><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p><p><a href="#" class="btn">View details »</a></p></div><div class="span4"><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p><p><a href="#" class="btn">View details »</a></p></div><div class="span4"><h2>Heading</h2><p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p><p><a href="#" class="btn">View details »</a></p></div></div></div></div></div></div><div><pre class="brush: php">$view = Tag::div(
-  Tag::div(array('class' =&gt; 'container-fluid'),
-    Tag::div(array('class' =&gt; 'row-fluid'),
-      Tag::div(array('class' =&gt; 'span9'),
-        Tag::div(array('class' =&gt; 'row-fluid'),
-          Tag::div(array('class' =&gt; 'span4'),
+);</pre>
+      </div></section>
+    <section><h2>
+        5. Headings.
+      </h2><div>
+        <div class="container-fluid">
+          <div class="row-fluid">
+            <div class="span9">
+              <div class="row-fluid">
+                <div class="span4">
+                  <h2>
+                    Heading
+                  </h2>
+                  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+                  <p><a href="#" class="btn">View details »</a></p>
+                </div>
+                <div class="span4">
+                  <h2>
+                    Heading
+                  </h2>
+                  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+                  <p><a href="#" class="btn">View details »</a></p>
+                </div>
+                <div class="span4">
+                  <h2>
+                    Heading
+                  </h2>
+                  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+                  <p><a href="#" class="btn">View details »</a></p>
+                </div>
+              </div>
+              <div class="row-fluid">
+                <div class="span4">
+                  <h2>
+                    Heading
+                  </h2>
+                  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+                  <p><a href="#" class="btn">View details »</a></p>
+                </div>
+                <div class="span4">
+                  <h2>
+                    Heading
+                  </h2>
+                  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+                  <p><a href="#" class="btn">View details »</a></p>
+                </div>
+                <div class="span4">
+                  <h2>
+                    Heading
+                  </h2>
+                  <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.</p>
+                  <p><a href="#" class="btn">View details »</a></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><div>
+        <pre class="brush: php">$headings = Tag::div(
+  Tag::div(array('class' => 'container-fluid'),
+    Tag::div(array('class' => 'row-fluid'),
+      Tag::div(array('class' => 'span9'),
+        Tag::div(array('class' => 'row-fluid'),
+          Tag::div(array('class' => 'span4'),
             Tag::h2('Heading'),
             Tag::p('Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.'),
-            Tag::p(Tag::a(array('href' =&gt; '#', 'class' =&gt; 'btn'), 'View details »'))
+            Tag::p(Tag::a(array('href' => '#', 'class' => 'btn'), 'View details »'))
           ),
-          Tag::div(array('class' =&gt; 'span4'),
+          Tag::div(array('class' => 'span4'),
             Tag::h2('Heading'),
             Tag::p('Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.'),
-            Tag::p(Tag::a(array('href' =&gt; '#', 'class' =&gt; 'btn'), 'View details »'))
+            Tag::p(Tag::a(array('href' => '#', 'class' => 'btn'), 'View details »'))
           ),
-          Tag::div(array('class' =&gt; 'span4'),
+          Tag::div(array('class' => 'span4'),
             Tag::h2('Heading'),
             Tag::p('Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.'),
-            Tag::p(Tag::a(array('href' =&gt; '#', 'class' =&gt; 'btn'), 'View details »'))
+            Tag::p(Tag::a(array('href' => '#', 'class' => 'btn'), 'View details »'))
           )
         ),
-        Tag::div(array('class' =&gt; 'row-fluid'),
-          Tag::div(array('class' =&gt; 'span4'),
+        Tag::div(array('class' => 'row-fluid'),
+          Tag::div(array('class' => 'span4'),
             Tag::h2('Heading'),
             Tag::p('Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.'),
-            Tag::p(Tag::a(array('href' =&gt; '#', 'class' =&gt; 'btn'), 'View details »'))
+            Tag::p(Tag::a(array('href' => '#', 'class' => 'btn'), 'View details »'))
           ),
-          Tag::div(array('class' =&gt; 'span4'),
+          Tag::div(array('class' => 'span4'),
             Tag::h2('Heading'),
             Tag::p('Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.'),
-            Tag::p(Tag::a(array('href' =&gt; '#', 'class' =&gt; 'btn'), 'View details »'))
+            Tag::p(Tag::a(array('href' => '#', 'class' => 'btn'), 'View details »'))
           ),
-          Tag::div(array('class' =&gt; 'span4'),
+          Tag::div(array('class' => 'span4'),
             Tag::h2('Heading'),
             Tag::p('Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.'),
-            Tag::p(Tag::a(array('href' =&gt; '#', 'class' =&gt; 'btn'), 'View details »'))
+            Tag::p(Tag::a(array('href' => '#', 'class' => 'btn'), 'View details »'))
           )
         )
       )
     )
   )
-);</pre></div></section></body></html>
+);</pre>
+      </div></section>
+  </body>
+</html>

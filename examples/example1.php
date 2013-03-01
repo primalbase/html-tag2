@@ -1,5 +1,5 @@
 <?php
-define('APP_ROOT', realpath(dirname(__FILE__).'/..'));
+!defined('APP_ROOT') && define('APP_ROOT', realpath(dirname(__FILE__).'/..'));
 set_include_path(implode(PATH_SEPARATOR, array(
   APP_ROOT,
   get_include_path(),
