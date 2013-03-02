@@ -8,16 +8,16 @@ set_include_path(implode(PATH_SEPARATOR, array(
   get_include_path(),
 )));
 
-$html_code =<<< '__PHP_CODE__'
+$html_code =<<< __PHP_CODE__
 
 require_once 'Tag.php';
 
-Tag::$DocType = 'html5';
+Tag::\$DocType = 'html5';
 
 /**
  * header
  */
-$html = Tag::html(
+\$html = Tag::html(
   array('lang' => 'en'),
   Tag::head(
     Tag::meta(array('charset' => 'UTF-8')),
@@ -42,7 +42,7 @@ $html = Tag::html(
     Tag::script(array('type' => 'text/javascript', 'src' => 'asset/syntaxhighlighter/scripts/shCore.js')),
     Tag::script(array('type' => 'text/javascript', 'src' => 'asset/syntaxhighlighter/scripts/shBrushPhp.js')),
     Tag::script(array('type' => 'text/javascript'), '
-$(function(){
+\$(function(){
   SyntaxHighlighter.all();
 })
 '
@@ -57,8 +57,8 @@ eval($html_code);
 /**
  * navbar
  */
-$navbar_code = <<< '__PHP_CODE__'
-$navbar = Tag::div(
+$navbar_code =<<< __PHP_CODE__
+\$navbar = Tag::div(
   Tag::div(array('class' => 'navbar navbar-inverse'),
     Tag::div(array('class' => 'navbar-inner'),
       Tag::div(array('class' => 'container-fluid'),
@@ -89,8 +89,8 @@ eval($navbar_code);
 /**
  * sidebar
  */
-$sidebar_code = <<< '__PHP_CODE__'
-$sidebar = Tag::div(
+$sidebar_code =<<< __PHP_CODE__
+\$sidebar = Tag::div(
   Tag::div(array('class' => 'container-fluid'),
     Tag::div(array('class' => 'row-fluid'),
       Tag::div(array('class' => 'span3'),
@@ -123,8 +123,8 @@ eval($sidebar_code);
 /**
  * hero unit
  */
-$hero_unit_code = <<< '__PHP_CODE__'
-$hero_unit = Tag::div(
+$hero_unit_code =<<< __PHP_CODE__
+\$hero_unit = Tag::div(
   Tag::div(array('class' => 'container-fluid'),
     Tag::div(array('class' => 'row-fluid'),
       Tag::div(array('class' => 'span9'),
@@ -144,8 +144,8 @@ eval($hero_unit_code);
 /**
  * Headings
  */
-$headings_code = <<< '__PHP_CODE__'
-$headings = Tag::div(
+$headings_code =<<< __PHP_CODE__
+\$headings = Tag::div(
   Tag::div(array('class' => 'container-fluid'),
     Tag::div(array('class' => 'row-fluid'),
       Tag::div(array('class' => 'span9'),

@@ -21,7 +21,8 @@ class Tag_Nodes implements Iterator {
   
   public function __construct()
   {
-    call_user_func_array(array($this, 'append'), func_get_args());
+    $arg = func_get_args();
+    call_user_func_array(array($this, 'append'), $arg);
   }
   
   public function rewind()
