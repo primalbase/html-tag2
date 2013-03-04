@@ -174,6 +174,13 @@ class Tag_Base {
     return str_repeat(self::$codeFormatSpacing, self::$codeFormatIndent);
   }
   
+  /**
+   * script and style tag contents to not escape.
+   *
+   * select tag is inline but use indent to contents.
+   *
+   * @return string
+   */
   public function __toString()
   {
     $is_block_tag = !$this->doc->isInlineTag($this->tagName);
@@ -212,26 +219,17 @@ class Tag_Base {
       foreach ($this->nodes as $node)
       {
         self::$codeFormatIndent++;
-        if (self::$codeFormat && $is_block_tag)
+        if (self::$codeFormat && $is_block_tag || $this->tagName == 'select')
           array_push($parts, PHP_EOL);
-        if (is_object($node))
-        {
-          if (self::$codeFormat && $is_block_tag)
-            array_push($parts, self::indent());
-          array_push($parts, (string)$node);
-        }
-        else
-        {
-          if (self::$codeFormat && $is_block_tag)
-          {
-            array_push($parts, self::indent());
-          }
-          array_push($parts, (string)$node);
-        }
+        
+        if (self::$codeFormat && $is_block_tag || $this->tagName == 'select')
+          array_push($parts, self::indent());
+        array_push($parts, (string)$node);
+        
         self::$codeFormatIndent--;
       }
     }
-    if (self::$codeFormat && $is_block_tag)
+    if (self::$codeFormat && $is_block_tag || $this->tagName == 'select')
     {
       array_push($parts, PHP_EOL);
         array_push($parts, self::indent());

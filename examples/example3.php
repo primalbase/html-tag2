@@ -55,10 +55,14 @@ $plain = Tag::span(Tag::span(), Tag::span());
 
 echo Tag::pre(Tag::code(htmlspecialchars($plain)));
 
-
 $plain = Tag::span(Tag::span(), Tag::br());
 
 echo Tag::pre(Tag::code(htmlspecialchars($plain)));
+
+$plain = Tag::select(Tag::option('a'), Tag::option('b'), Tag::option('c'));
+
+echo Tag::pre(Tag::code(htmlspecialchars($plain)));
+
 
 echo Tag::h2('5. Style and script.');
 

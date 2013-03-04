@@ -78,7 +78,7 @@ class Tag_Html5 extends Tag_DocType {
     'object' => 2,
     'ol' => 0,
     'optgroup' => 0,
-    'option' => 0,
+    'option' => 2,
     'output' => 2,
     'p' => 2,
     'param' => 1,

@@ -68,7 +68,7 @@ class Tag_Xhtml extends Tag_DocType {
     'object' => 2,
     'ol' => 0,
     'optgroup' => 0,
-    'option' => 0,
+    'option' => 2,
     'p' => 0,
     'param' => 1,
     'pre' => 0,

@@ -18,7 +18,7 @@ $cache_path   = dirname(__FILE__).'/cache/html4_elements.html';
 /**
  * @see http://www.xml.vc/html/block-inline.html
  */
-$inline_contents = array('a', 'abbr', 'acronym', 'applet', 'b', 'basefont', 'bdo', 'big', 'br', 'button', 'cite', 'code', 'dfn', 'em', 'font', 'i', 'iframe', 'img', 'input', 'kbd', 'label', 'map', 'object', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var', 'img', 'input', 'object', 'select', 'textarea');
+$inline_contents = array('a', 'abbr', 'acronym', 'applet', 'b', 'basefont', 'bdo', 'big', 'br', 'button', 'cite', 'code', 'dfn', 'em', 'font', 'i', 'iframe', 'img', 'input', 'kbd', 'label', 'map', 'object', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var', 'img', 'input', 'object', 'select', 'textarea', 'option');
 
 $tags = array();
 

@@ -19,7 +19,7 @@ $empty_tags = array('base', 'meta', 'link', 'hr', 'br', 'basefont', 'param', 'im
 /**
  * @see http://www.xml.vc/html/block-inline.html
  */
-$inline_contents = array('a', 'abbr', 'acronym', 'applet', 'b', 'basefont', 'bdo', 'big', 'br', 'button', 'cite', 'code', 'dfn', 'em', 'font', 'i', 'iframe', 'img', 'input', 'kbd', 'label', 'map', 'object', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var', 'img', 'input', 'object', 'select', 'textarea');
+$inline_contents = array('a', 'abbr', 'acronym', 'applet', 'b', 'basefont', 'bdo', 'big', 'br', 'button', 'cite', 'code', 'dfn', 'em', 'font', 'i', 'iframe', 'img', 'input', 'kbd', 'label', 'map', 'object', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var', 'img', 'input', 'object', 'select', 'textarea', 'option');
 
 $tags = array();
 
