@@ -85,6 +85,7 @@ class TagTest extends PHPUnit_Framework_TestCase
       $this->assertEquals((string)Tag::div('contents'), '<div>'.PHP_EOL.'  contents'.PHP_EOL.'</div>'.PHP_EOL);
       $this->assertEquals((string)Tag::div(Tag::div(Tag::span('content'))), '<div>'.PHP_EOL.'  <div>'.PHP_EOL.'    <span>content</span>'.PHP_EOL.'  </div>'.PHP_EOL.'</div>'.PHP_EOL);
       $this->assertEquals((string)Tag::span(Tag::span(), Tag::span()), '<span><span></span><span></span></span>'.PHP_EOL);
+      $this->assertEquals((string)Tag::select(Tag::option(array('value' => '1'), 'text1'), Tag::option(array('value' => '2'), 'text2')), '<select>'.PHP_EOL."  ".'<option value="1">text1</option>'.PHP_EOL."  ".'<option value="2">text2</option>'.PHP_EOL.'</select>'.PHP_EOL);
     }
     
 }
