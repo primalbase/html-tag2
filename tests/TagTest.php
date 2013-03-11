@@ -47,7 +47,7 @@ class TagTest extends PHPUnit_Framework_TestCase
     public function testAppend()
     {
       $this->assertEquals((string)Tag::div()->append(Tag::span('content')), '<div><span>content</span></div>');
-      $this->assertEquals((string)Tag::ul()->append(TagNodes::create(Tag::li('item1'), Tag::li('item2')), 'outer'), '<ul><li>item1</li><li>item2</li>outer</ul>');
+      $this->assertEquals((string)Tag::ul()->append(Tag_Nodes::create(Tag::li('item1'), Tag::li('item2')), 'outer'), '<ul><li>item1</li><li>item2</li>outer</ul>');
     }
     
     public function testHtml4()
@@ -88,5 +88,13 @@ class TagTest extends PHPUnit_Framework_TestCase
       $this->assertEquals((string)Tag::select(Tag::option(array('value' => '1'), 'text1'), Tag::option(array('value' => '2'), 'text2')), '<select>'.PHP_EOL."  ".'<option value="1">text1</option>'.PHP_EOL."  ".'<option value="2">text2</option>'.PHP_EOL.'</select>'.PHP_EOL);
     }
     
+    public function testDocType()
+    {
+      $this->assertEquals((string)Tag::docType(), '<!DOCTYPE html>'.PHP_EOL);
+      Tag::$DocType = 'html4';
+      $this->assertEquals((string)Tag::docType(), '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">'.PHP_EOL);
+      Tag::$DocType = 'xhtml';
+      $this->assertEquals((string)Tag::docType(), '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">'.PHP_EOL);
+    }
 }
 ?>

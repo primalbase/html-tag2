@@ -125,12 +125,7 @@ class Tag_Base {
         $this->append($arg);
     }
     
-    $doc_type_class     = 'Tag_'.ucfirst(self::$DocType);
-    $doc_type_file_name = 'Tag'.ucfirst(self::$DocType).'.php';
-    require_once dirname(__FILE__).'/'.$doc_type_file_name;
-    if (!isset(self::$DocTypeInstance[self::$DocType]))
-      self::$DocTypeInstance[self::$DocType] = new $doc_type_class;
-    $this->doc      = self::$DocTypeInstance[self::$DocType];
+    $this->doc      = self::docType();
     $this->property = $this->doc->property($this->tagName);
   }
   
@@ -167,6 +162,22 @@ class Tag_Base {
     $args = func_get_args();
     array_shift($args);
     return self::createInstanceArray($tagName, $args);
+  }
+  
+  /**
+   * To return the DocType.
+   */
+  public static function docType()
+  {
+    $doc_type_class     = 'Tag_'.ucfirst(self::$DocType);
+    $doc_type_file_name = 'Tag'.ucfirst(self::$DocType).'.php';
+    
+    require_once dirname(__FILE__).'/'.$doc_type_file_name;
+    
+    if (!isset(self::$DocTypeInstance[self::$DocType]))
+      self::$DocTypeInstance[self::$DocType] = new $doc_type_class;
+    
+    return self::$DocTypeInstance[self::$DocType];
   }
   
   static private function indent()
