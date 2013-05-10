@@ -22,9 +22,23 @@ class Tag_Template {
 	  $this->params = array_slice(func_get_args(), 1);
 	}
 
+	/**
+	 * If set an array to merge an attributes.
+	 * If set not an array to append a setting value.
+	 */
   public function build()
   {
-    return Tag::createInstanceArray($this->tagName, $this->params);
+    $tag = Tag::createInstanceArray($this->tagName, $this->params);
+
+    foreach (func_get_args() as $_)
+    {
+      if (is_array($_))
+        $tag->updateAttributes($_);
+      else
+        $tag->append($_);
+    }
+
+    return $tag;
   }
 }
 

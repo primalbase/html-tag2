@@ -10,51 +10,51 @@
  */
 class Tag_NodesException extends Exception {}
 class Tag_Nodes implements Iterator {
-  
+
   protected $nodes = array();
-  
+
   public static function create()
   {
     $_ = new ReflectionClass(__CLASS__);
     return $_->newInstanceArgs(func_get_args());
   }
-  
+
   public function __construct()
   {
     call_user_func_array(array($this, 'append'), func_get_args());
   }
-  
+
   public function rewind()
   {
     reset($this->nodes);
   }
-  
+
   public function current()
   {
     return current($this->nodes);
   }
-  
+
   public function key()
   {
     return key($this->nodes);
   }
-  
+
   public function next()
   {
     return next($this->nodes);
   }
-  
+
   public function valid()
   {
     $key = key($this->nodes);
     return ($key !== NULL && $key !== FALSE);
   }
-  
+
   public function get($idx)
   {
     return $this->nodes[$idx];
   }
-  
+
   public function append()
   {
     foreach (func_get_args() as $node)
@@ -67,15 +67,15 @@ class Tag_Nodes implements Iterator {
       else
         array_push($this->nodes, $node);
     }
-    
+
     return $this;
   }
-  
+
   public function isEmpty()
   {
     return empty($this->nodes);
   }
-  
+
   public function __toString()
   {
     $escaped = array();
@@ -88,7 +88,7 @@ class Tag_Nodes implements Iterator {
     }
     return implode('', $escaped);
   }
-  
+
   public function rawString()
   {
     $raw = array();
@@ -101,7 +101,7 @@ class Tag_Nodes implements Iterator {
     }
     return implode('', $raw);
   }
-  
+
   /**
    * Return posibility content append.
    *
@@ -124,7 +124,7 @@ class Tag_Nodes implements Iterator {
       else
         return false;
     }
-    
+
     return true;
   }
 }
