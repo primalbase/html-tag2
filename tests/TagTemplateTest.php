@@ -52,8 +52,7 @@ class NodesTest extends PHPUnit_Framework_TestCase
     $template = TagTemplate::get('another_div');
     $this->assertEquals($template->tagName, 'div');
     $this->assertEquals($template->params, array(array('class' => 'test'), 'content'));
-    $this->assertEquals((string)$template->build(), '<div class="test">content</div>');
-
+    $this->assertEquals((string)$template->build(array('class' => 'test2')), '<div class="test2">content</div>');
   }
 
   public function testChange()

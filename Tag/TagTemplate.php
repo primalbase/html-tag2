@@ -23,7 +23,7 @@ class Tag_Template {
     $this->tagName = $tagName;
 	  $this->params = array_slice(func_get_args(), 1);
 
-	  self::$templates[$this->tagName] = $this;
+	  self::$templates[$this->tagName] = clone $this;
 	}
 
 	public static function createInstanceArray($tagName, array $args)
@@ -47,11 +47,10 @@ class Tag_Template {
 
 	public function setLabel($label)
 	{
-	  if ($this->tagName == $label)
-	    return false;
+    self::$templates[$label] = clone $this;
 
-    self::$templates[$label] = $this;
-    unset(self::$templates[$this->tagName]);
+	  if ($this->tagName != $label)
+      unset(self::$templates[$this->tagName]);
 
     return $this;
 	}
@@ -80,7 +79,7 @@ class Tag_Template {
     if (!array_key_exists($label, self::$templates))
       throw new Tag_TemplateException('Label "'.$label.'" not found.');
 
-    return self::$templates[$label];
+    return clone self::$templates[$label];
   }
 }
 
