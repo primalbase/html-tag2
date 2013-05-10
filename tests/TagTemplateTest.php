@@ -41,6 +41,19 @@ class NodesTest extends PHPUnit_Framework_TestCase
     $this->assertEquals((string)$template->params[0], '<div>inner div</div>');
     $this->assertEquals($template->params[1], array('class' => 'test'));
     $this->assertEquals((string)$template->build(), '<div class="test"><div>inner div</div></div>');
+
+    TagTemplate::create('div', array('class' => 'test'), 'content');
+    $template = TagTemplate::get('div');
+    $this->assertEquals($template->tagName, 'div');
+    $this->assertEquals($template->params, array(array('class' => 'test'), 'content'));
+    $this->assertEquals((string)$template->build(), '<div class="test">content</div>');
+
+    $template->setLabel('another_div');
+    $template = TagTemplate::get('another_div');
+    $this->assertEquals($template->tagName, 'div');
+    $this->assertEquals($template->params, array(array('class' => 'test'), 'content'));
+    $this->assertEquals((string)$template->build(), '<div class="test">content</div>');
+
   }
 
   public function testChange()
@@ -48,7 +61,6 @@ class NodesTest extends PHPUnit_Framework_TestCase
     $template = new TagTemplate('div', array('class' => 'test1'));
     $this->assertEquals((string)$template->build(array('class' => 'test2')), '<div class="test2"></div>');
     $this->assertEquals((string)$template->build('append content'), '<div class="test1">append content</div>');
-
   }
 }
 ?>
