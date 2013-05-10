@@ -5,6 +5,7 @@ set_include_path(implode(PATH_SEPARATOR, array(
 )));
 
 require_once 'Tag.php';
+require_once 'TagNodes.php';
 
 /**
  * Test class for Tag.
@@ -87,5 +88,10 @@ class TagTest extends PHPUnit_Framework_TestCase
     $this->assertEquals((string)Tag::span(Tag::span(), Tag::span()), '<span><span></span><span></span></span>'.PHP_EOL);
   }
 
+  public function testUpdate()
+  {
+    $this->assertEquals((string)Tag::div(array('class' => 'span1', 'id' => 'update'), 'update')->updateFromArray(array(array('class' => 'span2'))), '<div class="span2" id="update">update</div>');
+    $this->assertEquals((string)Tag::div(array('class' => 'span1', 'id' => 'update'), 'update')->updateFromArray(array(Tag::span('new'))), '<div class="span1" id="update">update<span>new</span></div>');
+  }
 }
 ?>

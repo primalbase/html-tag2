@@ -61,17 +61,8 @@ class Tag_Template {
 	 */
   public function build()
   {
-    $tag = Tag::createInstanceArray($this->tagName, $this->params);
-
-    foreach (func_get_args() as $_)
-    {
-      if (is_array($_))
-        $tag->updateAttributes($_);
-      else
-        $tag->append($_);
-    }
-
-    return $tag;
+    return Tag::createInstanceArray($this->tagName, $this->params)
+      ->updateFromArray(func_get_args());
   }
 
   public static function get($label)
