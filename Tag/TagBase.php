@@ -276,6 +276,19 @@ class Tag_Base {
     return $this;
   }
 
+  public function updateFromArray(array $options=array())
+  {
+    foreach ($options as $_)
+    {
+      if (is_array($_))
+        $this->updateAttributes($_);
+      else
+        $this->append($_);
+    }
+
+    return $this;
+  }
+
   public function replace()
   {
     $args = func_get_args();
