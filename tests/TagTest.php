@@ -12,80 +12,80 @@ require_once 'Tag.php';
  */
 class TagTest extends PHPUnit_Framework_TestCase
 {
-    protected function setUp()
-    {
-      Tag::$codeFormat = false;
-    }
+  protected function setUp()
+  {
+    Tag::$codeFormat = false;
+  }
 
-    protected function tearDown()
-    {
-    }
+  protected function tearDown()
+  {
+  }
 
-    public function testConstruct()
-    {
-      $this->assertEquals(get_class(Tag::a()), 'Tag_Base');
-      $this->assertEquals((string)Tag::a(), '<a></a>');
-      $this->assertEquals((string)Tag::create('hoge', array('class' => 'fuga'), 'munya'), '<hoge class="fuga">munya</hoge>');
-      $this->assertEquals((string)Tag::div(array('class' => 'span12')), '<div class="span12"></div>');
-      $this->assertEquals((string)Tag::div(array('class' => 'span12'), 'test', Tag::span("inner")), '<div class="span12">test<span>inner</span></div>');
-      $this->assertEquals((string)Tag::createInstanceArray('div', array(array('class' => 'span9'), 'array contents.')), '<div class="span9">array contents.</div>');
-    }
-    
-    public function testMember()
-    {
-      $this->assertEquals(Tag::table()->tagName(), 'table');
-      $this->assertEquals(Tag::table(array('class' => 'horizontal'))->attributes(), array('class' => 'horizontal'));
-    }
-    
-    public function testAttributes()
-    {
-      $this->assertEquals((string)Tag::div()->class('control-group'), '<div class="control-group"></div>');
-      $this->assertEquals((string)Tag::a('here')->href('http://www.google.com'), '<a href="http://www.google.com">here</a>');
-      $this->assertEquals((string)Tag::a('another')->attr('href', 'http://www.yahoo.com'), '<a href="http://www.yahoo.com">another</a>');
-    }
-    
-    public function testAppend()
-    {
-      $this->assertEquals((string)Tag::div()->append(Tag::span('content')), '<div><span>content</span></div>');
-      $this->assertEquals((string)Tag::ul()->append(TagNodes::create(Tag::li('item1'), Tag::li('item2')), 'outer'), '<ul><li>item1</li><li>item2</li>outer</ul>');
-    }
-    
-    public function testHtml4()
-    {
-      Tag::$DocType = 'html4';
-      $this->assertEquals((string)Tag::br(), '<br>');
-    }
-    
-    public function testXhtml()
-    {
-      Tag::$DocType = 'xhtml';
-      $this->assertEquals((string)Tag::br(), '<br />');
-    }
-    
-    public function testHtml5()
-    {
-      Tag::$DocType = 'html5';
-      $this->assertEquals((string)Tag::br(), '<br>');
-    }
+  public function testConstruct()
+  {
+    $this->assertEquals(get_class(Tag::a()), 'Tag_Base');
+    $this->assertEquals((string)Tag::a(), '<a></a>');
+    $this->assertEquals((string)Tag::create('hoge', array('class' => 'fuga'), 'munya'), '<hoge class="fuga">munya</hoge>');
+    $this->assertEquals((string)Tag::div(array('class' => 'span12')), '<div class="span12"></div>');
+    $this->assertEquals((string)Tag::div(array('class' => 'span12'), 'test', Tag::span("inner")), '<div class="span12">test<span>inner</span></div>');
+    $this->assertEquals((string)Tag::createInstanceArray('div', array(array('class' => 'span9'), 'array contents.')), '<div class="span9">array contents.</div>');
+  }
 
-    public function testClassManipulation()
-    {
-      $this->assertEquals((string)Tag::div()->addClass('span1'), '<div class="span1"></div>');
-      $this->assertEquals((string)Tag::div(array('class' => 'span1 label'))->removeClass('span1'), '<div class="label"></div>');
-      $this->assertEquals((string)Tag::div()->addClass('span1', 'label'), '<div class="span1 label"></div>');
-      $this->assertEquals((string)Tag::div(array('class' => 'span1 label'))->removeClass(array('label')), '<div class="span1"></div>');
-    }
-    
-    public function testCodeFormat()
-    {
-      Tag::$codeFormat = true;
-      $this->assertEquals((string)Tag::div()->addClass('span1'), '<div class="span1">'.PHP_EOL.'</div>'.PHP_EOL);
-      $this->assertEquals((string)Tag::div('contents')->addClass('span1'), '<div class="span1">'.PHP_EOL.'  contents'.PHP_EOL.'</div>'.PHP_EOL);
-      $this->assertEquals((string)Tag::br(), '<br>'.PHP_EOL);
-      $this->assertEquals((string)Tag::div('contents'), '<div>'.PHP_EOL.'  contents'.PHP_EOL.'</div>'.PHP_EOL);
-      $this->assertEquals((string)Tag::div(Tag::div(Tag::span('content'))), '<div>'.PHP_EOL.'  <div>'.PHP_EOL.'    <span>content</span>'.PHP_EOL.'  </div>'.PHP_EOL.'</div>'.PHP_EOL);
-      $this->assertEquals((string)Tag::span(Tag::span(), Tag::span()), '<span><span></span><span></span></span>'.PHP_EOL);
-    }
-    
+  public function testMember()
+  {
+    $this->assertEquals(Tag::table()->tagName(), 'table');
+    $this->assertEquals(Tag::table(array('class' => 'horizontal'))->attributes(), array('class' => 'horizontal'));
+  }
+
+  public function testAttributes()
+  {
+    $this->assertEquals((string)Tag::div()->class('control-group'), '<div class="control-group"></div>');
+    $this->assertEquals((string)Tag::a('here')->href('http://www.google.com'), '<a href="http://www.google.com">here</a>');
+    $this->assertEquals((string)Tag::a('another')->attr('href', 'http://www.yahoo.com'), '<a href="http://www.yahoo.com">another</a>');
+  }
+
+  public function testAppend()
+  {
+    $this->assertEquals((string)Tag::div()->append(Tag::span('content')), '<div><span>content</span></div>');
+    $this->assertEquals((string)Tag::ul()->append(TagNodes::create(Tag::li('item1'), Tag::li('item2')), 'outer'), '<ul><li>item1</li><li>item2</li>outer</ul>');
+  }
+
+  public function testHtml4()
+  {
+    Tag::$DocType = 'html4';
+    $this->assertEquals((string)Tag::br(), '<br>');
+  }
+
+  public function testXhtml()
+  {
+    Tag::$DocType = 'xhtml';
+    $this->assertEquals((string)Tag::br(), '<br />');
+  }
+
+  public function testHtml5()
+  {
+    Tag::$DocType = 'html5';
+    $this->assertEquals((string)Tag::br(), '<br>');
+  }
+
+  public function testClassManipulation()
+  {
+    $this->assertEquals((string)Tag::div()->addClass('span1'), '<div class="span1"></div>');
+    $this->assertEquals((string)Tag::div(array('class' => 'span1 label'))->removeClass('span1'), '<div class="label"></div>');
+    $this->assertEquals((string)Tag::div()->addClass('span1', 'label'), '<div class="span1 label"></div>');
+    $this->assertEquals((string)Tag::div(array('class' => 'span1 label'))->removeClass(array('label')), '<div class="span1"></div>');
+  }
+
+  public function testCodeFormat()
+  {
+    Tag::$codeFormat = true;
+    $this->assertEquals((string)Tag::div()->addClass('span1'), '<div class="span1">'.PHP_EOL.'</div>'.PHP_EOL);
+    $this->assertEquals((string)Tag::div('contents')->addClass('span1'), '<div class="span1">'.PHP_EOL.'  contents'.PHP_EOL.'</div>'.PHP_EOL);
+    $this->assertEquals((string)Tag::br(), '<br>'.PHP_EOL);
+    $this->assertEquals((string)Tag::div('contents'), '<div>'.PHP_EOL.'  contents'.PHP_EOL.'</div>'.PHP_EOL);
+    $this->assertEquals((string)Tag::div(Tag::div(Tag::span('content'))), '<div>'.PHP_EOL.'  <div>'.PHP_EOL.'    <span>content</span>'.PHP_EOL.'  </div>'.PHP_EOL.'</div>'.PHP_EOL);
+    $this->assertEquals((string)Tag::span(Tag::span(), Tag::span()), '<span><span></span><span></span></span>'.PHP_EOL);
+  }
+
 }
 ?>

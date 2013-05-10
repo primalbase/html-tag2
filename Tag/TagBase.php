@@ -14,7 +14,7 @@ require_once 'Tag/TagNodes.php';
 
 class Tag_Exception extends Exception {}
 class Tag_Base {
-  
+
   /**
    * HTML Document type
    *
@@ -30,7 +30,7 @@ class Tag_Base {
    * @var Tag_DocType
    */
   public $doc;
-  
+
   /**
    * Cache array.
    *
@@ -41,7 +41,7 @@ class Tag_Base {
    * @var array $DocTypeInstance
    */
   protected static $DocTypeInstance = array();
-  
+
   /**
    * The tag property.
    *
@@ -53,7 +53,7 @@ class Tag_Base {
    * @var array
    */
   protected $property;
-  
+
   /**
    * lowercase always.
    *
@@ -63,7 +63,7 @@ class Tag_Base {
    * @var string $tagName
    */
   protected $tagName;
-  
+
   /**
    * <$tagName $attributes[key]="$attributes[value]"...>
    *
@@ -80,7 +80,7 @@ class Tag_Base {
    * @var mixed Tag_Nodes or string
    */
   protected $nodes;
-  
+
   /**
    * Code format settings.
    *
@@ -96,11 +96,11 @@ class Tag_Base {
    *
    */
   public static $codeFormat = true;
-  
+
   public static $codeFormatIndent = 0;
-  
+
   public static $codeFormatSpacing = '  ';
-  
+
   /**
    * Tag_Base($tagName, (variadic_options)...)
    *
@@ -116,7 +116,7 @@ class Tag_Base {
     $args          = func_get_args();
     $this->tagName = strtolower(array_shift($args));
     $this->nodes   = new Tag_Nodes();
-    
+
     foreach ($args as $arg)
     {
       if (is_array($arg))
@@ -124,7 +124,7 @@ class Tag_Base {
       else
         $this->append($arg);
     }
-    
+
     $doc_type_class     = 'Tag_'.ucfirst(self::$DocType);
     $doc_type_file_name = 'Tag'.ucfirst(self::$DocType).'.php';
     require_once dirname(__FILE__).'/'.$doc_type_file_name;
@@ -133,7 +133,7 @@ class Tag_Base {
     $this->doc      = self::$DocTypeInstance[self::$DocType];
     $this->property = $this->doc->property($this->tagName);
   }
-  
+
   /**
    * Create caller class instance with array.
    *
@@ -155,7 +155,7 @@ class Tag_Base {
   {
     return defined(TAG_REFLECTION_CLASS) ? TAG_REFLECTION_CLASS : __CLASS__;
   }
-  
+
   /**
    * Create a Tag instance with any tag name.
    *
@@ -168,30 +168,30 @@ class Tag_Base {
     array_shift($args);
     return self::createInstanceArray($tagName, $args);
   }
-  
+
   static private function indent()
   {
     return str_repeat(self::$codeFormatSpacing, self::$codeFormatIndent);
   }
-  
+
   public function __toString()
   {
     $is_block_tag = !$this->doc->isInlineTag($this->tagName);
     $is_empty_tag = $this->doc->isEmptyTag($this->tagName);
     $open_tag     = $this->doc->openTag($this->tagName, $this->attributes);
     $close_tag    = $this->doc->closeTag($this->tagName);
-    
+
     $parts = array();
-    
+
     array_push($parts, $open_tag);
-    
+
     if ($is_empty_tag)
     {
       if (self::$codeFormat && self::$codeFormatIndent == 0)
         array_push($parts, PHP_EOL);
       return implode('', $parts);
     }
-      
+
     if (in_array($this->tagName, array('script', 'style')))
     {
       if (self::$codeFormat)
@@ -206,7 +206,7 @@ class Tag_Base {
         array_push($parts, PHP_EOL);
       return implode('', $parts);
     }
-    
+
     if (!$this->nodes->isEmpty())
     {
       foreach ($this->nodes as $node)
@@ -236,15 +236,15 @@ class Tag_Base {
       array_push($parts, PHP_EOL);
         array_push($parts, self::indent());
     }
-    
+
     array_push($parts, $close_tag);
-    
+
     if (self::$codeFormat && self::$codeFormatIndent == 0)
       array_push($parts, PHP_EOL);
-    
+
     return implode('', $parts);
   }
-  
+
   /**
    * Undefined method call is set attribute.
    *
@@ -259,23 +259,31 @@ class Tag_Base {
   {
     if (empty($args))
       return $this->attributes[$name];
-    
+
     return $this->attr($name, $args[0]);
   }
-  
+
   public function tagName()
   {
     return $this->tagName;
   }
-  
+
   public function append()
   {
     $args = func_get_args();
     call_user_func_array(array($this->nodes, 'append'), $args);
-    
+
     return $this;
   }
-  
+
+  public function replace()
+  {
+    $args = func_get_args();
+    call_user_func_array(array($this->nodes, 'replace'), $args);
+
+    return $this;
+  }
+
   /**
    * Set attribute.
    *
@@ -286,15 +294,15 @@ class Tag_Base {
   public function attr($name, $value)
   {
     $this->attributes[$name] = $value;
-    
+
     return $this;
   }
-  
+
   public function attributes()
   {
     return $this->attributes;
   }
-  
+
   public function updateAttributes(array $attributes=array())
   {
     $this->attributes = array_merge(
@@ -302,7 +310,7 @@ class Tag_Base {
       $attributes);
     return $this;
   }
-  
+
   /**
    * Add class.
    *
@@ -321,15 +329,15 @@ class Tag_Base {
         $this->addClass($arg);
         continue;
       }
-      
+
       if (!isset($this->attributes['class']))
       {
         $this->attributes['class'] = $arg;
         continue;
       }
-      
+
       $defined_class = $this->attributes['class'];
-      
+
       $class_array = preg_split('/\s+/', $defined_class);
       if (!in_array($arg, $class_array))
       {
@@ -337,10 +345,10 @@ class Tag_Base {
         $this->attributes['class'] = implode(' ', $class_array);
       }
     }
-    
+
     return $this;
   }
-  
+
   /**
    * remove class.
    *
@@ -354,14 +362,14 @@ class Tag_Base {
     {
       if (!$this->attributes['class'])
         break;
-      
+
       if (is_array($arg))
       {
         foreach ($arg as $_)
           $this->removeClass($_);
         continue;
       }
-      
+
       $class_array = preg_split('/\s+/', $this->attributes['class']);
       $index = array_search($arg, $class_array);
       if ($index !== false)
@@ -371,10 +379,10 @@ class Tag_Base {
       else
         $this->attributes['class'] = implode(' ', $class_array);
     }
-          
+
     return $this;
   }
-  
+
   //+generate_here
   public static function a() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
   public static function abbr() { $_=func_get_args(); return self::createInstanceArray(__FUNCTION__, $_); }
