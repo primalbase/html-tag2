@@ -258,7 +258,10 @@ class Tag_Base {
   public function __call($name, $args)
   {
     if (empty($args))
-      return $this->attributes[$name];
+      if (array_key_exists($name, $this->attributes))
+        return $this->attributes[$name];
+      else
+        return null;
 
     return $this->attr($name, $args[0]);
   }
@@ -306,7 +309,10 @@ class Tag_Base {
    */
   public function attr($name, $value)
   {
-    $this->attributes[$name] = $value;
+    if (is_null($value))
+      unset($this->attributes[$name]);
+    else
+      $this->attributes[$name] = $value;
 
     return $this;
   }
