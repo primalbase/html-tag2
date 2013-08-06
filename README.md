@@ -1,7 +1,7 @@
 HTML Tag generator. / HTMLタグジェネレータ
 -------------------
 
-PHP 5 >= 5.2.0
+PHP 5 >= 5.3.0
 
 Support DocType: HTML5, XHTML(XHTML1.0 Transitional), HTML(HTML4)
 
@@ -9,7 +9,7 @@ _サポートするDocType: HTML5, XHTML(XHTML1.0 Transitional), HTML(HTML4)_
 
 ### Tag - HTML Tag generate class. / HTMLタグを動的に生成するクラス ###
 
-@version 0.0.0.1
+@version 1.9.0
 
 ### $body_tag = Tag::body() ###
 ### echo $body_tag ###

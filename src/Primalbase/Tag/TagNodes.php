@@ -2,20 +2,23 @@
 /**
  * HTML Tag nodes class.
  *
- * PHP 5 >= 5.2.0
+ * PHP 5 >= 5.3.0
  *
  * @author Hiroshi Kawai <hkawai@gmail.com>
- * @version 0.0.0.1
+ * @version 0.9.0
  *
  */
-class Tag_NodesException extends Exception {}
-class Tag_Nodes implements Iterator {
+
+namespace Primalbase\Tag;
+
+class TagNodesException extends \Exception {}
+class TagNodes implements \Iterator {
 
   protected $nodes = array();
 
   public static function create()
   {
-    $_ = new ReflectionClass(__CLASS__);
+    $_ = new \ReflectionClass(__CLASS__);
     return $_->newInstanceArgs(func_get_args());
   }
 
@@ -64,7 +67,7 @@ class Tag_Nodes implements Iterator {
         foreach ($node as $in_node)
           $this->append($in_node);
       elseif (!self::appendable($node))
-        throw new Tag_NodesException('Don\'t append type [' . gettype($node).']');
+        throw new TagNodesException('Don\'t append type [' . gettype($node).']');
       else
         array_push($this->nodes, $node);
     }
@@ -117,10 +120,8 @@ class Tag_Nodes implements Iterator {
     if (is_object($content))
     {
       if (
-        get_class($content) == 'Tag_Base' ||
-        is_subclass_of($content, 'Tag_Base') ||
-        get_class($content) == 'Tag_Nodes' ||
-        is_subclass_of($content, 'Tag_Nodes'))
+        get_class($content) == 'Primalbase\Tag\Tag' ||
+        get_class($content) == 'Primalbase\Tag\TagNodes')
         return true;
       else
         return false;

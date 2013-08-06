@@ -1,11 +1,6 @@
 <?php
-set_include_path(implode(PATH_SEPARATOR, array(
-  dirname(__FILE__).'/..',
-  get_include_path(),
-)));
-
-require_once 'TagNodes.php';
-require_once 'Tag.php';
+use Primalbase\Tag\Tag;
+use Primalbase\Tag\TagNodes;
 
 class NodesTest extends PHPUnit_Framework_TestCase
 {
@@ -45,7 +40,7 @@ class NodesTest extends PHPUnit_Framework_TestCase
 
   public function testException()
   {
-    $this->setExpectedException('Tag_NodesException');
+    $this->setExpectedException('Primalbase\Tag\TagNodesException');
     $this->nodes->append(new stdClass);
   }
 

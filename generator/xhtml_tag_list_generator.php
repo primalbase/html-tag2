@@ -2,24 +2,83 @@
 /**
  * Generate a tag list to "tags/xhtmltags" from a websites.
  */
+define('APP_ROOT', __DIR__.'/..');
+define('DOCTYPE_CLASS_DIR', APP_ROOT.'/src/Primalbase/Tag/DocType');
 
 set_include_path(implode(PATH_SEPARATOR, array(
-    dirname(__FILE__).'/..',
-    get_include_path(),
+__DIR__,
+APP_ROOT,
+get_include_path(),
 )));
 
-define('APP_ROOT', dirname(__FILE__).'/..');
-
-require_once dirname(__FILE__).'/lib/Generator.php';
+require_once 'lib/Generator.php';
 
 $elements_list_url   = 'http://undine.sakura.ne.jp/uglabo/htmlref/xhtml1-transitional/index.html';
 $cache_path          = dirname(__FILE__).'/cache/xhtml_elements.html';
 
-$empty_tags = array('base', 'meta', 'link', 'hr', 'br', 'basefont', 'param', 'img', 'area', 'input', 'isindex', 'col');
+$empty_tags = array(
+  'base',
+  'meta',
+  'link',
+  'hr',
+  'br',
+  'basefont',
+  'param',
+  'img',
+  'area',
+  'input',
+  'isindex',
+  'col'
+);
+
 /**
  * @see http://www.xml.vc/html/block-inline.html
  */
-$inline_contents = array('a', 'abbr', 'acronym', 'applet', 'b', 'basefont', 'bdo', 'big', 'br', 'button', 'cite', 'code', 'dfn', 'em', 'font', 'i', 'iframe', 'img', 'input', 'kbd', 'label', 'map', 'object', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var', 'img', 'input', 'object', 'select', 'textarea', 'option');
+$inline_contents = array(
+  'a',
+  'abbr',
+  'acronym',
+  'applet',
+  'b',
+  'basefont',
+  'bdo',
+  'big',
+  'br',
+  'button',
+  'cite',
+  'code',
+  'dfn',
+  'em',
+  'font',
+  'i',
+  'iframe',
+  'img',
+  'input',
+  'kbd',
+  'label',
+  'map',
+  'object',
+  'q',
+  's',
+  'samp',
+  'select',
+  'small',
+  'span',
+  'strike',
+  'strong',
+  'sub',
+  'sup',
+  'textarea',
+  'tt',
+  'u',
+  'var',
+  'img',
+  'input',
+  'object',
+  'select',
+  'textarea',
+  'option'
+);
 
 $tags = array();
 
@@ -55,12 +114,12 @@ foreach ($all_li as $li)
 }
 
 $generator = new Generator(array(
-  'class_name'          => 'Tag_Xhtml',
+  'class_name'          => 'Xhtml',
   'use_empty_close_separator' => 'true',
   'tags'                => $tags,
   'doc_type'            => '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">',
-  'doc_type_class_path' => APP_ROOT.'/Tag/TagXhtml.php',
-  'tag_list_path'       => dirname(__FILE__).'/tags/xhtmltags',
+  'doc_type_class_path' => DOCTYPE_CLASS_DIR.'/Xhtml.php',
+  'tag_list_path'       => __DIR__.'/tags/xhtmltags',
 ));
 
 $generator->output();

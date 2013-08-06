@@ -2,26 +2,101 @@
 /**
  * Generate a tag list to "tags/html5tags" from a websites.
  */
+define('APP_ROOT', __DIR__.'/..');
+define('DOCTYPE_CLASS_DIR', APP_ROOT.'/src/Primalbase/Tag/DocType');
 
 set_include_path(implode(PATH_SEPARATOR, array(
-    dirname(__FILE__).'/..',
-    get_include_path(),
+  __DIR__,
+  APP_ROOT,
+  get_include_path(),
 )));
 
-define('APP_ROOT', dirname(__FILE__).'/..');
-
-require_once dirname(__FILE__).'/lib/Generator.php';
+require_once 'lib/Generator.php';
 
 $elements_list_url   = 'http://www.quackit.com/html_5/tags/';
-$cache_path          = dirname(__FILE__).'/cache/html5_elements.html';
+$cache_path          = 'cache/html5_elements.html';
 /**
  * @see http://www.w3.org/TR/html5/syntax.html#void-elements
  */
-$empty_tags = array('area', 'base', 'br', 'col', 'command', 'embed', 'hr', 'img', 'input', 'keygen', 'link', 'meta', 'param', 'source', 'track', 'wbr');
+$empty_tags = array(
+  'area',
+  'base',
+  'br',
+  'col',
+  'command',
+  'embed',
+  'hr',
+  'img',
+  'input',
+  'keygen',
+  'link',
+  'meta',
+  'param',
+  'source',
+  'track',
+  'wbr'
+);
 /**
  * @see http://www.marguerite.jp/Nihongo/WWW/RefHTML5/Appendix/Content-Phrasing.html
  */
-$phrasing_contents = array('a', 'abbr', 'area', 'map', 'audio', 'b', 'bdi', 'bdo', 'br', 'button', 'canvas', 'cite', 'code', 'command', 'del', 'dfn', 'em', 'embed', 'i', 'iframe', 'img', 'input', 'ins', 'kbd', 'keygen', 'label', 'map', 'mark', 'math', 'meter', 'noscript', 'object', 'output', 'p', 'pre', 'progress', 'q', 'ruby', 's', 'samp', 'script', 'section', 'select', 'small', 'span', 'strong', 'sub', 'sup', 'svg', 'textarea', 'time', 'u', 'var', 'video', 'wbr', 'option');
+$phrasing_contents = array(
+  'a',
+  'abbr',
+  'area',
+  'map',
+  'audio',
+  'b',
+  'bdi',
+  'bdo',
+  'br',
+  'button',
+  'canvas',
+  'cite',
+  'code',
+  'command',
+  'del',
+  'dfn',
+  'em',
+  'embed',
+  'i',
+  'iframe',
+  'img',
+  'input',
+  'ins',
+  'kbd',
+  'keygen',
+  'label',
+  'map',
+  'mark',
+  'math',
+  'meter',
+  'noscript',
+  'object',
+  'output',
+  'p',
+  'pre',
+  'progress',
+  'q',
+  'ruby',
+  's',
+  'samp',
+  'script',
+  'section',
+  'select',
+  'small',
+  'span',
+  'strong',
+  'sub',
+  'sup',
+  'svg',
+  'textarea',
+  'time',
+  'u',
+  'var',
+  'video',
+  'wbr',
+  'option'
+);
 
 $tags = array();
 
@@ -53,11 +128,11 @@ foreach ($all_tr as $tr)
 }
 
 $generator = new Generator(array(
-  'class_name'          => 'Tag_Html5',
+  'class_name'          => 'Html5',
   'tags'                => $tags,
   'doc_type'            => '<!DOCTYPE html>',
-  'doc_type_class_path' => APP_ROOT.'/Tag/TagHtml5.php',
-  'tag_list_path'       => dirname(__FILE__).'/tags/html5tags',
+  'doc_type_class_path' => DOCTYPE_CLASS_DIR.'/Html5.php',
+  'tag_list_path'       => __DIR__.'/tags/html5tags',
 ));
 
 $generator->output();

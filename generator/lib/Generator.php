@@ -18,9 +18,9 @@ class Generator {
   {
     $php_code =<<< __PHP_CODE__
 <?php
-require_once 'Tag/TagDocType.php';
+namespace Primalbase\Tag\DocType;
 
-class {$this->class_name} extends Tag_DocType {
+class {$this->class_name} extends DocType {
 
   protected \$docTypeTag = '{$this->doc_type}';
 

@@ -2,23 +2,68 @@
 /**
  * Generate a tag list to "tags/html4tags" from a websites.
  */
+define('APP_ROOT', __DIR__.'/..');
+define('DOCTYPE_CLASS_DIR', APP_ROOT.'/src/Primalbase/Tag/DocType');
 
 set_include_path(implode(PATH_SEPARATOR, array(
-    dirname(__FILE__).'/..',
-    get_include_path(),
+  __DIR__,
+  APP_ROOT,
+  get_include_path(),
 )));
 
-define('APP_ROOT', dirname(__FILE__).'/..');
-
-require_once dirname(__FILE__).'/lib/Generator.php';
+require_once 'lib/Generator.php';
 
 $elements_url = 'http://www.w3.org/TR/html401/index/elements.html';
-$cache_path   = dirname(__FILE__).'/cache/html4_elements.html';
+$cache_path   = 'cache/html4_elements.html';
 
 /**
  * @see http://www.xml.vc/html/block-inline.html
  */
-$inline_contents = array('a', 'abbr', 'acronym', 'applet', 'b', 'basefont', 'bdo', 'big', 'br', 'button', 'cite', 'code', 'dfn', 'em', 'font', 'i', 'iframe', 'img', 'input', 'kbd', 'label', 'map', 'object', 'q', 's', 'samp', 'select', 'small', 'span', 'strike', 'strong', 'sub', 'sup', 'textarea', 'tt', 'u', 'var', 'img', 'input', 'object', 'select', 'textarea', 'option');
+$inline_contents = array(
+  'a',
+  'abbr',
+  'acronym',
+  'applet',
+  'b',
+  'basefont',
+  'bdo',
+  'big',
+  'br',
+  'button',
+  'cite',
+  'code',
+  'dfn',
+  'em',
+  'font',
+  'i',
+  'iframe',
+  'img',
+  'input',
+  'kbd',
+  'label',
+  'map',
+  'object',
+  'q',
+  's',
+  'samp',
+  'select',
+  'small',
+  'span',
+  'strike',
+  'strong',
+  'sub',
+  'sup',
+  'textarea',
+  'tt',
+  'u',
+  'var',
+  'img',
+  'input',
+  'object',
+  'select',
+  'textarea',
+  'option',
+);
 
 $tags = array();
 
@@ -49,11 +94,11 @@ foreach ($all_tr as $tr)
 }
 
 $generator = new Generator(array(
-  'class_name'          => 'Tag_Html4',
+  'class_name'          => 'Html4',
   'tags'                => $tags,
   'doc_type'            => '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">',
-  'doc_type_class_path' => APP_ROOT.'/Tag/TagHtml4.php',
-  'tag_list_path'       => dirname(__FILE__).'/tags/html4tags',
+  'doc_type_class_path' => DOCTYPE_CLASS_DIR.'/Html4.php',
+  'tag_list_path'       => __DIR__.'/tags/html4tags',
 ));
 
 $generator->output();

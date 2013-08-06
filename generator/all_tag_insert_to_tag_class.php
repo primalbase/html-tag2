@@ -3,13 +3,79 @@
  * Make a method from "tags" directory and insert to the TagBase.
  */
 
-define('APP_ROOT', realpath(dirname(__FILE__).'/..'));
+define('APP_ROOT', realpath(__DIR__.'/..'));
 set_include_path(implode(PATH_SEPARATOR, array(
     APP_ROOT,
     get_include_path(),
 )));
 
-$php_keywords = array('__halt_compiler', 'abstract', 'and', 'array', 'as', 'break', 'callable', 'case', 'catch', 'class', 'clone', 'const', 'continue', 'declare', 'default', 'die', 'do', 'echo', 'else', 'elseif', 'empty', 'enddeclare', 'endfor', 'endforeach', 'endif', 'endswitch', 'endwhile', 'eval', 'exit', 'extends', 'final', 'for', 'foreach', 'function', 'global', 'goto', 'if', 'implements', 'include', 'include_once', 'instanceof', 'insteadof', 'interface', 'isset', 'list', 'namespace', 'new', 'or', 'print', 'private', 'protected', 'public', 'require', 'require_once', 'return', 'static', 'switch', 'throw', 'trait', 'try', 'unset', 'use', 'var', 'while', 'xor');
+$php_keywords = array(
+  '__halt_compiler',
+  'abstract',
+  'and',
+  'array',
+  'as',
+  'break',
+  'callable',
+  'case',
+  'catch',
+  'class',
+  'clone',
+  'const',
+  'continue',
+  'declare',
+  'default',
+  'die',
+  'do',
+  'echo',
+  'else',
+  'elseif',
+  'empty',
+  'enddeclare',
+  'endfor',
+  'endforeach',
+  'endif',
+  'endswitch',
+  'endwhile',
+  'eval',
+  'exit',
+  'extends',
+  'final',
+  'for',
+  'foreach',
+  'function',
+  'global',
+  'goto',
+  'if',
+  'implements',
+  'include',
+  'include_once',
+  'instanceof',
+  'insteadof',
+  'interface',
+  'isset',
+  'list',
+  'namespace',
+  'new',
+  'or',
+  'print',
+  'private',
+  'protected',
+  'public',
+  'require',
+  'require_once',
+  'return',
+  'static',
+  'switch',
+  'throw',
+  'trait',
+  'try',
+  'unset',
+  'use',
+  'var',
+  'while',
+  'xor',
+);
 
 $tag_list = array();
 foreach (glob('tags/*') as $tags)
@@ -37,7 +103,8 @@ foreach ($tag_list as $tag)
 $generate_flg = false;
 $contents = array();
 $insert_index = 0;
-foreach (file(APP_ROOT.'/Tag/TagBase.php') as $index => $line)
+$class_file_path = APP_ROOT.'/src/Primalbase/Tag/Tag.php';
+foreach (file($class_file_path) as $index => $line)
 {
   if ($generate_flg && (strpos($line, '-generate_here') !== false))
     $generate_flg = false;
@@ -52,4 +119,4 @@ foreach (file(APP_ROOT.'/Tag/TagBase.php') as $index => $line)
   }
 }
 array_splice($contents, $insert_index+1, 0, $php_code);
-file_put_contents(APP_ROOT.'/Tag/TagBase.php', implode('', $contents));
+file_put_contents($class_file_path, implode('', $contents));

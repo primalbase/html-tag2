@@ -1,9 +1,11 @@
 <?php
-require_once 'Tag/TagDocType.php';
+namespace Primalbase\Tag\DocType;
 
-class Tag_Html4 extends Tag_DocType {
+class Xhtml extends DocType {
 
-  protected $docTypeTag = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
+  protected $docTypeTag = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
+
+  protected $useEmptyCloseSeparator = true;
 
   protected $elements = array(
     'a' => 2,
@@ -38,8 +40,6 @@ class Tag_Html4 extends Tag_DocType {
     'fieldset' => 0,
     'font' => 2,
     'form' => 0,
-    'frame' => 1,
-    'frameset' => 0,
     'h1' => 0,
     'h2' => 0,
     'h3' => 0,

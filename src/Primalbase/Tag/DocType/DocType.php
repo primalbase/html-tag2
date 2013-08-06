@@ -8,8 +8,9 @@
  *
  * @author Hiroshi Kawai <hkawai@gmail.com>
  */
+namespace Primalbase\Tag\DocType;
 
-abstract class Tag_DocType {
+abstract class DocType {
   
   protected $docTypeTag = '<!DOCTYPE html>';
   

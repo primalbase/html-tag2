@@ -1,7 +1,7 @@
 <?php
-require_once 'Tag/TagDocType.php';
+namespace Primalbase\Tag\DocType;
 
-class Tag_Html5 extends Tag_DocType {
+class Html5 extends DocType {
 
   protected $docTypeTag = '<!DOCTYPE html>';
 
