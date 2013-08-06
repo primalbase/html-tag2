@@ -1,10 +1,22 @@
 {
-   "repositories": [
-     {
-       "packagist": false
-     }
-   ],
-   "autoload": {
-     "psr-0": {"Primalbase": "src"}
+  "name": "primalbase/html-tag2",
+  "description": "HTML Tag generator",
+  "keywords": ["html", "tag", "php"],
+  "type": "library",
+  "license": "MIT",
+  "homepage": "https://github.com/primalbase/html-tag",
+  "authors": [
+    {
+      "name": "primalbase",
+      "email": "kawai@primalbase.jp"
+    }
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*"
+  },
+  "autoload": {
+    "psr-0": {
+      "Primalbase\\Tag": "src/"
    }
+  }
 }
