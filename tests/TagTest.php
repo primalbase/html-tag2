@@ -48,19 +48,19 @@ class TagTest extends PHPUnit_Framework_TestCase
 
   public function testHtml4()
   {
-    Tag::$DocType = 'html4';
+    Tag::$DocType = 'Primalbase\Tag\DocType\Html4';
     $this->assertEquals((string)Tag::br(), '<br>');
   }
 
   public function testXhtml()
   {
-    Tag::$DocType = 'xhtml';
+    Tag::$DocType = 'Primalbase\Tag\DocType\Xhtml';
     $this->assertEquals((string)Tag::br(), '<br />');
   }
 
   public function testHtml5()
   {
-    Tag::$DocType = 'html5';
+    Tag::$DocType = 'Primalbase\Tag\DocType\Html5';
     $this->assertEquals((string)Tag::br(), '<br>');
   }
 

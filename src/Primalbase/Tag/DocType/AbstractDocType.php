@@ -10,7 +10,7 @@
  */
 namespace Primalbase\Tag\DocType;
 
-abstract class DocType {
+abstract class AbstractDocType {
   
   protected $docTypeTag = '<!DOCTYPE html>';
   

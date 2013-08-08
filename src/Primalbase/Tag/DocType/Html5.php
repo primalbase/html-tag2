@@ -1,10 +1,9 @@
 <?php
 namespace Primalbase\Tag\DocType;
 
-class Html5 extends DocType {
+class Html5 extends AbstractDocType {
 
   protected $docTypeTag = '<!DOCTYPE html>';
-
   protected $elements = array(
     'a' => 2,
     'abbr' => 2,

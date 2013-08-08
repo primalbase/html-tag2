@@ -1,10 +1,9 @@
 <?php
 namespace Primalbase\Tag\DocType;
 
-class Html4 extends DocType {
+class Html4 extends AbstractDocType {
 
   protected $docTypeTag = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">';
-
   protected $elements = array(
     'a' => 2,
     'abbr' => 2,

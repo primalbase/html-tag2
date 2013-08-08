@@ -20,10 +20,9 @@ class Generator {
 <?php
 namespace Primalbase\Tag\DocType;
 
-class {$this->class_name} extends DocType {
+class {$this->class_name} extends AbstractDocType {
 
   protected \$docTypeTag = '{$this->doc_type}';
-
 
 __PHP_CODE__;
     if ($this->open_bracket)

@@ -9,7 +9,7 @@ _サポートするDocType: HTML5, XHTML(XHTML1.0 Transitional), HTML(HTML4)_
 
 ### Tag - HTML Tag generate class. / HTMLタグを動的に生成するクラス ###
 
-@version 1.9.0
+@version 1.9.1
 
 ### $body_tag = Tag::body() ###
 ### echo $body_tag ###
@@ -45,22 +45,22 @@ or
 ### Change doctype.
 
 ```PHP
-Tag::$DocType = 'xhtml5';
+Tag::$DocType = 'Primalbase\Tag\DocType\Hhtml5';
 echo Tag::br() //=> <br>
 ```
 ```PHP
-Tag::$DocType = 'xhtml';
+Tag::$DocType = 'Primalbase\Tag\DocType\Xhtml';
 echo Tag::br() //=> <br />
 ```
 ```PHP
-Tag::$DocType = 'html4';
+Tag::$DocType = 'Primalbase\Tag\DocType\Html4';
 echo Tag::br() //=> <br>
 ```
 
 TagNodes - HTML Tag list. / 兄弟関係のタグオブジェクトを格納するクラス
 ---------------------------------------------------------------------
 
-@version 0.0.0.1
+@version 1.9.1
 
 ### echo TagNodes::create()->append(Tag::hr())->append(Tag::br())
 
