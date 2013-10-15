@@ -109,7 +109,7 @@ class TagNodes implements \Iterator {
   /**
    * Return posibility content append.
    *
-   * Content type is object then allow Tag_Base or Tag_Nodes.
+   * Content type is object then allow Tag or TagNodes.
    * Other types always true.
    *
    * @param mixed $content
@@ -119,9 +119,8 @@ class TagNodes implements \Iterator {
   {
     if (is_object($content))
     {
-      if (
-        get_class($content) == 'Primalbase\Tag\Tag' ||
-        get_class($content) == 'Primalbase\Tag\TagNodes')
+      if ($content instanceof \Primalbase\Tag\Tag ||
+      $content instanceof \Primalbase\Tag\TagNodes)
         return true;
       else
         return false;
