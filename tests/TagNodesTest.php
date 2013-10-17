@@ -51,5 +51,9 @@ class NodesTest extends PHPUnit_Framework_TestCase
     $this->assertEquals((string)$this->nodes->append(array(Tag::br(), 'append text')), '<strong>content</strong><br>append text');
   }
 
+  public function testAppendEscape()
+  {
+    $this->assertEquals((string)$this->nodes->append('<strong></strong>'), '&lt;strong&gt;&lt;/strong&gt;');
+  }
+
 }
-?>

@@ -9,7 +9,7 @@ _サポートするDocType: HTML5, XHTML(XHTML1.0 Transitional), HTML(HTML4)_
 
 ### Tag - HTML Tag generate class. / HTMLタグを動的に生成するクラス ###
 
-@version 1.9.1
+@version 1.9.2
 
 ### $body_tag = Tag::body() ###
 ### echo $body_tag ###
@@ -58,9 +58,9 @@ echo Tag::br() //=> <br>
 ```
 
 TagNodes - HTML Tag list. / 兄弟関係のタグオブジェクトを格納するクラス
----------------------------------------------------------------------
+----------------------------------------------------------------------
 
-@version 1.9.1
+@version 1.9.2
 
 ### echo TagNodes::create()->append(Tag::hr())->append(Tag::br())
 
@@ -70,6 +70,10 @@ TagNodes - HTML Tag list. / 兄弟関係のタグオブジェクトを格納す�
 
 `hoge fuga`
 
+Plain - For Escaped HTML append to Tag and TagNods. / HTMLコードをエスケープせずに追加するためのクラス
+--------------------------------------------------------------------------------------
+
+@version 1.0.0
 
 Other Examples.
 ---------------

@@ -5,7 +5,7 @@
  * PHP 5 >= 5.3.0
  *
  * @author Hiroshi Kawai <hkawai@gmail.com>
- * @version 1.9.1
+ * @version 1.9.2
  *
  */
 
@@ -71,7 +71,6 @@ class TagNodes implements \Iterator {
       else
         array_push($this->nodes, $node);
     }
-
     return $this;
   }
 
@@ -84,13 +83,17 @@ class TagNodes implements \Iterator {
   {
     $escaped = array();
     foreach ($this->nodes as $node)
-    {
-      if (is_object($node))
-        array_push($escaped, (string)$node);
-      else
-        array_push($escaped, htmlspecialchars((string)$node));
-    }
+      array_push($escaped, static::escapedString($node));
+
     return implode('', $escaped);
+  }
+
+  public static function escapedString($node)
+  {
+    if (is_object($node))
+      return (string)$node;
+    else
+      return htmlspecialchars((string)$node);
   }
 
   public function rawString()
@@ -120,7 +123,8 @@ class TagNodes implements \Iterator {
     if (is_object($content))
     {
       if ($content instanceof \Primalbase\Tag\Tag ||
-      $content instanceof \Primalbase\Tag\TagNodes)
+          $content instanceof \Primalbase\Tag\TagNodes ||
+          $content instanceof \Primalbase\tag\Plain)
         return true;
       else
         return false;

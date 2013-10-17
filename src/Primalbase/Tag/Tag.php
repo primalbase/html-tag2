@@ -7,13 +7,14 @@
  * Support doctype: html5, xhtml(xhtml1.0 Transitional), html4(html4.01 Transitional)
  *
  * @author Hiroshi Kawai <hkawai@gmail.com>
- * @version 1.9.1
+ * @version 1.9.2
  *
  */
 
 namespace Primalbase\Tag;
 
 use Primalbase\Tag\TagNodes;
+use Primalbase\Tag\Plain;
 
 class Tag {
 	
@@ -102,7 +103,7 @@ class Tag {
   public static $codeFormatIndent = 0;
   
   public static $codeFormatSpacing = '  ';
-  
+
   /**
    * Tag_Base($tagName, (variadic_options)...)
    *
@@ -200,7 +201,7 @@ class Tag {
         array_push($parts, PHP_EOL);
       return implode('', $parts);
     }
-  
+
     if (in_array($this->tagName, array('script', 'style')))
     {
       if (self::$codeFormat)
@@ -215,7 +216,7 @@ class Tag {
         array_push($parts, PHP_EOL);
       return implode('', $parts);
     }
-  
+
     if (!$this->nodes->isEmpty())
     {
       foreach ($this->nodes as $node)
@@ -223,20 +224,12 @@ class Tag {
         self::$codeFormatIndent++;
         if (self::$codeFormat && $is_block_tag)
           array_push($parts, PHP_EOL);
-        if (is_object($node))
-        {
-          if (self::$codeFormat && $is_block_tag)
-            array_push($parts, self::indent());
-          array_push($parts, (string)$node);
-        }
-        else
-        {
-          if (self::$codeFormat && $is_block_tag)
-          {
-            array_push($parts, self::indent());
-          }
-          array_push($parts, (string)$node);
-        }
+
+        if (self::$codeFormat && $is_block_tag)
+          array_push($parts, self::indent());
+
+        array_push($parts, TagNodes::escapedString($node));
+
         self::$codeFormatIndent--;
       }
     }
@@ -284,10 +277,18 @@ class Tag {
   {
     $args = func_get_args();
     call_user_func_array(array($this->nodes, 'append'), $args);
-  
     return $this;
   }
-  
+
+  /**
+   * Append to object not apply escape.
+   */
+  public function appendHtml($html)
+  {
+    $this->nodes->append(Plain::html($html));
+    return $this;
+  }
+
   public function updateFromArray(array $options=array())
   {
     foreach ($options as $_)
