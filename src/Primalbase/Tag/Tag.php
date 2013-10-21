@@ -105,11 +105,11 @@ class Tag {
   public static $codeFormatSpacing = '  ';
 
   /**
-   * Tag_Base($tagName, (variadic_options)...)
+   * Tag($tagName, (variadic_options)...)
    *
    * If variadic_options is an array to update attributes.
    *
-   * Else if it is a string or a Tag_Base to append nodes.
+   * Else if it is a string or a Tag to append nodes.
    *
    * @param string $tagName
    * @param variadic_options $content1, $content2, ...
@@ -158,6 +158,7 @@ class Tag {
    *
    * @param string $tagName
    * @param array $args
+   * @return Tag
    */
   public static function createInstanceArray($tagName, array $args)
   {
@@ -171,6 +172,7 @@ class Tag {
    *
    * @param string $tagName
    * @param variadic_options $content1, $content2, ...
+   * @return Tag
    */
   public static function create($tagName)
   {
@@ -256,6 +258,7 @@ class Tag {
    *
    * @param $name string
    * @param $args array
+   * @return Tag
    */
   public function __call($name, $args)
   {
@@ -315,7 +318,7 @@ class Tag {
    *
    * @param string $name
    * @param string $value
-   * @return Tag_Base
+   * @return Tag
    */
   public function attr($name, $value)
   {
@@ -339,15 +342,33 @@ class Tag {
       $attributes);
     return $this;
   }
-  
+
+  /**
+   * Has class.
+   *
+   * @param $class
+   *
+   * @return bool
+   */
+  public function hasClass($class)
+  {
+    if (!isset($this->attributes['class']))
+      return false;
+
+    $defined_class = $this->attributes['class'];
+
+    $class_array = preg_split('/\s+/', $defined_class);
+    return in_array($class, $class_array);
+  }
+
   /**
    * Add class.
    *
    * Not append if class exists.
    *
-   * @param valiadic_options
+   * @param variadic_options
    *
-   * @return self
+   * @return Tag
    */
   public function addClass()
   {
@@ -364,12 +385,10 @@ class Tag {
         $this->attributes['class'] = $arg;
         continue;
       }
-  
-      $defined_class = $this->attributes['class'];
-  
-      $class_array = preg_split('/\s+/', $defined_class);
-      if (!in_array($arg, $class_array))
+
+      if (!$this->hasClass($arg))
       {
+        $class_array = preg_split('/\s+/', $this->attributes['class']);
         array_push($class_array, $arg);
         $this->attributes['class'] = implode(' ', $class_array);
       }
@@ -381,9 +400,9 @@ class Tag {
   /**
    * remove class.
    *
-   * @param valiadic_options
+   * @param variadic_options
    *
-   * @return self
+   * @return Tag
    */
   public function removeClass()
   {
@@ -398,7 +417,10 @@ class Tag {
           $this->removeClass($_);
         continue;
       }
-  
+
+      if (!$this->hasClass($arg))
+        continue;
+
       $class_array = preg_split('/\s+/', $this->attributes['class']);
       $index = array_search($arg, $class_array);
       if ($index !== false)

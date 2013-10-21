@@ -78,6 +78,10 @@ class TagTest extends PHPUnit_Framework_TestCase
 
   public function testClassManipulation()
   {
+    $this->assertFalse(Tag::div()->hasClass('label'));
+    $this->assertTrue(Tag::div()->addClass('label')->hasClass('label'));
+    $this->assertTrue(Tag::div()->class('label1 label2')->hasClass('label2'));
+    $this->assertFalse(Tag::div()->class('label1 label2')->hasClass('label3'));
     $this->assertEquals((string)Tag::div()->addClass('span1'), '<div class="span1"></div>');
     $this->assertEquals((string)Tag::div(array('class' => 'span1 label'))->removeClass('span1'), '<div class="label"></div>');
     $this->assertEquals((string)Tag::div()->addClass('span1', 'label'), '<div class="span1 label"></div>');
