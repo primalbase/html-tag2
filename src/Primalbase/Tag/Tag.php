@@ -270,8 +270,16 @@ class Tag {
   
     return $this->attr($name, $args[0]);
   }
-  
-  public function tagName()
+
+  public function tagName($tagName='')
+  {
+    if ($tagName)
+      $this->tagName = $tagName;
+
+    return $this;
+  }
+
+  public function getTagName()
   {
     return $this->tagName;
   }

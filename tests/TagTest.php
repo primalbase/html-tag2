@@ -32,7 +32,8 @@ class TagTest extends PHPUnit_Framework_TestCase
 
   public function testMember()
   {
-    $this->assertEquals(Tag::table()->tagName(), 'table');
+    $tag = Tag::table()->tagName('strong');
+    $this->assertEquals($tag->getTagName(), 'strong');
     $this->assertEquals(Tag::table(array('class' => 'horizontal'))->attributes(), array('class' => 'horizontal'));
   }
 
