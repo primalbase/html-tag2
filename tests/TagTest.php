@@ -46,8 +46,9 @@ class TagTest extends PHPUnit_Framework_TestCase
 
   public function testAppend()
   {
-    $this->assertEquals((string)Tag::div()->append(Tag::span('content')), '<div><span>content</span></div>');
-    $this->assertEquals((string)Tag::ul()->append(TagNodes::create(Tag::li('item1'), Tag::li('item2')), 'outer'), '<ul><li>item1</li><li>item2</li>outer</ul>');
+    $this->assertEquals('<div><span>content</span></div>', (string)Tag::div()->append(Tag::span('content')));
+    $this->assertEquals('<div><span>content1</span><span>content2</span></div>', (string)Tag::div(Tag::span('content1'))->append(Tag::span('content2')));
+    $this->assertEquals('<ul><li>item1</li><li>item2</li>outer</ul>', (string)Tag::ul()->append(TagNodes::create(Tag::li('item1'), Tag::li('item2')), 'outer'));
 
     $this->assertEquals((string)TagNodes::create()->append('<strong></strong>'), '&lt;strong&gt;&lt;/strong&gt;');
     $this->assertEquals((string)Tag::div()->append('<strong></strong>'), '<div>&lt;strong&gt;&lt;/strong&gt;</div>');
@@ -57,6 +58,24 @@ class TagTest extends PHPUnit_Framework_TestCase
   {
     $this->assertEquals('<div>&lt;span id=&quot;append_html&quot;&gt;test&lt;/span&gt;</div>', (string)Tag::div()->append('<span id="append_html">test</span>'));
     $this->assertEquals('<div><span id="append_html">test</span></div>', (string)Tag::div()->appendHtml('<span id="append_html">test</span>'));
+    $this->assertEquals('<div><span id="append_html">test1</span><span id="append_html">test2</span></div>', (string)Tag::div()->appendHtml('<span id="append_html">test1</span>')->appendHtml('<span id="append_html">test2</span>'));
+  }
+
+  public function testPrepend()
+  {
+    $this->assertEquals('<div><span>content</span></div>', (string)Tag::div()->prepend(Tag::span('content')));
+    $this->assertEquals('<div><span>content1</span><span>content2</span></div>', (string)Tag::div(Tag::span('content2'))->prepend(Tag::span('content1')));
+    $this->assertEquals('<ul><li>item1</li><li>item2</li>outer</ul>', (string)Tag::ul()->prepend(TagNodes::create(Tag::li('item1'), Tag::li('item2'), 'outer')));
+
+    $this->assertEquals((string)TagNodes::create()->prepend('<strong></strong>'), '&lt;strong&gt;&lt;/strong&gt;');
+    $this->assertEquals((string)Tag::div()->prepend('<strong></strong>'), '<div>&lt;strong&gt;&lt;/strong&gt;</div>');
+  }
+
+  public function testPrependHtml()
+  {
+    $this->assertEquals('<div>&lt;span id=&quot;append_html&quot;&gt;test&lt;/span&gt;</div>', (string)Tag::div()->prepend('<span id="append_html">test</span>'));
+    $this->assertEquals('<div><span id="append_html">test</span></div>', (string)Tag::div()->prependHtml('<span id="append_html">test</span>'));
+    $this->assertEquals('<div><span id="append_html">test1</span><span id="append_html">test2</span></div>', (string)Tag::div()->prependHtml('<span id="append_html">test2</span>')->prependHtml('<span id="append_html">test1</span>'));
   }
 
   public function testHtml4()

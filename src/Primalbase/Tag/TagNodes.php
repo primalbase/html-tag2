@@ -74,6 +74,21 @@ class TagNodes implements \Iterator {
     return $this;
   }
 
+  public function prepend()
+  {
+    foreach (func_get_args() as $node)
+    {
+      if (is_array($node))
+        foreach ($node as $in_node)
+          $this->prepend($in_node);
+      elseif (!self::appendable($node))
+        throw new TagNodesException('Don\'t append type [' . gettype($node).']');
+      else
+        array_unshift($this->nodes, $node);
+    }
+    return $this;
+  }
+
   public function isEmpty()
   {
     return empty($this->nodes);

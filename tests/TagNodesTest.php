@@ -35,7 +35,12 @@ class NodesTest extends PHPUnit_Framework_TestCase
 
   public function testAppendTag()
   {
-    $this->assertEquals((string)$this->nodes->append(Tag::strong()), '<strong></strong>');
+    $this->assertEquals('<strong>1</strong><strong>2</strong>', (string)$this->nodes->append(Tag::strong('1'))->append(Tag::strong('2')));
+  }
+
+  public function testPrependTag()
+  {
+    $this->assertEquals('<strong>1</strong><strong>2</strong>', (string)$this->nodes->append(Tag::strong('2'))->prepend(Tag::strong('1')));
   }
 
   public function testException()

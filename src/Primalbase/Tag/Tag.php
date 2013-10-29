@@ -300,6 +300,22 @@ class Tag {
     return $this;
   }
 
+  public function prepend()
+  {
+    $args = func_get_args();
+    call_user_func_array(array($this->nodes, 'prepend'), $args);
+    return $this;
+  }
+
+  /**
+   * Prepend to object not apply escape.
+   */
+  public function prependHtml($html)
+  {
+    $this->nodes->prepend(Plain::html($html));
+    return $this;
+  }
+
   public function updateFromArray(array $options=array())
   {
     foreach ($options as $_)
