@@ -250,9 +250,7 @@ class Tag {
   }
   
   /**
-   * Undefined method call is set attribute.
-   *
-   * If get empty $args return attributes[$name].
+   * Undefined method call to set attribute.
    *
    * $attributes[$name] = $args[0]
    *
@@ -262,12 +260,6 @@ class Tag {
    */
   public function __call($name, $args)
   {
-    if (empty($args))
-    if (array_key_exists($name, $this->attributes))
-      return $this->attributes[$name];
-    else
-      return null;
-  
     return $this->attr($name, $args[0]);
   }
 
@@ -341,13 +333,13 @@ class Tag {
    * Set attribute.
    *
    * @param string $name
-   * @param string $value
+   * @param string $value default null
    * @return Tag
    */
-  public function attr($name, $value)
+  public function attr($name, $value=null)
   {
-    if (is_null($value))
-      unset($this->attributes[$name]);
+    if (ctype_digit($name))
+      $this->attributes[$name] = null;
     else
       $this->attributes[$name] = $value;
   
@@ -357,6 +349,11 @@ class Tag {
   public function attributes()
   {
     return $this->attributes;
+  }
+
+  public function getAttribute($name)
+  {
+    return $this->attributes[$name];
   }
   
   public function updateAttributes(array $attributes=array())

@@ -37,11 +37,25 @@ class TagTest extends PHPUnit_Framework_TestCase
     $this->assertEquals(Tag::table(array('class' => 'horizontal'))->attributes(), array('class' => 'horizontal'));
   }
 
+  public function testAttr()
+  {
+    $this->assertEquals('<a href="http://www.yahoo.com">another</a>',
+      (string)Tag::a('another')->attr('href', 'http://www.yahoo.com'));
+
+    $this->assertEquals('<input name="require" required>',
+      (string)Tag::input(array('name' => 'require'))->attr('required'));
+  }
+
   public function testAttributes()
   {
-    $this->assertEquals((string)Tag::div()->class('control-group'), '<div class="control-group"></div>');
-    $this->assertEquals((string)Tag::a('here')->href('http://www.google.com'), '<a href="http://www.google.com">here</a>');
-    $this->assertEquals((string)Tag::a('another')->attr('href', 'http://www.yahoo.com'), '<a href="http://www.yahoo.com">another</a>');
+    $this->assertEquals('<div class="control-group"></div>',
+      (string)Tag::div()->class('control-group'));
+
+    $this->assertEquals('<a href="http://www.google.com">here</a>',
+      (string)Tag::a('here')->href('http://www.google.com'));
+
+    $this->assertEquals('<input required>',
+      (string)Tag::input()->required());
   }
 
   public function testAppend()

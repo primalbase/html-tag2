@@ -37,8 +37,13 @@ abstract class AbstractDocType {
     $token = array($tagName);
     
     foreach ($attributes as $key => $val)
-      array_push($token, sprintf('%s="%s"', $key, htmlspecialchars($val)));
-    
+    {
+      if (is_null($val))
+        array_push($token, sprintf('%s', $key));
+      else
+        array_push($token, sprintf('%s="%s"', $key, htmlspecialchars($val)));
+    }
+
     $parts = array($this->openBracket, implode(' ', $token));
     
     if ($this->isEmptyTag($tagName) && $this->useEmptyCloseSeparator)
