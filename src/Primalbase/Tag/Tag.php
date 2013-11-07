@@ -338,7 +338,7 @@ class Tag {
    */
   public function attr($name, $value=null)
   {
-    if (ctype_digit($name))
+    if (preg_match('/^[0-9]+$/', $name))
       $this->attributes[$name] = null;
     else
       $this->attributes[$name] = $value;
