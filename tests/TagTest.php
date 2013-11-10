@@ -73,6 +73,9 @@ class TagTest extends PHPUnit_Framework_TestCase
 
     $this->assertEquals((string)TagNodes::create()->append('<strong></strong>'), '&lt;strong&gt;&lt;/strong&gt;');
     $this->assertEquals((string)Tag::div()->append('<strong></strong>'), '<div>&lt;strong&gt;&lt;/strong&gt;</div>');
+
+    $this->assertEquals('<div hoge>fuga</div>',
+      (string)Tag::div()->append('fuga', array('hoge')));
   }
 
   public function testAppendHtml()

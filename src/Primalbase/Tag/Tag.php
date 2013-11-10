@@ -121,12 +121,7 @@ class Tag {
     $this->nodes   = new TagNodes();
   
     foreach ($args as $arg)
-    {
-      if (is_array($arg))
-        $this->updateAttributes($arg);
-      else
-        $this->append($arg);
-    }
+      $this->append($arg);
 
     $doctype = static::getDocType();
     $this->doc      = $doctype;
@@ -286,11 +281,25 @@ class Tag {
   {
     return $this->tagName;
   }
-  
+
+  /**
+   * Append nodes if argument is not array.
+   * Update attribute if argument is array.
+   *
+   * @return $this
+   */
   public function append()
   {
     $args = func_get_args();
-    call_user_func_array(array($this->nodes, 'append'), $args);
+
+    foreach ($args as $arg)
+    {
+      if (is_array($arg))
+        $this->updateAttributes($arg);
+      else
+        $this->nodes->append($arg);
+    }
+
     return $this;
   }
 
