@@ -140,6 +140,17 @@ class Tag {
     
     return static::$DocTypeInstance[static::$DocType];
   }
+
+  public static function docType()
+  {
+    if (!isset(static::$DocTypeInstance[static::$DocType]))
+      static::$DocTypeInstance[static::$DocType] = new static::$DocType;
+
+    if (self::$codeFormat)
+      return (string)static::$DocTypeInstance[static::$DocType].PHP_EOL;
+    else
+      return (string)static::$DocTypeInstance[static::$DocType];
+  }
   
   /**
    * Generate any $tagName object.

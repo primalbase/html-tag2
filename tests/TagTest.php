@@ -96,18 +96,24 @@ class TagTest extends PHPUnit_Framework_TestCase
   {
     Tag::$DocType = 'Primalbase\Tag\DocType\Html4';
     $this->assertEquals((string)Tag::br(), '<br>');
+    $this->assertEquals('<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">', Tag::docType());
   }
 
   public function testXhtml()
   {
     Tag::$DocType = 'Primalbase\Tag\DocType\Xhtml';
     $this->assertEquals((string)Tag::br(), '<br />');
+    $this->assertEquals('<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">', Tag::docType());
   }
 
   public function testHtml5()
   {
     Tag::$DocType = 'Primalbase\Tag\DocType\Html5';
     $this->assertEquals((string)Tag::br(), '<br>');
+    Tag::$codeFormat = true;
+    $this->assertEquals('<!DOCTYPE html>'.PHP_EOL, Tag::docType());
+    Tag::$codeFormat = false;
+    $this->assertEquals('<!DOCTYPE html>', Tag::docType());
   }
 
   public function testClassManipulation()

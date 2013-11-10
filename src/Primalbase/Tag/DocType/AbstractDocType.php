@@ -83,6 +83,6 @@ abstract class AbstractDocType {
   
   public function __toString()
   {
-    return $this->docTypeTag.PHP_EOL;
+    return $this->docTypeTag;
   }
 }
