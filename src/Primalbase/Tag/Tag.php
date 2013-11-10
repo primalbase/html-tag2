@@ -350,10 +350,10 @@ class Tag {
   public function attr($name, $value=null)
   {
     if (preg_match('/^[0-9]+$/', $name))
-      $this->attributes[$name] = null;
+      $this->attributes[$value] = null;
     else
       $this->attributes[$name] = $value;
-  
+
     return $this;
   }
   
@@ -369,9 +369,10 @@ class Tag {
   
   public function updateAttributes(array $attributes=array())
   {
-    $this->attributes = array_merge(
-      $this->attributes,
-      $attributes);
+
+    foreach ($attributes as $name => $value)
+      $this->attr($name, $value);
+
     return $this;
   }
 

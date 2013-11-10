@@ -58,6 +58,13 @@ class TagTest extends PHPUnit_Framework_TestCase
       (string)Tag::input()->required());
   }
 
+  public function testUpdateAttributes()
+  {
+    $this->assertEquals('<input type="text" required>',
+      (string)Tag::input()->updateAttributes(array('type' => 'text', 'required')));
+
+  }
+
   public function testAppend()
   {
     $this->assertEquals('<div><span>content</span></div>', (string)Tag::div()->append(Tag::span('content')));
