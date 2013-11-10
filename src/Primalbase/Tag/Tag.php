@@ -7,7 +7,7 @@
  * Support doctype: html5, xhtml(xhtml1.0 Transitional), html4(html4.01 Transitional)
  *
  * @author Hiroshi Kawai <hkawai@gmail.com>
- * @version 1.9.2
+ * @version 1.9.4
  *
  */
 

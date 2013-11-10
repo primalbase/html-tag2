@@ -5,7 +5,7 @@
  * PHP 5 >= 5.3.0
  *
  * @author Hiroshi Kawai <hkawai@gmail.com>
- * @version 1.9.2
+ * @version 1.9.4
  *
  */
 
