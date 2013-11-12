@@ -62,4 +62,15 @@ class NodesTest extends PHPUnit_Framework_TestCase
     $this->assertEquals((string)$this->nodes->append('<strong></strong>'), '&lt;strong&gt;&lt;/strong&gt;');
   }
 
+  public function testGetter()
+  {
+    $this->nodes->append('first');
+    $this->nodes->append('second');
+    $this->nodes->append('last');
+
+    $this->assertEquals('first', $this->nodes->first());
+    $this->assertEquals('last', $this->nodes->last());
+  }
+
+
 }

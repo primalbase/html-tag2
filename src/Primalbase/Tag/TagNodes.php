@@ -59,6 +59,16 @@ class TagNodes implements \Iterator {
     return $this->nodes[$idx];
   }
 
+  public function last()
+  {
+    return end($this->nodes);
+  }
+
+  public function first()
+  {
+    return reset($this->nodes);
+  }
+
   public function append()
   {
     foreach (func_get_args() as $node)
