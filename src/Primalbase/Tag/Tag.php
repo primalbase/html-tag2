@@ -515,7 +515,7 @@ class Tag {
 
   public function parent($depth = 1)
   {
-    if ($depth <= 0) return $this;
+    if ($depth == 0) return $this;
     if (is_null($this->parent)) return $this;
 
     return $this->parent->parent(--$depth);
@@ -524,5 +524,13 @@ class Tag {
   public function close()
   {
     return call_user_func_array(array($this, 'parent'), func_get_args());
+  }
+
+  /**
+   * Close all.
+   */
+  public function end()
+  {
+    return $this->parent(-1);
   }
 }

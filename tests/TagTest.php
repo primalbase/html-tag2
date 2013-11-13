@@ -160,5 +160,18 @@ class TagTest extends PHPUnit_Framework_TestCase
     $this->assertEquals((string)Tag::div(array('class' => 'span1', 'id' => 'update'), 'update')->updateFromArray(array(array('class' => 'span2'))), '<div class="span2" id="update">update</div>');
     $this->assertEquals((string)Tag::div(array('class' => 'span1', 'id' => 'update'), 'update')->updateFromArray(array(Tag::span('new'))), '<div class="span1" id="update">update<span>new</span></div>');
   }
+
+  public function testParent()
+  {
+    $root = Tag::div()->id('root');
+    $this->assertNull($root->getParent());
+    $root->append($second = Tag::div()->id('second'));
+    $this->assertEquals('<div id="second"></div>', (string)$second);
+    $this->assertEquals('<div id="root"><div id="second"></div></div>', (string)$second->close());
+    $second->append($third = Tag::div()->id('third'));
+    $this->assertEquals('<div id="third"></div>', (string)$third);
+    $this->assertEquals('<div id="second"><div id="third"></div></div>', (string)$third->close());
+    $this->assertEquals('<div id="root"><div id="second"><div id="third"></div></div></div>', (string)$third->end());
+  }
 }
-?>
+
