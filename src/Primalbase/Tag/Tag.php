@@ -2,6 +2,9 @@
 /**
  * HTML Tag generate class.
  *
+ * append return a self.
+ * append{tagName} return a tagName object. (not implemented yet.)
+ *
  * PHP 5 >= 5.3.0
  *
  * Support doctype: html5, xhtml(xhtml1.0 Transitional), html4(html4.01 Transitional)
@@ -9,6 +12,7 @@
  * @author Hiroshi Kawai <hkawai@gmail.com>
  * @version 1.9.4
  *
+ * @todo implement append{tagName}
  */
 
 namespace Primalbase\Tag;
@@ -83,7 +87,12 @@ class Tag {
    * @var mixed Tag_Nodes or string
   */
   protected $nodes;
-  
+
+  /**
+   * @var Tag parent Tag.
+   */
+  protected $parent;
+
   /**
    * Code format settings.
    *
@@ -119,7 +128,8 @@ class Tag {
     $args          = func_get_args();
     $this->tagName = strtolower(array_shift($args));
     $this->nodes   = new TagNodes();
-  
+    $this->nodes->setParent($this);
+
     foreach ($args as $arg)
       $this->append($arg);
 
@@ -304,18 +314,32 @@ class Tag {
   }
 
   /**
+   * Prepend nodes if argument is not array.
+   * Update attribute if argument is array.
+   *
+   * @return $this
+   */
+  public function prepend()
+  {
+    $args = func_get_args();
+
+    foreach ($args as $arg)
+    {
+      if (is_array($arg))
+        $this->updateAttributes($arg);
+      else
+        $this->nodes->prepend($arg);
+    }
+
+    return $this;
+  }
+
+  /**
    * Append to object not apply escape.
    */
   public function appendHtml($html)
   {
     $this->nodes->append(Plain::html($html));
-    return $this;
-  }
-
-  public function prepend()
-  {
-    $args = func_get_args();
-    call_user_func_array(array($this->nodes, 'prepend'), $args);
     return $this;
   }
 
@@ -474,5 +498,31 @@ class Tag {
     }
   
     return $this;
+  }
+
+  public function setParent($parent = null)
+  {
+    $this->parent = $parent;
+
+    return $this;
+  }
+
+  public function getParent()
+  {
+    return $this->parent;
+  }
+
+
+  public function parent($depth = 1)
+  {
+    if ($depth <= 0) return $this;
+    if (is_null($this->parent)) return $this;
+
+    return $this->parent->parent(--$depth);
+  }
+
+  public function close()
+  {
+    return call_user_func_array(array($this, 'parent'), func_get_args());
   }
 }

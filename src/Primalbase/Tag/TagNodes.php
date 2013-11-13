@@ -16,16 +16,30 @@ class TagNodes implements \Iterator {
 
   protected $nodes = array();
 
-  public static function create()
+  protected $parent = null;
+
+  public static function create($options = null)
   {
     $_ = new \ReflectionClass(__CLASS__);
     return $_->newInstanceArgs(func_get_args());
   }
 
-  public function __construct()
+  public function __construct($options = null)
   {
-    $arg = func_get_args();
-    call_user_func_array(array($this, 'append'), $arg);
+    $args = func_get_args();
+    call_user_func_array(array($this, 'append'), $args);
+  }
+
+  public function setParent($parent = null)
+  {
+    $this->parent = $parent;
+
+    return $this;
+  }
+
+  public function getParent()
+  {
+    return $this->parent;
   }
 
   public function rewind()
@@ -73,13 +87,20 @@ class TagNodes implements \Iterator {
   {
     foreach (func_get_args() as $node)
     {
+      if (is_null($node))
+        continue;
+
       if (is_array($node))
         foreach ($node as $in_node)
           $this->append($in_node);
       elseif (!self::appendable($node))
         throw new TagNodesException('Don\'t append type [' . gettype($node).']');
       else
+      {
+        if (method_exists($node, 'setParent'))
+          $node->setParent($this->parent);
         array_push($this->nodes, $node);
+      }
     }
     return $this;
   }
@@ -88,6 +109,9 @@ class TagNodes implements \Iterator {
   {
     foreach (func_get_args() as $node)
     {
+      if (is_null($node))
+        continue;
+
       if (is_array($node))
         foreach ($node as $in_node)
           $this->prepend($in_node);
