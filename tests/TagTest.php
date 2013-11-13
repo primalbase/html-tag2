@@ -44,6 +44,10 @@ class TagTest extends PHPUnit_Framework_TestCase
 
     $this->assertEquals('<input name="require" required>',
       (string)Tag::input(array('name' => 'require'))->attr('required'));
+
+    $this->assertEquals('<input name="optional">',
+      (string)Tag::input(array('name' => 'optional'))->attr('required')->attr('required', false));
+
   }
 
   public function testAttributes()

@@ -376,13 +376,20 @@ class Tag {
   /**
    * Set attribute.
    *
+   * Unset if set false to $value.
+   *
    * @param string $name
    * @param string $value default null
    * @return Tag
    */
   public function attr($name, $value=null)
   {
-    if (preg_match('/^[0-9]+$/', $name))
+    if ($value === false)
+    {
+      if (array_key_exists($name, $this->attributes))
+        unset($this->attributes[$name]);
+    }
+    elseif (preg_match('/^[0-9]+$/', $name))
       $this->attributes[$value] = null;
     else
       $this->attributes[$name] = $value;
