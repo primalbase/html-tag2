@@ -454,7 +454,10 @@ class Tag {
 
       if (!$this->hasClass($arg))
       {
-        $class_array = preg_split('/\s+/', $this->attributes['class']);
+        if (!$this->attributes['class']) // set false or null
+          $class_array = array();
+        else
+          $class_array = preg_split('/\s+/', $this->attributes['class']);
         array_push($class_array, $arg);
         $this->attributes['class'] = implode(' ', $class_array);
       }

@@ -48,6 +48,8 @@ class TagTest extends PHPUnit_Framework_TestCase
     $this->assertEquals('<input name="optional">',
       (string)Tag::input(array('name' => 'optional'))->attr('required')->attr('required', false));
 
+    $this->assertEquals('<input name="optional" class="form-control">',
+      (string)Tag::input(array('name' => 'optional'))->attr('class', false)->addClass('form-control'));
   }
 
   public function testAttributes()
