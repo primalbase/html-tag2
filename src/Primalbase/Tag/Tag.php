@@ -20,6 +20,16 @@ namespace Primalbase\Tag;
 use Primalbase\Tag\TagNodes;
 use Primalbase\Tag\Plain;
 
+/**
+ * Class Tag
+ * @package Primalbase\Tag
+ *
+ * @method static \Primalbase\Tag\Tag div(array $options = null)
+ * @method static \Primalbase\Tag\Tag input(array $options = null)
+ * @method \Primalbase\Tag\Tag required(\string $value = null)
+ *
+ * @todo Define all methods for auto completion.
+ */
 class Tag {
 	
   /**
@@ -383,7 +393,7 @@ class Tag {
   public function attr($name, $value=null)
   {
     if (preg_match('/^[0-9]+$/', $name))
-      $this->attributes[$value] = null;
+      $this->attributes[$value] = false;
     else
       $this->attributes[$name] = $value;
 

@@ -43,10 +43,10 @@ class TagTest extends PHPUnit_Framework_TestCase
       (string)Tag::a('another')->attr('href', 'http://www.yahoo.com'));
 
     $this->assertEquals('<input name="require" required>',
-      (string)Tag::input(array('name' => 'require'))->attr('required'));
+      (string)Tag::input(array('name' => 'require'))->attr('required', false));
 
     $this->assertEquals('<input name="optional">',
-      (string)Tag::input(array('name' => 'optional'))->attr('required')->attr('required', false));
+      (string)Tag::input(array('name' => 'optional'))->attr('required', false)->attr('required'));
 
     $this->assertEquals('<input name="optional" class="form-control">',
       (string)Tag::input(array('name' => 'optional'))->attr('class', false)->addClass('form-control'));
@@ -54,14 +54,17 @@ class TagTest extends PHPUnit_Framework_TestCase
 
   public function testAttributes()
   {
-    $this->assertEquals('<div class="control-group"></div>',
+    $this->assertEquals(
+      '<div class="control-group"></div>',
       (string)Tag::div()->class('control-group'));
 
-    $this->assertEquals('<a href="http://www.google.com">here</a>',
+    $this->assertEquals(
+      '<a href="http://www.google.com">here</a>',
       (string)Tag::a('here')->href('http://www.google.com'));
 
-    $this->assertEquals('<input required>',
-      (string)Tag::input()->required());
+    $this->assertEquals(
+      '<input required>',
+      (string)Tag::input()->required(false));
   }
 
   public function testUpdateAttributes()
