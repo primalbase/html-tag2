@@ -28,7 +28,7 @@ use Primalbase\Tag\Plain;
  * @method static \Primalbase\Tag\Tag input(array $options = null)
  * @method \Primalbase\Tag\Tag required(\string $value = null)
  *
- * @todo Define all methods for auto completion.
+ * @todo Define all methods for the auto completion.
  */
 class Tag {
 	
@@ -124,14 +124,13 @@ class Tag {
   public static $codeFormatSpacing = '  ';
 
   /**
-   * Tag($tagName, (variadic_options)...)
+   * Tag($tagName, $options,...)
    *
-   * If variadic_options is an array to update attributes.
+   * If variadic options is an array to update attributes.
    *
    * Else if it is a string or a Tag to append nodes.
    *
-   * @param string $tagName
-   * @param variadic_options $content1, $content2, ...
+   * @param string|mixed $tagName, $options,...
    */
   public function __construct($tagName)
   {
@@ -171,8 +170,8 @@ class Tag {
    * Generate any $tagName object.
    *
    * @param string $tagName
-   * @param array $arguments
-   * @return Tag
+   * @param array $args
+   * @return static
    */
   public static function __callStatic($tagName, array $args)
   {
@@ -184,7 +183,7 @@ class Tag {
    *
    * @param string $tagName
    * @param array $args
-   * @return Tag
+   * @return static
    */
   public static function createInstanceArray($tagName, array $args)
   {
@@ -196,9 +195,8 @@ class Tag {
   /**
    * Create a Tag instance with any tag name.
    *
-   * @param string $tagName
-   * @param variadic_options $content1, $content2, ...
-   * @return Tag
+   * @param string|mixed $tagName, $options,...
+   * @return static
    */
   public static function create($tagName)
   {
