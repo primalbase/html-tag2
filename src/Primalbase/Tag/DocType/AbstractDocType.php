@@ -43,7 +43,7 @@ abstract class AbstractDocType {
       elseif ($val === false)
         array_push($token, sprintf('%s', $key));
       else
-        array_push($token, sprintf('%s="%s"', $key, htmlspecialchars($val)));
+        array_push($token, sprintf('%s="%s"', $key, htmlspecialchars($val, ENT_QUOTES)));
     }
 
     $parts = array($this->openBracket, implode(' ', $token));
