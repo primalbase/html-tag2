@@ -391,7 +391,7 @@ class Tag {
   public function attr($name, $value=null)
   {
     if (preg_match('/^[0-9]+$/', $name))
-      $this->attributes[$value] = false;
+      $this->attributes[$value] = true;
     else
       $this->attributes[$name] = $value;
 

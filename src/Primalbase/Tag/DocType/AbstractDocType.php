@@ -38,9 +38,9 @@ abstract class AbstractDocType {
     
     foreach ($attributes as $key => $val)
     {
-      if (is_null($val))
+      if (is_null($val) || $val === false)
         continue;
-      elseif ($val === false)
+      elseif ($val === true)
         array_push($token, sprintf('%s', $key));
       else
         array_push($token, sprintf('%s="%s"', $key, htmlspecialchars($val, ENT_QUOTES)));

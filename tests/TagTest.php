@@ -43,13 +43,13 @@ class TagTest extends PHPUnit_Framework_TestCase
       (string)Tag::a('another')->attr('href', 'http://www.yahoo.com'));
 
     $this->assertEquals('<input name="require" required>',
-      (string)Tag::input(array('name' => 'require'))->attr('required', false));
+      (string)Tag::input(array('name' => 'require'))->attr('required', true));
 
     $this->assertEquals('<input name="optional">',
-      (string)Tag::input(array('name' => 'optional'))->attr('required', false)->attr('required'));
+      (string)Tag::input(array('name' => 'optional'))->attr('required', true)->attr('required'));
 
     $this->assertEquals('<input name="optional" class="form-control">',
-      (string)Tag::input(array('name' => 'optional'))->attr('class', false)->addClass('form-control'));
+      (string)Tag::input(array('name' => 'optional'))->attr('class')->addClass('form-control'));
   }
 
   public function testAttributes()
@@ -64,7 +64,7 @@ class TagTest extends PHPUnit_Framework_TestCase
 
     $this->assertEquals(
       '<input required>',
-      (string)Tag::input()->required(false));
+      (string)Tag::input()->required(true));
   }
 
   public function testUpdateAttributes()
