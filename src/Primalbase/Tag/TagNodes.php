@@ -142,7 +142,7 @@ class TagNodes implements \Iterator {
     if (is_object($node))
       return (string)$node;
     else
-      return htmlspecialchars((string)$node);
+      return htmlspecialchars((string)$node, ENT_QUOTES);
   }
 
   public function rawString()
