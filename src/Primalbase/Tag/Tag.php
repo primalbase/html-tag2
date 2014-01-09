@@ -188,8 +188,8 @@ class Tag {
   public static function createInstanceArray($tagName, array $args)
   {
     array_unshift($args, $tagName);
-    return (new \ReflectionClass(get_called_class()))
-      ->newInstanceArgs($args);
+    $reflectionClass = new \ReflectionClass(get_called_class());
+    return $reflectionClass->newInstanceArgs($args);
   }
   
   /**
